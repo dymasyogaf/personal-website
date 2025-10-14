@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Kontak() {
     return (
-        <section className="relative z-10 py-24 px-6 sm:px-12 text-white overflow-hidden">
+        <section className="relative z-10 pt-32 pb-24 px-6 sm:px-12 text-white overflow-hidden">
             {/* 🌟 Heading */}
             <div className="text-center mb-16">
                 <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">

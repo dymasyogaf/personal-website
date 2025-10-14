@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -46,19 +45,13 @@ function DynamicFocus() {
     );
 }
 
-// 🎬 HERO SECTION (Cinematic Scroll)
+// 🎬 HERO SECTION (Simplified, No Heavy Animation)
 export default function Hero() {
     return (
         <section className="relative z-10 flex items-center justify-center min-h-[90vh] pt-28 sm:pt-32 px-4 sm:px-10 md:px-16 text-white overflow-hidden">
             <div className="grid md:grid-cols-2 items-center gap-10 md:gap-14 max-w-6xl w-full">
                 {/* 👋 Kiri: Deskripsi */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2, ease: 'easeOut' }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="text-left md:pr-6 flex flex-col items-start"
-                >
+                <div className="text-left md:pr-6 flex flex-col items-start">
                     <span className="text-xs sm:text-sm uppercase tracking-widest text-indigo-300 bg-white/10 backdrop-blur-md px-3 sm:px-4 py-1 rounded-full">
                         Solusi Digital
                     </span>
@@ -94,35 +87,27 @@ export default function Hero() {
                             <Play className="w-4 h-4 sm:w-5 sm:h-5" /> Profil Saya
                         </Link>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* 🎥 Kanan: Card Statistik */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 1 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    className="grid grid-cols-2 gap-4 place-items-center"
-                >
+                <div className="grid grid-cols-2 gap-4 place-items-center">
                     {[
                         { label: 'Pengalaman', value: '+120', color: 'from-indigo-500 to-blue-400' },
                         { label: 'Skor Klien', value: '4.9★', color: 'from-cyan-400 to-indigo-400' },
                         { label: 'Interaktif', value: '3D', color: 'from-blue-400 to-indigo-500' },
                         { label: 'Dukungan', value: '24/7', color: 'from-indigo-400 to-cyan-400' },
                     ].map((card, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            whileHover={{ scale: 1.05, y: -4 }}
-                            transition={{ type: 'spring', stiffness: 220, damping: 14 }}
-                            className="w-full bg-white/5 hover:bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 text-center shadow-[0_0_25px_rgba(99,102,241,0.1)] cursor-pointer transition-all"
+                            className="w-full bg-white/5 hover:bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 text-center shadow-[0_0_25px_rgba(99,102,241,0.1)] cursor-pointer transition-all hover:scale-105 hover:-translate-y-1"
                         >
                             <p className={`text-2xl font-bold bg-gradient-to-r ${card.color} bg-clip-text text-transparent`}>
                                 {card.value}
                             </p>
                             <p className="text-xs sm:text-sm text-gray-400 mt-1">{card.label}</p>
-                        </motion.div>
+                        </div>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     );
