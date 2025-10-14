@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/* 🎨 Warna & Font Variables */
+:root {
+  --background: #060b18;
+  --foreground: #ededed;
+  --accent: #6366f1;
+  /* indigo-500 */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* 🌙 Mode Gelap */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #060b18;
+    --foreground: #f1f1f1;
+    --accent: #6366f1;
+  }
+}
+
+/* 🧍 Style Global */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* 🌈 Global Gradient Animation */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background: linear-gradient(120deg, #0f172a, #1e293b, #0a0f24);
+  background-size: 300% 300%;
+  animation: gradientMove 20s ease infinite;
+}
+
+/* 💡 Floating Orbs — Soft Ambient Light */
+.orb {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(120px);
+  animation: floatOrb 20s ease-in-out infinite;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+
+  50% {
+    transform: translateY(-40px) translateX(20px);
+  }
+
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+/* 💫 Efek Bingkai Futuristik Konsisten & Elegan */
+.section-glow {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  padding: 4px;
+  background: linear-gradient(135deg,
+      rgba(56, 189, 248, 0.2),
+      rgba(99, 102, 241, 0.2));
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.section-glow:hover {
+  background: linear-gradient(135deg,
+      rgba(56, 189, 248, 0.3),
+      rgba(99, 102, 241, 0.3));
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
+  transform: translateY(-4px);
+}
+
+.section-glow::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(900px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(56, 189, 248, 0.25),
+      rgba(99, 102, 241, 0.15),
+      transparent 80%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  filter: blur(10px);
+}
+
+.section-glow:hover::before {
+  opacity: 1;
+}
+
+.section-content {
+  position: relative;
+  z-index: 1;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  padding: 2.8rem;
+  box-shadow:
+    inset 0 0 25px rgba(99, 102, 241, 0.05),
+    inset 0 0 8px rgba(255, 255, 255, 0.02);
+}
+
+/* ⚡ Efek Interaktif Card (Hover Reactive) */
+.card-reactive {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: border 0.3s ease, transform 0.3s ease;
+}
+
+.card-reactive::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(56, 189, 248, 0.25),
+      rgba(99, 102, 241, 0.15),
+      transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.card-reactive:hover::before {
+  opacity: 1;
+}
+
+.card-reactive:hover {
+  transform: translateY(-4px);
+}
+
+/* ✨ Glow Soft untuk Hover di Elemen Kecil */
+.glow-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+  transform: translateY(-3px);
+}
