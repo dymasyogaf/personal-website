@@ -1,0 +1,100 @@
+/* =========================
+HOMEPAGE STYLES
+========================= */
+
+/* 🏠 Hero Section */
+.home-hero {
+    position: relative;
+    z-index: 10;
+    min-height: 90vh;
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+    color: white;
+    overflow: hidden;
+}
+
+/* 🌈 Background Gradient (smooth & cinematic) */
+.home-gradient-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -10;
+    animation: gradientMove 20s ease infinite;
+    background: linear-gradient(135deg, #0f172a, #1e293b, #0a0f24);
+    background-size: 300% 300%;
+    overflow: hidden;
+}
+
+/* 💡 Ambient Glow */
+.home-gradient-bg::before,
+.home-gradient-bg::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(180px);
+    opacity: 0.25;
+}
+
+.home-gradient-bg::before {
+    top: 10%;
+    left: 5%;
+    width: 500px;
+    height: 500px;
+    background: rgba(99, 102, 241, 0.4);
+}
+
+.home-gradient-bg::after {
+    bottom: 10%;
+    right: 5%;
+    width: 600px;
+    height: 600px;
+    background: rgba(6, 182, 212, 0.4);
+}
+
+/* 💼 Layanan Section */
+.home-services {
+    position: relative;
+    z-index: 10;
+    padding: 6rem 1.5rem;
+    color: white;
+}
+
+/* 🧱 Service Card */
+.service-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    backdrop-filter: blur(20px);
+    transition: all 0.4s ease;
+}
+
+.service-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.15);
+}
+
+/* 🙋 Tentang Kami */
+.home-about {
+    position: relative;
+    z-index: 10;
+    padding: 6rem 1.5rem;
+}
+
+/* 📞 Contact (if shown inline) */
+.home-contact {
+    position: relative;
+    z-index: 10;
+    padding: 6rem 1.5rem;
+    color: white;
+}
+
+/* ✨ Section Title */
+.section-title {
+    text-align: center;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    background: linear-gradient(to right, #60a5fa, #a5b4fc, #22d3ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

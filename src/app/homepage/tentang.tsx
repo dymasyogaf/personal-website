@@ -2,9 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { useCallback } from 'react';
+import { Rocket, Lightbulb, Compass, HeartHandshake } from 'lucide-react';
+import "../../styles/homepage.css";
 
 export default function Tentang() {
-    // 🧠 Fungsi untuk mengikuti posisi mouse (efek glow interaktif)
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
         e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
@@ -16,99 +17,85 @@ export default function Tentang() {
             {/* ✨ Heading */}
             <div className="text-center mb-16">
                 <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">
-                    Tentang Kami
+                    Tentang Dyogaf
                 </span>
 
                 <h2 className="mt-5 text-3xl sm:text-5xl font-extrabold">
-                    Transformasi Digital{' '}
                     <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-                        Terdepan
-                    </span>
+                        Dyogaf
+                    </span>{' '}
+                    — Studio Digital Kreatif
                 </h2>
+                <p className="mt-4 text-gray-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+                    Kami menciptakan pengalaman digital berjiwa manusia dengan pendekatan futuristik.
+                    Dyogaf hadir untuk membantu brand tumbuh, berinteraksi, dan menginspirasi melalui
+                    desain, strategi, dan teknologi.
+                </p>
             </div>
 
-            {/* 🌌 Bingkai Besar dengan Efek Glow */}
-            <div
-                className="section-glow max-w-6xl mx-auto relative z-10"
-                onMouseMove={handleMouseMove}
-            >
-                <div className="section-content grid md:grid-cols-2 gap-10">
-                    {/* 🧩 Kiri: Deskripsi */}
+            {/* 🌌 Bingkai Utama */}
+            <div className="section-glow max-w-6xl mx-auto relative z-10" onMouseMove={handleMouseMove}>
+                <div className="section-content grid lg:grid-cols-2 gap-10">
+                    {/* KIRI */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1 }}
                         viewport={{ once: false, amount: 0.3 }}
-                        className="space-y-10"
+                        className="space-y-8"
                     >
-                        {[
-                            {
-                                icon: '⚡',
-                                title: 'Inovasi Berkelanjutan',
-                                text: (
-                                    <>
-                                        Sebagai{' '}
-                                        <span className="text-cyan-400 font-semibold">
-                                            Digital Marketer
-                                        </span>
-                                        ,{' '}
-                                        <span className="text-cyan-400 font-semibold">
-                                            Web Developer
-                                        </span>
-                                        , dan{' '}
-                                        <span className="text-cyan-400 font-semibold">
-                                            Adventurer
-                                        </span>
-                                        , saya berfokus menciptakan pengalaman digital berkesan
-                                        dengan sentuhan humanis dan futuristik. Menggabungkan
-                                        strategi, desain, dan teknologi untuk menghasilkan karya
-                                        yang bermakna.
-                                    </>
-                                ),
-                                gradient: 'from-cyan-500 to-indigo-600',
-                            },
-                            {
-                                icon: '✅',
-                                title: 'Kualitas Terjamin',
-                                text: (
-                                    <>
-                                        Fokus pada detail, performa, dan kemudahan penggunaan.
-                                        Saya mengembangkan website{' '}
-                                        <span className="text-cyan-400 font-medium">WordPress</span>{' '}
-                                        dan sistem digital dengan pendekatan modern — SEO-friendly,
-                                        cepat, dan responsif.
-                                    </>
-                                ),
-                                gradient: 'from-indigo-500 to-cyan-400',
-                            },
-                            {
-                                icon: '👥',
-                                title: 'Tim Profesional',
-                                text: (
-                                    <>
-                                        Didukung oleh kolaborasi dengan desainer, fotografer, dan
-                                        kreator digital untuk menghadirkan hasil berkualitas tinggi,
-                                        mulai dari branding, visual, hingga sistem berbasis web.
-                                    </>
-                                ),
-                                gradient: 'from-blue-500 to-teal-400',
-                            },
-                        ].map((item, i) => (
-                            <div key={i} className="flex items-start gap-4">
+                        {/* Visi Dyogaf */}
+                        <div className="card-reactive bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10">
+                            <h3 className="text-2xl font-semibold mb-3 bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+                                Visi Kami
+                            </h3>
+                            <p className="text-gray-300 leading-relaxed">
+                                Menjadi studio digital yang tidak hanya membangun website, tetapi juga
+                                menghadirkan *experience* yang hidup — menghubungkan manusia, nilai, dan teknologi
+                                dalam satu kesatuan yang bermakna.
+                            </p>
+                        </div>
+
+                        {/* Nilai-nilai Dyogaf */}
+                        <div className="grid sm:grid-cols-2 gap-5">
+                            {[
+                                {
+                                    icon: <Rocket className="w-6 h-6 text-cyan-400" />,
+                                    title: 'Inovatif',
+                                    text: 'Membawa ide-ide baru dalam setiap proyek dengan semangat eksplorasi.',
+                                },
+                                {
+                                    icon: <Lightbulb className="w-6 h-6 text-indigo-400" />,
+                                    title: 'Visioner',
+                                    text: 'Melihat jauh ke depan — membangun strategi digital jangka panjang.',
+                                },
+                                {
+                                    icon: <Compass className="w-6 h-6 text-teal-400" />,
+                                    title: 'Petualangan',
+                                    text: 'Terinspirasi oleh perjalanan dan tantangan, setiap proyek adalah ekspedisi kreatif.',
+                                },
+                                {
+                                    icon: <HeartHandshake className="w-6 h-6 text-cyan-300" />,
+                                    title: 'Humanis',
+                                    text: 'Membangun hubungan yang tulus, kolaboratif, dan penuh makna.',
+                                },
+                            ].map((item, i) => (
                                 <div
-                                    className={`w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br ${item.gradient} shadow-lg`}
+                                    key={i}
+                                    className="card-reactive bg-white/5 hover:bg-white/10 transition-all p-5 rounded-xl border border-white/10 flex flex-col items-start gap-3"
+                                    onMouseMove={handleMouseMove}
                                 >
-                                    {item.icon}
+                                    <div className="p-2 rounded-lg bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">
+                                        {item.icon}
+                                    </div>
+                                    <h4 className="text-lg font-semibold text-white">{item.title}</h4>
+                                    <p className="text-sm text-gray-400">{item.text}</p>
                                 </div>
-                                <div>
-                                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                                    <p className="text-gray-300 leading-relaxed">{item.text}</p>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </motion.div>
 
-                    {/* 📊 Kanan: Statistik Interaktif */}
+                    {/* KANAN */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -118,8 +105,9 @@ export default function Tentang() {
                     >
                         {[
                             { number: '3+', label: 'Tahun Pengalaman' },
-                            { number: '50+', label: 'Klien & Proyek Selesai' },
+                            { number: '50+', label: 'Proyek & Klien Puas' },
                             { number: '24/7', label: 'Dukungan & Komunikasi' },
+                            { number: '∞', label: 'Karya Bermakna' },
                         ].map((stat, i) => (
                             <div
                                 key={i}

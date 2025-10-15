@@ -5,7 +5,7 @@ import "../../styles/homepage.css";
 
 export default function Layanan() {
     return (
-        <section className="relative z-10 py-24 px-6 sm:px-12 text-white overflow-hidden">
+        <section className="page-section text-white overflow-hidden">
             {/* 🌟 Heading */}
             <div className="text-center mb-16">
                 <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">
@@ -52,7 +52,6 @@ export default function Layanan() {
                         viewport={{ once: false, amount: 0.3 }}
                         className="group relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_40px_rgba(99,102,241,0.15)]"
                     >
-                        {/* ✨ Efek hover gradasi */}
                         <div
                             className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-3xl`}
                         />

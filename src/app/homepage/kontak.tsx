@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
+import "../../styles/homepage.css";
 
 export default function Kontak() {
     return (

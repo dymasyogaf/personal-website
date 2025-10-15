@@ -13,52 +13,65 @@ export default function Navbar() {
         document.documentElement.classList.toggle('dark', isDark);
     }, [isDark]);
 
+    const menuItems = [
+        { name: 'Home', href: '/' },
+        { name: 'Tentang', href: '/about' },
+        { name: 'Layanan', href: '/services' },
+        { name: 'Proyek', href: '/projects' },
+        { name: 'Blog', href: '/blog' },
+        { name: 'Kontak', href: '/contact' },
+    ];
+
     return (
-        <header
-            className="
-        fixed top-0 left-0 z-50 w-full
-        sm:top-6 sm:left-1/2 sm:-translate-x-1/2 sm:w-auto
-        flex justify-center
-      "
-        >
+        <header className="fixed top-0 left-0 z-50 w-full flex justify-center">
             <nav
                 className="
-          flex items-center justify-between gap-6
-          w-full sm:w-auto
-          px-5 sm:px-10 py-3
+          flex items-center justify-between
+          w-[94%] sm:w-[90%] md:w-[88%] lg:w-[82%] xl:w-[75%]
+          px-5 sm:px-8 md:px-10 py-3
           border border-white/10
           bg-white/10 dark:bg-[#0b1120]/70
           backdrop-blur-2xl
           shadow-[0_8px_32px_rgba(0,0,0,0.3)]
-          rounded-none sm:rounded-full
+          rounded-2xl
+          mt-4
           transition-all duration-300
         "
             >
                 {/* 🌈 Logo */}
-                <Link href="/" className="font-extrabold text-lg tracking-widest text-white">
+                <Link
+                    href="/"
+                    className="font-extrabold text-lg md:text-xl tracking-widest text-white select-none whitespace-nowrap"
+                >
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
                         Dyogaf
                     </span>
                 </Link>
 
-                {/* 📱 Tombol Menu Mobile */}
+                {/* 📱 Tombol Menu Mobile / Tablet */}
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="sm:hidden flex items-center justify-center w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition"
+                    className="md:hidden flex items-center justify-center w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition"
                 >
                     {isMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
                 </button>
 
-                {/* 🧭 Menu Desktop */}
-                <ul className="hidden sm:flex items-center gap-8 text-sm font-medium text-gray-300">
-                    <li><Link href="/" className="hover:text-white transition">Home</Link></li>
-                    <li><Link href="/services" className="hover:text-white transition">Layanan</Link></li>
-                    <li><Link href="/about" className="hover:text-white transition">Tentang</Link></li>
-                    <li><Link href="/contact" className="hover:text-white transition">Kontak</Link></li>
+                {/* 🧭 Menu Desktop / Tablet */}
+                <ul className="hidden md:flex flex-wrap items-center justify-center gap-6 lg:gap-8 xl:gap-10 text-sm font-medium text-gray-300">
+                    {menuItems.map((item) => (
+                        <li key={item.name}>
+                            <Link
+                                href={item.href}
+                                className="hover:text-white transition relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-indigo-400 after:to-cyan-400 hover:after:w-full after:transition-all after:duration-300"
+                            >
+                                {item.name}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
 
-                {/* ☀️ Tombol Mode + CTA */}
-                <div className="hidden sm:flex items-center gap-4">
+                {/* ☀️ Mode & CTA */}
+                <div className="hidden md:flex items-center gap-3 lg:gap-5 whitespace-nowrap">
                     <button
                         onClick={() => setIsDark(!isDark)}
                         className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
@@ -74,11 +87,12 @@ export default function Navbar() {
                         href="/contact"
                         className="
               inline-flex items-center gap-2
-              px-5 py-2 rounded-full
+              px-4 md:px-5 py-2 rounded-full
               bg-gradient-to-r from-indigo-500 to-cyan-400
               text-white font-semibold
-              hover:opacity-90 transition
+              hover:scale-[1.03] active:scale-95 transition
               shadow-[0_0_20px_rgba(99,102,241,0.3)]
+              text-sm md:text-base
             "
                     >
                         HUBUNGI KAMI <ArrowUpRight className="w-4 h-4" />
@@ -86,29 +100,38 @@ export default function Navbar() {
                 </div>
             </nav>
 
-            {/* 📱 Menu Mobile (Fullscreen Overlay) */}
+            {/* 📱 Overlay Menu (Mobile & Tablet) */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -10 }}
+                        initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="sm:hidden fixed inset-0 z-40 flex justify-center items-start pt-24 px-6 bg-[#0b1120]/90 backdrop-blur-2xl"
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                        className="md:hidden fixed inset-0 z-40 bg-[#0b1120]/95 backdrop-blur-2xl flex flex-col justify-start items-center pt-28 px-6"
                     >
-                        <div className="w-full max-w-sm bg-white/10 border border-white/10 rounded-3xl p-6 text-center text-gray-200 shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
+                        {/* ❌ Tombol Tutup */}
+                        <button
+                            onClick={() => setIsMenuOpen(false)}
+                            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
+                        >
+                            <X className="w-6 h-6 text-white" />
+                        </button>
+
+                        <div className="w-full max-w-sm bg-white/10 border border-white/10 rounded-3xl p-8 text-center text-gray-200 shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
                             <p className="uppercase tracking-widest text-xs text-indigo-300 mb-6">
                                 Navigasi
                             </p>
 
                             <div className="flex flex-col gap-3">
-                                {['Home', 'Layanan', 'Tentang', 'Kontak'].map((item) => (
+                                {menuItems.map((item) => (
                                     <Link
-                                        key={item}
-                                        href={`/${item === 'Home' ? '' : item.toLowerCase()}`}
+                                        key={item.name}
+                                        href={item.href}
                                         onClick={() => setIsMenuOpen(false)}
                                         className="w-full py-3 rounded-xl bg-white/5 hover:bg-white/15 transition text-base font-medium"
                                     >
-                                        {item}
+                                        {item.name}
                                     </Link>
                                 ))}
                             </div>
@@ -116,7 +139,7 @@ export default function Navbar() {
                             <Link
                                 href="/contact"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="mt-6 w-full inline-flex justify-center items-center gap-2 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 text-white font-semibold hover:opacity-90 transition text-sm"
+                                className="mt-6 w-full inline-flex justify-center items-center gap-2 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 text-white font-semibold hover:scale-[1.02] transition text-sm"
                             >
                                 HUBUNGI KAMI <ArrowUpRight className="w-4 h-4" />
                             </Link>
