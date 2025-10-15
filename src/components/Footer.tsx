@@ -2,51 +2,82 @@
 
 import { Mail, MapPin, Phone, Github, Linkedin, Instagram } from 'lucide-react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export default function Footer() {
     return (
-        <footer className="relative z-10 text-white py-16 px-6 sm:px-12 border-t border-white/10 backdrop-blur-xl bg-white/5">
-            {/* Efek cahaya lembut di belakang footer */}
-            <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/40 via-transparent to-transparent blur-3xl -z-10" />
+        <footer className="relative z-10 text-white py-20 px-6 sm:px-12 border-t border-white/10 bg-transparent backdrop-blur-xl">
+            {/* ✨ Garis cahaya lembut di atas footer */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 0.6 }}
+                transition={{ duration: 1 }}
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"
+            />
 
             <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
-                {/* 🧭 Kolom 1 */}
+                {/* 🧭 Profil */}
                 <div>
                     <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-                        Dymas Yoga Febratama
+                        Dyogaf Studio
                     </h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                        Digital Marketer, Web Developer, dan Adventurer yang menciptakan
-                        pengalaman digital berkesan dengan sentuhan humanis dan futuristik.
+                        Dymas Yoga Febratama — Digital Marketer, Web Developer (WordPress),
+                        dan Adventurer.  
+                        <br />
+                        Membangun ekosistem digital yang humanis, modern, dan berkarakter.
                     </p>
                 </div>
 
-                {/* 🔗 Kolom 2 */}
+                {/* 🔗 Navigasi */}
                 <div>
                     <h4 className="text-lg font-semibold mb-4 text-indigo-300">Navigasi</h4>
                     <ul className="space-y-2 text-sm text-gray-300">
-                        <li><Link href="/" className="hover:text-cyan-400 transition">Beranda</Link></li>
-                        <li><Link href="/projects" className="hover:text-cyan-400 transition">Proyek</Link></li>
-                        <li><Link href="/about" className="hover:text-cyan-400 transition">Tentang Saya</Link></li>
-                        <li><Link href="/contact" className="hover:text-cyan-400 transition">Kontak</Link></li>
+                        {[
+                            { href: '/', label: 'Beranda' },
+                            { href: '/projects', label: 'Proyek' },
+                            { href: '/about', label: 'Tentang Saya' },
+                            { href: '/contact', label: 'Kontak' },
+                        ].map((item, i) => (
+                            <motion.li
+                                key={i}
+                                whileHover={{ x: 6 }}
+                                transition={{ type: 'spring', stiffness: 300 }}
+                            >
+                                <Link href={item.href} className="hover:text-cyan-400 transition">
+                                    {item.label}
+                                </Link>
+                            </motion.li>
+                        ))}
                     </ul>
                 </div>
 
-                {/* 📞 Kolom 3 */}
+                {/* 📞 Kontak & Sosial Media */}
                 <div>
                     <h4 className="text-lg font-semibold mb-4 text-indigo-300">Hubungi Saya</h4>
                     <ul className="space-y-3 text-sm text-gray-300">
                         <li className="flex items-center gap-3">
-                            <Mail className="w-4 h-4 text-indigo-400" />
-                            dymasyoga@example.com
+                            <Mail className="w-4 h-4 text-cyan-400" />
+                            <Link
+                                href="mailto:dymasyoga02@gmail.com"
+                                className="hover:text-cyan-400 transition"
+                            >
+                                dymasyoga02@gmail.com
+                            </Link>
                         </li>
                         <li className="flex items-center gap-3">
                             <MapPin className="w-4 h-4 text-cyan-400" />
                             Palembang, Indonesia
                         </li>
                         <li className="flex items-center gap-3">
-                            <Phone className="w-4 h-4 text-blue-400" />
-                            +62 812-3456-789
+                            <Phone className="w-4 h-4 text-cyan-400" />
+                            <Link
+                                href="https://wa.me/6281234567890"
+                                target="_blank"
+                                className="hover:text-cyan-400 transition"
+                            >
+                                +62 812-3456-7890
+                            </Link>
                         </li>
                     </ul>
 
@@ -71,9 +102,14 @@ export default function Footer() {
             </div>
 
             {/* 🧡 Garis bawah footer */}
-            <div className="border-t border-white/10 mt-12 pt-6 text-center text-gray-400 text-xs tracking-wider">
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="border-t border-white/10 mt-12 pt-6 text-center text-gray-400 text-xs tracking-wider"
+            >
                 © {new Date().getFullYear()} Dymas Yoga Febratama — All rights reserved.
-            </div>
+            </motion.div>
         </footer>
     );
 }

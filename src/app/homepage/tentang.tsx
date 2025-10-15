@@ -16,7 +16,7 @@ export default function Tentang() {
         <section className="relative z-10 py-24 px-6 sm:px-12 text-white overflow-hidden">
             {/* ✨ Heading */}
             <div className="text-center mb-16">
-                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">
+                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/[0.04] border border-white/[0.06] backdrop-blur-md rounded-full text-gray-400">
                     Tentang Dyogaf
                 </span>
 
@@ -44,8 +44,8 @@ export default function Tentang() {
                         viewport={{ once: false, amount: 0.3 }}
                         className="space-y-8"
                     >
-                        {/* Visi Dyogaf */}
-                        <div className="card-reactive bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10">
+                        {/* 🎯 Visi Dyogaf */}
+                        <div className="card-reactive bg-white/[0.02] backdrop-blur-2xl p-8 rounded-3xl border border-white/[0.05] hover:bg-white/[0.04] hover:border-white/[0.08] transition-all">
                             <h3 className="text-2xl font-semibold mb-3 bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                                 Visi Kami
                             </h3>
@@ -56,7 +56,7 @@ export default function Tentang() {
                             </p>
                         </div>
 
-                        {/* Nilai-nilai Dyogaf */}
+                        {/* 🌟 Nilai-nilai Dyogaf */}
                         <div className="grid sm:grid-cols-2 gap-5">
                             {[
                                 {
@@ -80,17 +80,19 @@ export default function Tentang() {
                                     text: 'Membangun hubungan yang tulus, kolaboratif, dan penuh makna.',
                                 },
                             ].map((item, i) => (
-                                <div
+                                <motion.div
                                     key={i}
-                                    className="card-reactive bg-white/5 hover:bg-white/10 transition-all p-5 rounded-xl border border-white/10 flex flex-col items-start gap-3"
+                                    whileHover={{ scale: 1.02 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                    className="card-reactive bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-xl p-5 rounded-2xl border border-white/[0.05] hover:border-white/[0.08] transition-all flex flex-col items-start gap-3"
                                     onMouseMove={handleMouseMove}
                                 >
-                                    <div className="p-2 rounded-lg bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">
+                                    <div className="p-2 rounded-lg bg-gradient-to-br from-cyan-500/10 to-indigo-500/10">
                                         {item.icon}
                                     </div>
                                     <h4 className="text-lg font-semibold text-white">{item.title}</h4>
                                     <p className="text-sm text-gray-400">{item.text}</p>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </motion.div>
@@ -109,20 +111,21 @@ export default function Tentang() {
                             { number: '24/7', label: 'Dukungan & Komunikasi' },
                             { number: '∞', label: 'Karya Bermakna' },
                         ].map((stat, i) => (
-                            <div
+                            <motion.div
                                 key={i}
-                                className="card-reactive bg-white/10 backdrop-blur-md py-8 px-6 text-center transition-all duration-500 relative"
+                                whileHover={{ scale: 1.02 }}
+                                className="card-reactive bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-xl py-8 px-6 text-center rounded-2xl border border-white/[0.05] hover:border-white/[0.08] transition-all"
                                 onMouseMove={handleMouseMove}
                             >
                                 <div className="relative z-10">
                                     <h4 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-1">
                                         {stat.number}
                                     </h4>
-                                    <p className="uppercase tracking-widest text-sm text-gray-300">
+                                    <p className="uppercase tracking-widest text-sm text-gray-400">
                                         {stat.label}
                                     </p>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </motion.div>
                 </div>
