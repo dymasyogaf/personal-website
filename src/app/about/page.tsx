@@ -25,11 +25,8 @@ export default function AboutPage() {
     }, []);
 
     return (
-        <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 text-white overflow-hidden">
+        <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 text-white bg-transparent overflow-visible">
             {/* 🌌 Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a] via-[#0d0d22] to-[#0a0a1a]" />
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_40%_30%,rgba(56,189,248,0.12),transparent_70%)] pointer-events-none" />
-
             <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
                 {/* 🔹 1. Header */}
                 <div className="text-center space-y-6">
@@ -198,7 +195,6 @@ export default function AboutPage() {
                         dengan jiwa petualang dan hati yang bermakna. Setiap proyek adalah perjalanan menuju masa depan yang lebih indah. ✨
                     </p>
                 </div>
-
             </div>
         </section>
     );
