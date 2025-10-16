@@ -1,7 +1,6 @@
 'use client';
 
 import {
-    Users,
     Rocket,
     Lightbulb,
     HeartHandshake,
@@ -13,13 +12,23 @@ import {
     Globe2,
 } from 'lucide-react';
 import "../../styles/about.css";
+import { useCallback } from 'react';
 
 export default function AboutPage() {
+    // 🌀 Efek mouse reactive border
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+    }, []);
+
     return (
         <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 text-white overflow-hidden">
             {/* 🌌 Background */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a] via-[#0d0d22] to-[#0a0a1a]" />
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_40%_30%,rgba(56,189,248,0.15),transparent_70%)] pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_40%_30%,rgba(56,189,248,0.12),transparent_70%)] pointer-events-none" />
 
             <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
                 {/* 🔹 1. Header */}
@@ -29,9 +38,9 @@ export default function AboutPage() {
                     </h1>
                     <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
                         <span className="text-cyan-400 font-semibold">Dyogaf Digital Studio</span> adalah ruang kolaboratif
-                        yang lahir dari visi untuk menyatukan <strong>teknologi</strong>, <strong>nilai kemanusiaan</strong>,
-                        dan <strong>makna kreatif</strong> dalam satu harmoni.
-                        Kami percaya bahwa desain dan kode bisa lebih dari sekadar tampilan — mereka bisa bercerita, menginspirasi, dan berdampak.
+                        yang lahir dari semangat eksplorasi, teknologi, dan kemanusiaan.
+                        Kami percaya bahwa desain dan kode bukan hanya tampilan —
+                        tapi perjalanan yang penuh makna dan nilai.
                     </p>
                 </div>
 
@@ -42,26 +51,31 @@ export default function AboutPage() {
                             Filosofi & Awal Mula
                         </h2>
                         <p className="text-gray-300 leading-relaxed text-base">
-                            Nama <span className="text-cyan-400 font-semibold">Dyogaf</span> berasal dari pendirinya —{" "}
-                            <strong>Dymas Yoga Febratama</strong>, seorang digital creator yang percaya bahwa setiap karya digital
-                            seharusnya memiliki <em>jiwa dan tujuan</em>.
-                            Dari perjalanan pribadi sebagai desainer dan developer independen, Dyogaf tumbuh menjadi studio yang membantu brand, bisnis, dan individu untuk membangun identitas digital yang otentik.
+                            Nama <span className="text-cyan-400 font-semibold">Dyogaf</span> diambil dari pendirinya,
+                            <strong> Dymas Yoga Febratama</strong> — seorang digital creator dan petualang
+                            yang percaya bahwa setiap karya digital harus punya <em>jiwa</em> dan <em>arah</em>.
+                            Dari perjalanan mandiri hingga kolaborasi global,
+                            Dyogaf tumbuh sebagai studio yang menghadirkan teknologi dengan rasa kemanusiaan.
                         </p>
                         <p className="text-gray-400 text-sm sm:text-base">
-                            Kami tidak sekadar membuat website — kami merancang <strong>pengalaman digital</strong> yang hidup,
-                            interaktif, dan bermakna, dengan sentuhan futuristik namun tetap humanis.
+                            Kami tidak hanya membangun website, tapi merancang <strong>pengalaman digital</strong> —
+                            hidup, interaktif, dan menyentuh sisi manusia. Setiap proyek adalah ekspedisi kreatif,
+                            dan setiap piksel adalah langkah menuju makna.
                         </p>
                     </div>
 
-                    <div className="relative group">
-                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 blur-2xl group-hover:blur-3xl transition-all" />
-                        <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-lg">
-                            <p className="text-gray-300 text-base leading-relaxed">
-                                “Kami percaya setiap pixel punya makna, setiap interaksi punya emosi, dan setiap proyek adalah ekspedisi
-                                menuju masa depan yang lebih bernilai.”
-                            </p>
-                            <p className="mt-4 text-right text-cyan-400 font-semibold">— Tim Dyogaf</p>
-                        </div>
+                    <div
+                        onMouseMove={handleMouseMove}
+                        data-color="cyan"
+                        className="card-reactive border-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-lg transition-all"
+                    >
+                        <div className="gloss-top"></div>
+                        <div className="inner-shadow"></div>
+                        <p className="text-gray-300 text-base leading-relaxed">
+                            “Kami percaya setiap pixel punya makna, setiap interaksi punya emosi,
+                            dan setiap proyek adalah ekspedisi menuju masa depan yang lebih bernilai.”
+                        </p>
+                        <p className="mt-4 text-right text-cyan-400 font-semibold">— Tim Dyogaf</p>
                     </div>
                 </div>
 
@@ -72,31 +86,39 @@ export default function AboutPage() {
                     </h2>
 
                     <div className="grid md:grid-cols-2 gap-10">
-                        {/* Kiri — Visi */}
-                        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-[0_0_25px_rgba(99,102,241,0.1)]">
+                        {/* Visi */}
+                        <div
+                            onMouseMove={handleMouseMove}
+                            data-color="indigo"
+                            className="card-reactive border-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8"
+                        >
+                            <div className="gloss-top"></div>
+                            <div className="inner-shadow"></div>
                             <h3 className="text-xl font-semibold text-cyan-300 mb-4">Visi Kami</h3>
                             <p className="text-gray-300 text-base leading-relaxed">
-                                Menjadi <strong>studio digital</strong> yang tidak hanya membangun website,
-                                tetapi juga menghadirkan <em>experience</em> yang hidup — menghubungkan manusia, nilai, dan teknologi
-                                dalam satu kesatuan yang bermakna.
+                                Menjadi <strong>studio digital petualang</strong> yang tak hanya membangun website,
+                                tapi juga menghadirkan <em>pengalaman hidup</em> — menghubungkan nilai, manusia, dan teknologi
+                                menjadi satu kesatuan yang bermakna.
                             </p>
                         </div>
 
-                        {/* Kanan — Statistik */}
+                        {/* Statistik */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             {[
-                                { value: '3+', label: 'Tahun Pengalaman', icon: <Clock className="w-6 h-6 text-cyan-400" /> },
-                                { value: '50+', label: 'Proyek & Klien Puas', icon: <FolderCheck className="w-6 h-6 text-indigo-400" /> },
-                                { value: '24/7', label: 'Dukungan & Komunikasi', icon: <HeartHandshake className="w-6 h-6 text-teal-400" /> },
-                                { value: '∞', label: 'Karya Bermakna', icon: <Infinity className="w-6 h-6 text-purple-400" /> },
+                                { value: '3+', label: 'Tahun Pengalaman', color: 'cyan', icon: <Clock className="w-6 h-6 text-cyan-400" /> },
+                                { value: '50+', label: 'Proyek & Klien Puas', color: 'indigo', icon: <FolderCheck className="w-6 h-6 text-indigo-400" /> },
+                                { value: '24/7', label: 'Dukungan & Komunikasi', color: 'teal', icon: <HeartHandshake className="w-6 h-6 text-teal-400" /> },
+                                { value: '∞', label: 'Karya Bermakna', color: 'purple', icon: <Infinity className="w-6 h-6 text-purple-400" /> },
                             ].map((stat, i) => (
                                 <div
                                     key={i}
-                                    className="flex flex-col justify-center items-center gap-3 bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-8 text-center hover:scale-[1.03] transition-all"
+                                    onMouseMove={handleMouseMove}
+                                    data-color={stat.color}
+                                    className="card-reactive border-reactive flex flex-col justify-center items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center"
                                 >
-                                    <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">
-                                        {stat.icon}
-                                    </div>
+                                    <div className="gloss-top"></div>
+                                    <div className="inner-shadow"></div>
+                                    <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">{stat.icon}</div>
                                     <h3 className="text-3xl font-bold text-cyan-300">{stat.value}</h3>
                                     <p className="text-gray-400 text-xs tracking-wider uppercase">{stat.label}</p>
                                 </div>
@@ -110,28 +132,36 @@ export default function AboutPage() {
                             {
                                 icon: <Rocket className="w-6 h-6 text-cyan-400" />,
                                 title: 'Inovatif',
-                                desc: 'Membawa ide-ide baru dengan semangat eksplorasi dan keberanian mencoba hal baru.',
+                                desc: 'Membawa ide baru dengan semangat eksplorasi dan keberanian mencoba hal baru.',
+                                color: 'cyan',
                             },
                             {
                                 icon: <Lightbulb className="w-6 h-6 text-indigo-400" />,
                                 title: 'Visioner',
-                                desc: 'Melihat jauh ke depan — merancang strategi digital yang tahan waktu.',
+                                desc: 'Melihat jauh ke depan — membangun strategi digital yang tahan waktu.',
+                                color: 'indigo',
                             },
                             {
                                 icon: <Compass className="w-6 h-6 text-teal-400" />,
                                 title: 'Petualangan',
-                                desc: 'Setiap proyek adalah perjalanan kreatif yang menantang dan menyenangkan.',
+                                desc: 'Setiap proyek adalah perjalanan yang menantang dan menyenangkan.',
+                                color: 'teal',
                             },
                             {
                                 icon: <HeartHandshake className="w-6 h-6 text-purple-400" />,
                                 title: 'Humanis',
-                                desc: 'Kami membangun hubungan yang tulus, kolaboratif, dan penuh makna.',
+                                desc: 'Membangun hubungan yang tulus, kolaboratif, dan penuh makna.',
+                                color: 'purple',
                             },
                         ].map((item, i) => (
                             <div
                                 key={i}
-                                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:scale-[1.03] transition-all text-center"
+                                onMouseMove={handleMouseMove}
+                                data-color={item.color}
+                                className="card-reactive border-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center"
                             >
+                                <div className="gloss-top"></div>
+                                <div className="inner-shadow"></div>
                                 <div className="flex flex-col items-center gap-3">
                                     <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">
                                         {item.icon}
@@ -151,20 +181,24 @@ export default function AboutPage() {
                         Kolaborasi & Dampak Global
                     </h2>
                     <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-                        Dari Palembang ke dunia 🌍 — Dyogaf telah bekerja dengan berbagai klien dari sektor kreatif, pendidikan, dan bisnis digital.
-                        Kami hadir bukan hanya untuk membangun website, tapi juga membangun <strong>makna</strong> di dunia digital.
+                        Dari Palembang ke dunia 🌍 — Dyogaf telah bekerja sama dengan berbagai klien di bidang kreatif,
+                        edukasi, dan bisnis digital. Kami hadir bukan hanya untuk membangun website,
+                        tapi untuk menanamkan makna di dunia digital.
                     </p>
                 </div>
 
                 {/* 🔹 5. Penutup */}
-                <div className="relative mt-20 text-center max-w-3xl mx-auto">
-                    <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 blur-3xl rounded-full" />
-                    <p className="relative text-gray-300 text-base leading-relaxed backdrop-blur-md bg-white/5 p-6 rounded-2xl border border-white/10 shadow-lg">
+                <div
+                    onMouseMove={handleMouseMove}
+                    className="footer-reactive relative mt-20 text-center max-w-3xl mx-auto p-6"
+                >
+                    <p className="text-gray-300 text-base leading-relaxed">
                         <Sparkles className="w-5 h-5 text-cyan-400 inline-block mr-2" />
-                        <span className="font-semibold text-cyan-400">Dyogaf</span> — tempat di mana kreativitas, teknologi, dan nilai hidup bersatu.
-                        Setiap proyek adalah perjalanan spiritual dan teknologis menuju karya yang bermakna. ✨
+                        <span className="font-semibold text-cyan-400">Dyogaf</span> — menjelajah dunia digital
+                        dengan jiwa petualang dan hati yang bermakna. Setiap proyek adalah perjalanan menuju masa depan yang lebih indah. ✨
                     </p>
                 </div>
+
             </div>
         </section>
     );

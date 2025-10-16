@@ -1,0 +1,110 @@
+/* 🌌 Base Card Style */
+.card-reactive {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(20, 20, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.4s ease;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+
+/* ✨ Border gradient follow mouse position */
+.card-reactive::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            var(--hover-color, rgba(56, 189, 248, 0.3)) 0%,
+            transparent 70%);
+    transition: opacity 0.35s ease, background 0.45s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.card-reactive:hover::before {
+    opacity: 1;
+}
+
+/* 🌈 Warna efek berbeda per-card */
+.card-reactive[data-color="cyan"] {
+    --hover-color: rgba(56, 189, 248, 0.35);
+}
+
+.card-reactive[data-color="purple"] {
+    --hover-color: rgba(168, 85, 247, 0.35);
+}
+
+.card-reactive[data-color="teal"] {
+    --hover-color: rgba(45, 212, 191, 0.35);
+}
+
+.card-reactive[data-color="pink"] {
+    --hover-color: rgba(236, 72, 153, 0.35);
+}
+
+.card-reactive[data-color="indigo"] {
+    --hover-color: rgba(99, 102, 241, 0.35);
+}
+
+/* 🌫 Efek dalam lembut */
+.card-reactive::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05), transparent 70%);
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.card-reactive:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* 🌟 Text content */
+.card-reactive .content {
+    position: relative;
+    z-index: 2;
+}
+
+/* ✨ Efek penutup “Dyogaf” */
+.footer-reactive {
+    position: relative;
+    background: rgba(20, 20, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+/* efek follow mouse */
+.footer-reactive::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(56, 189, 248, 0.25) 0%,
+            transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease, background 0.5s ease;
+}
+
+.footer-reactive:hover::before {
+    opacity: 1;
+}
+
+.footer-reactive p {
+    position: relative;
+    z-index: 2;
+}
