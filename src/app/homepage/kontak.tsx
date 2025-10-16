@@ -3,20 +3,24 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { useCallback } from 'react';
 import "../../styles/homepage.css";
 
 export default function CTA() {
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    }, []);
+
     return (
         <section className="relative z-10 py-28 px-6 sm:px-12 text-white overflow-hidden">
-            {/* 🌌 Background mengikuti global layout dari page.tsx */}
-            {/* Tidak perlu background tambahan di sini */}
-
-            {/* ✨ Efek spotlight fokus ke CTA button */}
+            {/* 🌌 Cahaya lembut di background */}
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 1.5 }}
-                className="absolute top-[60%] left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[600px] bg-gradient-radial from-cyan-500/20 via-transparent to-transparent blur-[120px] animate-pulse"
+                className="absolute top-[60%] left-1/2 -translate-x-1/2 w-[700px] sm:w-[900px] h-[700px] bg-gradient-radial from-cyan-500/15 via-transparent to-transparent blur-[140px]"
             />
 
             {/* 💫 CTA Card */}
@@ -25,16 +29,10 @@ export default function CTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="relative max-w-5xl mx-auto text-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-10 sm:p-16 shadow-[0_0_60px_rgba(99,102,241,0.15)] overflow-hidden"
+                className="relative max-w-5xl mx-auto text-center card-reactive bg-white/[0.02] backdrop-blur-2xl border border-white/[0.08] rounded-[2rem] p-10 sm:p-16 shadow-[0_0_60px_rgba(99,102,241,0.15)] overflow-hidden"
+                onMouseMove={handleMouseMove}
+                data-color="indigo"
             >
-                {/* 🩵 Efek kilau bergerak di belakang tombol */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: [0.2, 0.6, 0.2], x: [0, 80, 0] }}
-                    transition={{ repeat: Infinity, duration: 4 }}
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] h-[200px] bg-cyan-400/20 blur-[80px] rounded-full"
-                />
-
                 {/* ✨ Label kecil */}
                 <div className="flex items-center justify-center gap-2 mb-4 relative z-10">
                     <Sparkles className="w-5 h-5 text-cyan-400 animate-pulse" />
@@ -55,17 +53,21 @@ export default function CTA() {
                     Kami siap membantu membangun website, strategi SEO, dan branding digital yang futuristik, fungsional, dan berkarakter. 
                 </p>
 
-                {/* 🎯 Tombol CTA */}
+                {/* 🎯 Tombol CTA dengan efek reactive */}
                 <div className="mt-10 relative z-10">
                     <motion.div
-                        initial={{ scale: 1 }}
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                        className="inline-block"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
+                        className="relative inline-flex group"
+                        onMouseMove={handleMouseMove}
+                        data-color="cyan"
                     >
+                        {/* Efek cahaya mouse */}
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/10 to-indigo-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                        
                         <Link
                             href="/order"
-                            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400 font-semibold text-white hover:scale-[1.05] active:scale-95 transition-transform shadow-[0_0_25px_rgba(99,102,241,0.3)]"
+                            className="relative inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-indigo-500 to-cyan-400 transition-all duration-300 hover:shadow-[0_0_35px_rgba(99,102,241,0.3)]"
                         >
                             Isi Form Order <ArrowRight className="w-5 h-5" />
                         </Link>

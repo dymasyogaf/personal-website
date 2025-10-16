@@ -48,7 +48,7 @@ function DynamicFocus() {
 
 export default function Hero() {
   // 🌌 Efek glow interaktif (cursor)
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
     e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
@@ -57,7 +57,7 @@ export default function Hero() {
   return (
     <section className="relative z-10 flex items-center justify-center min-h-[90vh] pt-24 sm:pt-28 lg:pt-32 px-4 sm:px-8 md:px-16 text-white overflow-hidden">
       <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-14 items-center">
-        
+
         {/* 🧭 KIRI — Deskripsi */}
         <div className="text-left flex flex-col items-start space-y-6">
           <span className="text-xs sm:text-sm uppercase tracking-[0.25em] text-cyan-300 bg-white/10 border border-white/10 backdrop-blur-md px-4 py-1 rounded-full">
@@ -87,16 +87,19 @@ export default function Hero() {
           <div className="pt-3 flex flex-wrap gap-3">
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-indigo-500 text-white px-6 py-3 rounded-full font-semibold hover:scale-105 transition-transform shadow-[0_0_20px_rgba(99,102,241,0.3)] text-sm sm:text-base"
+              onMouseMove={handleMouseMove}
+              className="button-reactive from-cyan-500 to-indigo-500 text-white px-6 py-3 rounded-full font-semibold text-sm sm:text-base"
             >
-              Jelajahi Karya Kami <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              Jelajahi Karya Kami <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
             </Link>
 
             <Link
               href="/about"
-              className="inline-flex items-center justify-center gap-2 border border-white/20 backdrop-blur-md px-6 py-3 rounded-full text-white/90 hover:bg-white/10 hover:scale-105 transition-transform text-sm sm:text-base"
+              onMouseMove={handleMouseMove}
+              className="button-reactive border border-white/20 text-white/90 px-6 py-3 rounded-full text-sm sm:text-base backdrop-blur-md"
+              data-color="secondary"
             >
-              <Play className="w-4 h-4 sm:w-5 sm:h-5" /> Tentang Dyogaf
+              <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" /> Tentang Dyogaf
             </Link>
           </div>
         </div>
@@ -108,29 +111,34 @@ export default function Hero() {
               icon: <Sparkles className="w-6 h-6 text-cyan-400" />,
               label: 'Inovasi',
               value: 'Futuristik',
+              color: 'cyan',
             },
             {
               icon: <Lightbulb className="w-6 h-6 text-indigo-400" />,
               label: 'Kreativitas',
               value: 'Tanpa Batas',
+              color: 'indigo',
             },
             {
               icon: <Compass className="w-6 h-6 text-teal-400" />,
               label: 'Petualangan',
               value: 'Digital',
+              color: 'teal',
             },
             {
               icon: <Globe2 className="w-6 h-6 text-purple-400" />,
               label: 'Klien',
               value: 'Global',
+              color: 'purple',
             },
           ].map((card, index) => (
             <div
               key={index}
-              className="card-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 text-center shadow-[0_0_25px_rgba(99,102,241,0.1)] transition-all w-full hover:scale-[1.03]"
+              data-color={card.color}
+              className="card-reactive p-5 sm:p-6 text-center transition-all w-full"
               onMouseMove={handleMouseMove}
             >
-              <div className="flex flex-col items-center gap-2">
+              <div className="content flex flex-col items-center gap-2">
                 <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">
                   {card.icon}
                 </div>

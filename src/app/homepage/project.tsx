@@ -3,42 +3,54 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCallback } from 'react';
 import "../../styles/homepage.css";
 
 export default function Project() {
+    // ✨ Efek kursor reaktif
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    }, []);
+
     const projects = [
         {
             title: "Website Portfolio Personal",
             desc: "Website elegan dengan konsep glassmorphism dan animasi halus. Dibangun dengan Next.js & Tailwind.",
-            image: "/images/project1.webp",
+            image: "/image/homepage/website-portfolio-personal.png",
             tag: "Creative Portfolio",
             link: "/projects/portfolio",
+            color: "cyan",
         },
         {
-            title: "Sistem Wakaf Digital",
+            title: "Website Fundrising",
             desc: "Platform donasi & manajemen data wakaf berbasis WordPress, integrasi API dan dashboard custom.",
-            image: "/images/project2.webp",
+            image: "/image/homepage/website-fundrising.png",
             tag: "Nonprofit Tech",
             link: "/projects/wakaf",
+            color: "indigo",
         },
         {
             title: "Landing Page Produk",
             desc: "Desain futuristik dengan CTA yang kuat, performa tinggi, dan SEO optimization maksimal.",
-            image: "/images/project3.webp",
+            image: "/image/homepage/landing-page-produk.png",
             tag: "Marketing Design",
             link: "/projects/landing",
+            color: "teal",
         },
     ];
 
+
     return (
         <section className="relative z-10 py-24 px-6 sm:px-12 text-white overflow-hidden">
-            {/* ✨ Heading */}
+            {/* 🌟 Heading */}
             <div className="text-center mb-16">
                 <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">
                     Karya Kami
                 </span>
-                <h2 className="mt-5 text-3xl sm:text-5xl font-extrabold text-white leading-snug">
-                    Proyek Digital <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">Dyogaf</span>
+                <h2 className="mt-5 section-title">
+                    Proyek Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Dyogaf</span>
                 </h2>
                 <p className="mt-4 text-gray-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
                     Kami mengubah ide menjadi pengalaman digital yang interaktif dan bernilai tinggi.
@@ -54,9 +66,12 @@ export default function Project() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.2, duration: 0.8 }}
                         viewport={{ once: true, amount: 0.3 }}
-                        className="group relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_40px_rgba(99,102,241,0.15)]"
+                        onMouseMove={handleMouseMove}
+                        data-color={project.color}
+                        className="card-reactive relative rounded-3xl overflow-hidden transition-all duration-500 group"
                     >
-                        <div className="relative w-full h-56 sm:h-64 overflow-hidden">
+                        {/* 🖼️ Gambar */}
+                        <div className="relative w-full h-56 sm:h-64 overflow-hidden rounded-t-3xl">
                             <Image
                                 src={project.image}
                                 alt={project.title}
@@ -65,32 +80,36 @@ export default function Project() {
                             />
                         </div>
 
-                        <div className="p-6 relative z-10">
-                            <span className="text-xs uppercase text-cyan-400 font-medium">{project.tag}</span>
+                        {/* 📄 Konten */}
+                        <div className="p-6 relative z-10 content">
+                            <span className="text-xs uppercase text-cyan-400 font-medium tracking-wider">
+                                {project.tag}
+                            </span>
                             <h3 className="mt-2 text-xl font-bold">{project.title}</h3>
                             <p className="mt-3 text-sm text-gray-400 leading-relaxed">{project.desc}</p>
 
                             <Link
                                 href={project.link}
-                                className="inline-block mt-5 text-sm font-semibold text-cyan-400 hover:text-indigo-300 transition"
+                                className="inline-flex items-center mt-5 text-sm font-semibold text-cyan-400 hover:text-indigo-300 transition"
                             >
                                 Lihat Proyek →
                             </Link>
                         </div>
 
-                        {/* 🔮 Overlay Hover */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b1120]/40 to-[#0b1120]/90 opacity-0 group-hover:opacity-100 transition duration-500" />
+                        {/* ✨ Hover Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b1120]/40 to-[#0b1120]/90 opacity-0 group-hover:opacity-100 transition duration-500 rounded-3xl" />
                     </motion.div>
                 ))}
             </div>
 
-            {/* CTA */}
+            {/* 🎯 CTA */}
             <div className="text-center mt-16">
                 <Link
                     href="/projects"
-                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-cyan-400 text-white px-6 py-3 rounded-full font-semibold hover:scale-105 transition-transform shadow-[0_0_20px_rgba(99,102,241,0.3)]"
+                    onMouseMove={handleMouseMove}
+                    className="button-reactive from-cyan-500 to-indigo-500 text-white px-6 py-3 rounded-full font-semibold text-sm sm:text-base"
                 >
-                    Lihat Semua Proyek
+                    Lihat Semua Proyek →
                 </Link>
             </div>
         </section>

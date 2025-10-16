@@ -6,6 +6,7 @@ import { Rocket, Lightbulb, Compass, HeartHandshake } from 'lucide-react';
 import "../../styles/homepage.css";
 
 export default function Tentang() {
+    // 🧠 Efek reaktif seperti hero & highlight
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
         e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
@@ -16,12 +17,12 @@ export default function Tentang() {
         <section className="relative z-10 py-24 px-6 sm:px-12 text-white overflow-hidden">
             {/* ✨ Heading */}
             <div className="text-center mb-16">
-                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/[0.04] border border-white/[0.06] backdrop-blur-md rounded-full text-gray-400">
+                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">
                     Tentang Dyogaf
                 </span>
 
-                <h2 className="mt-5 text-3xl sm:text-5xl font-extrabold">
-                    <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+                <h2 className="mt-5 section-title">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
                         Dyogaf
                     </span>{' '}
                     — Studio Digital Kreatif
@@ -34,9 +35,12 @@ export default function Tentang() {
             </div>
 
             {/* 🌌 Bingkai Utama */}
-            <div className="section-glow max-w-6xl mx-auto relative z-10" onMouseMove={handleMouseMove}>
-                <div className="section-content grid lg:grid-cols-2 gap-10">
-                    {/* KIRI */}
+            <div
+                className="relative z-10 max-w-6xl mx-auto rounded-[2rem] border border-white/[0.08] bg-white/[0.02] backdrop-blur-2xl p-10 transition-all duration-500"
+                onMouseMove={handleMouseMove}
+            >
+                <div className="grid lg:grid-cols-2 gap-12 items-start">
+                    {/* ✨ KIRI - VISI DAN NILAI */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -44,9 +48,13 @@ export default function Tentang() {
                         viewport={{ once: false, amount: 0.3 }}
                         className="space-y-8"
                     >
-                        {/* 🎯 Visi Dyogaf */}
-                        <div className="card-reactive bg-white/[0.02] backdrop-blur-2xl p-8 rounded-3xl border border-white/[0.05] hover:bg-white/[0.04] hover:border-white/[0.08] transition-all">
-                            <h3 className="text-2xl font-semibold mb-3 bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+                        {/* 🎯 Visi */}
+                        <div
+                            className="card-reactive bg-white/[0.03] backdrop-blur-xl p-8 rounded-3xl border border-white/[0.05] hover:bg-white/[0.05] hover:border-white/[0.1] transition-all"
+                            onMouseMove={handleMouseMove}
+                            data-color="indigo"
+                        >
+                            <h3 className="text-2xl font-semibold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">
                                 Visi Kami
                             </h3>
                             <p className="text-gray-300 leading-relaxed">
@@ -56,48 +64,54 @@ export default function Tentang() {
                             </p>
                         </div>
 
-                        {/* 🌟 Nilai-nilai Dyogaf */}
+                        {/* 🌟 Nilai-nilai */}
                         <div className="grid sm:grid-cols-2 gap-5">
                             {[
                                 {
                                     icon: <Rocket className="w-6 h-6 text-cyan-400" />,
                                     title: 'Inovatif',
                                     text: 'Membawa ide-ide baru dalam setiap proyek dengan semangat eksplorasi.',
+                                    color: 'cyan',
                                 },
                                 {
                                     icon: <Lightbulb className="w-6 h-6 text-indigo-400" />,
                                     title: 'Visioner',
                                     text: 'Melihat jauh ke depan — membangun strategi digital jangka panjang.',
+                                    color: 'indigo',
                                 },
                                 {
                                     icon: <Compass className="w-6 h-6 text-teal-400" />,
                                     title: 'Petualangan',
                                     text: 'Terinspirasi oleh perjalanan dan tantangan, setiap proyek adalah ekspedisi kreatif.',
+                                    color: 'teal',
                                 },
                                 {
                                     icon: <HeartHandshake className="w-6 h-6 text-cyan-300" />,
                                     title: 'Humanis',
                                     text: 'Membangun hubungan yang tulus, kolaboratif, dan penuh makna.',
+                                    color: 'cyan',
                                 },
                             ].map((item, i) => (
                                 <motion.div
                                     key={i}
-                                    whileHover={{ scale: 1.02 }}
-                                    transition={{ type: "spring", stiffness: 300 }}
-                                    className="card-reactive bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-xl p-5 rounded-2xl border border-white/[0.05] hover:border-white/[0.08] transition-all flex flex-col items-start gap-3"
+                                    whileHover={{ scale: 1.03 }}
+                                    transition={{ type: "spring", stiffness: 200 }}
+                                    className="card-reactive bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-xl p-5 rounded-2xl border border-white/[0.06] hover:border-white/[0.1] transition-all"
                                     onMouseMove={handleMouseMove}
+                                    data-color={item.color}
                                 >
-                                    <div className="p-2 rounded-lg bg-gradient-to-br from-cyan-500/10 to-indigo-500/10">
-                                        {item.icon}
+                                    <div className="relative p-2 rounded-lg bg-gradient-to-br from-cyan-500/10 to-indigo-500/10 flex items-center justify-center">
+                                        <div className="absolute inset-0 rounded-lg blur-md bg-gradient-to-br from-cyan-400/15 to-indigo-500/15"></div>
+                                        <div className="relative z-10">{item.icon}</div>
                                     </div>
-                                    <h4 className="text-lg font-semibold text-white">{item.title}</h4>
-                                    <p className="text-sm text-gray-400">{item.text}</p>
+                                    <h4 className="text-lg font-semibold text-white mt-3">{item.title}</h4>
+                                    <p className="text-sm text-gray-400 mt-1">{item.text}</p>
                                 </motion.div>
                             ))}
                         </div>
                     </motion.div>
 
-                    {/* KANAN */}
+                    {/* ✨ KANAN - STATISTIK */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -106,16 +120,17 @@ export default function Tentang() {
                         className="flex flex-col justify-center gap-6"
                     >
                         {[
-                            { number: '3+', label: 'Tahun Pengalaman' },
-                            { number: '50+', label: 'Proyek & Klien Puas' },
-                            { number: '24/7', label: 'Dukungan & Komunikasi' },
-                            { number: '∞', label: 'Karya Bermakna' },
+                            { number: '3+', label: 'Tahun Pengalaman', color: 'indigo' },
+                            { number: '50+', label: 'Proyek & Klien Puas', color: 'cyan' },
+                            { number: '24/7', label: 'Dukungan & Komunikasi', color: 'teal' },
+                            { number: '∞', label: 'Karya Bermakna', color: 'indigo' },
                         ].map((stat, i) => (
                             <motion.div
                                 key={i}
-                                whileHover={{ scale: 1.02 }}
-                                className="card-reactive bg-white/[0.02] hover:bg-white/[0.04] backdrop-blur-xl py-8 px-6 text-center rounded-2xl border border-white/[0.05] hover:border-white/[0.08] transition-all"
+                                whileHover={{ scale: 1.03 }}
+                                className="card-reactive bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-xl py-8 px-6 text-center rounded-2xl border border-white/[0.06] hover:border-white/[0.1] transition-all"
                                 onMouseMove={handleMouseMove}
+                                data-color={stat.color}
                             >
                                 <div className="relative z-10">
                                     <h4 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-1">
