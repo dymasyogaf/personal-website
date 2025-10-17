@@ -1,0 +1,31 @@
+@import "./about.css";
+
+/* ⚙️ Teknologi Section */
+.tech-item {
+    transition: all 0.4s ease;
+}
+
+.tech-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+}
+
+/* 🧭 Workflow Cards */
+.card-reactive[data-color="purple"] {
+    --hover-color: rgba(168, 85, 247, 0.35);
+}
+
+.card-reactive:hover {
+    transform: translateY(-4px);
+}
+
+/* CTA Button */
+.card-reactive {
+    position: relative;
+    z-index: 1;
+}
+
+.card-reactive::before,
+.card-reactive::after {
+    z-index: 0;
+}
