@@ -1,4 +1,7 @@
-/* 🌌 Base Card Style */
+/* =========================================================
+ 🌐 SECTION 1: SERVICES
+    (Website Development, WordPress Development, Berdu Platform)
+========================================================= */
 .card-reactive {
     position: relative;
     border-radius: 18px;
@@ -9,10 +12,10 @@
     -webkit-backdrop-filter: blur(16px);
     transition: all 0.4s ease;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    cursor: pointer;
+    cursor: default;
 }
 
-/* ✨ Border gradient follow mouse position */
+/* ✨ Efek hover lembut mengikuti posisi kursor */
 .card-reactive::before {
     content: '';
     position: absolute;
@@ -25,13 +28,14 @@
     transition: opacity 0.35s ease, background 0.45s ease;
     opacity: 0;
     pointer-events: none;
+    filter: blur(40px);
 }
 
 .card-reactive:hover::before {
     opacity: 1;
 }
 
-/* 🌈 Warna efek berbeda per-card */
+/* 🌈 Warna efek per-card */
 .card-reactive[data-color="cyan"] {
     --hover-color: rgba(56, 189, 248, 0.35);
 }
@@ -69,13 +73,153 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* 🌟 Text content */
+/* 🌟 Konten tetap di atas efek */
 .card-reactive .content {
     position: relative;
     z-index: 2;
 }
 
-/* ✨ Efek penutup “Dyogaf” */
+/* =========================================================
+🧭 SECTION 2: BAGAIMANA KAMI BEKERJA
+   (Konsultasi, Desain, Testing, Peluncuran)
+   — efek disamakan dengan SECTION 1: SERVICES
+========================================================= */
+.workflow-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(20, 20, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.4s ease;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    cursor: default;
+}
+
+/* ✨ Efek hover lembut mengikuti posisi kursor */
+.workflow-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            var(--hover-color, rgba(56, 189, 248, 0.3)) 0%,
+            transparent 70%);
+    transition: opacity 0.35s ease, background 0.45s ease;
+    opacity: 0;
+    pointer-events: none;
+    filter: blur(40px);
+}
+
+.workflow-card:hover::before {
+    opacity: 1;
+}
+
+/* 🌈 Warna efek per-card */
+.workflow-card[data-color="cyan"] {
+    --hover-color: rgba(56, 189, 248, 0.35);
+}
+
+.workflow-card[data-color="purple"] {
+    --hover-color: rgba(168, 85, 247, 0.35);
+}
+
+.workflow-card[data-color="teal"] {
+    --hover-color: rgba(45, 212, 191, 0.35);
+}
+
+.workflow-card[data-color="pink"] {
+    --hover-color: rgba(236, 72, 153, 0.35);
+}
+
+.workflow-card[data-color="indigo"] {
+    --hover-color: rgba(99, 102, 241, 0.35);
+}
+
+/* 🌫 Efek dalam lembut */
+.workflow-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05), transparent 70%);
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+/* Hover smooth */
+.workflow-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* 🌟 Konten tetap di atas efek */
+.workflow-card .content {
+    position: relative;
+    z-index: 2;
+}
+
+/* =========================================================
+⚙️ SECTION 3: TEKNOLOGI YANG KAMI GUNAKAN
+   (Efek konsisten dengan card-reactive)
+========================================================= */
+.tech-reactive {
+    position: relative;
+    border-radius: 14px;
+    background: rgba(20, 20, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: all 0.4s ease;
+    cursor: default;
+    overflow: hidden;
+}
+
+/* ✨ Efek follow mouse lembut */
+.tech-reactive::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        var(--hover-color, rgba(56, 189, 248, 0.3)) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease, background 0.45s ease;
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+.tech-reactive:hover::before {
+    opacity: 1;
+}
+
+/* Warna efek opsional per item */
+.tech-reactive[data-color="cyan"] { --hover-color: rgba(56, 189, 248, 0.35); }
+.tech-reactive[data-color="purple"] { --hover-color: rgba(168, 85, 247, 0.35); }
+.tech-reactive[data-color="indigo"] { --hover-color: rgba(99, 102, 241, 0.35); }
+.tech-reactive[data-color="pink"] { --hover-color: rgba(236, 72, 153, 0.35); }
+.tech-reactive[data-color="teal"] { --hover-color: rgba(45, 212, 191, 0.35); }
+
+.tech-reactive:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.tech-reactive .content {
+    position: relative;
+    z-index: 2;
+}
+
+/* =========================================================
+ 💫 SECTION 4: CTA / FOOTER
+    (Setiap proyek adalah perjalanan ...)
+========================================================= */
 .footer-reactive {
     position: relative;
     background: rgba(20, 20, 35, 0.6);
@@ -87,7 +231,7 @@
     overflow: hidden;
 }
 
-/* efek follow mouse */
+/* ✨ Efek follow mouse lembut */
 .footer-reactive::before {
     content: '';
     position: absolute;
@@ -98,6 +242,7 @@
             transparent 70%);
     opacity: 0;
     transition: opacity 0.4s ease, background 0.5s ease;
+    filter: blur(40px);
 }
 
 .footer-reactive:hover::before {

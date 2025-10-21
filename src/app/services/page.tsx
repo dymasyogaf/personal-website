@@ -11,7 +11,7 @@ import {
     ShieldCheck,
     Code,
     Lightbulb,
-    ArrowRight, // ✅ Tambahkan
+    ArrowRight,
 } from "lucide-react";
 import {
     SiWordpress,
@@ -22,73 +22,66 @@ import {
 } from "react-icons/si";
 
 export default function ServicesPage() {
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-        e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-    }, []);
+    // follow-mouse (dipakai semua kartu)
+    const handleMouseMove = useCallback(
+        (e: React.MouseEvent<HTMLDivElement>) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+            e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        },
+        []
+    );
 
     const services = [
         {
             title: "Website Development",
             desc: "Kami membangun website profesional, cepat, dan memukau — dirancang untuk menonjolkan identitas brand dan mengoptimalkan pengalaman pengguna.",
             icon: <Globe className="w-7 h-7 text-cyan-400" />,
-            features: [
-                "UI/UX Modern",
-                "SEO Optimization",
-                "Performance Boost",
-                "Custom Domain Integration",
-            ],
+            features: ["UI/UX Modern", "SEO Optimization", "Performance Boost", "Custom Domain Integration"],
             color: "cyan",
         },
         {
             title: "WordPress Development",
             desc: "WordPress bukan sekadar CMS — bagi kami, ia adalah kanvas digital. Kami kustomisasi tema, plugin, dan sistem agar sepenuhnya mencerminkan karakter unik bisnis Anda.",
             icon: <SiWordpress className="w-7 h-7 text-[#21759B]" />,
-            features: [
-                "Custom Themes",
-                "Plugin Development",
-                "WooCommerce Integration",
-                "Security Hardening",
-            ],
+            features: ["Custom Themes", "Plugin Development", "WooCommerce Integration", "Security Hardening"],
             color: "indigo",
         },
         {
             title: "Berdu Platform",
             desc: "Bangun sistem berbasis Berdu — solusi platform lokal yang kuat untuk website, toko online, dan dashboard bisnis.",
             icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-8 h-8" />,
-            features: [
-                "Admin Dashboard",
-                "User Management",
-                "Data Analytics",
-                "Cloud Hosting",
-            ],
+            features: ["Admin Dashboard", "User Management", "Data Analytics", "Cloud Hosting"],
             color: "sky",
         },
-    ];
+    ] as const;
 
     const workflow = [
         {
             icon: <Lightbulb />,
             title: "Konsultasi & Ideasi",
             text: "Kami mulai dengan memahami visi, audiens, dan nilai bisnis Anda.",
+            color: "cyan",
         },
         {
             icon: <Code />,
             title: "Desain & Pengembangan",
             text: "Kami ubah ide menjadi desain interaktif dan kode berkualitas tinggi.",
+            color: "purple",
         },
         {
             icon: <ShieldCheck />,
             title: "Testing & Keamanan",
             text: "Setiap proyek diuji dengan ketat untuk menjamin performa dan stabilitas.",
+            color: "teal",
         },
         {
             icon: <Rocket />,
             title: "Peluncuran & Dukungan",
             text: "Kami bantu Anda meluncurkan proyek dan menyediakan dukungan berkelanjutan.",
+            color: "indigo",
         },
-    ];
+    ] as const;
 
     const tools = [
         { name: "Next.js", icon: <SiNextdotjs className="w-6 h-6 text-white" /> },
@@ -97,45 +90,51 @@ export default function ServicesPage() {
         { name: "Framer Motion", icon: <SiFramer className="w-6 h-6 text-purple-400" /> },
         { name: "WordPress", icon: <SiWordpress className="w-6 h-6 text-[#21759B]" /> },
         { name: "Berdu", icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-6 h-6" /> },
-    ];
+    ] as const;
 
-    const MotionLink = motion(Link); // ✅ buat MotionLink biar bisa animasi
+    const MotionLink = motion(Link);
 
     return (
         <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 py-28 text-white bg-transparent overflow-visible">
             <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
-                {/* 🌌 Hero Section */}
+                {/* Hero */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     className="text-center space-y-6"
                 >
+                    <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300"
+                    >
+                        Layanan Kami
+                    </motion.span>
+
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                        Layanan
+                        Siap Melayani Anda
                     </h1>
                     <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
                         Di Dyogaf Digital Studio, kami tak sekadar membuat website. Kami
-                        menciptakan <em>pengalaman digital</em> — interaktif, berkarakter,
-                        dan bermakna.
+                        menciptakan <em>pengalaman digital</em> — interaktif, berkarakter, dan bermakna.
                     </p>
                 </motion.div>
 
-                {/* 💼 Layanan */}
+                {/* Services cards */}
                 <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
                     {services.map((service, i) => (
                         <motion.div
-                            key={i}
+                            key={service.title}
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.2, duration: 0.6 }}
                             onMouseMove={handleMouseMove}
                             data-color={service.color}
-                            className="card-reactive border-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-lg transition-all hover:-translate-y-2 duration-500 flex flex-col justify-between h-full min-h-[480px]"
+                            className="card-reactive p-8 flex flex-col justify-between h-full min-h-[480px]"
                         >
-                            <div className="gloss-top"></div>
-                            <div className="inner-shadow"></div>
-
                             <div className="flex flex-col items-center text-center gap-4 flex-grow">
                                 <div className="p-4 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">
                                     {service.icon}
@@ -145,12 +144,12 @@ export default function ServicesPage() {
                             </div>
 
                             <ul className="mt-6 space-y-2 text-left w-full">
-                                {service.features.map((feat, j) => (
+                                {service.features.map((feat) => (
                                     <li
-                                        key={j}
+                                        key={feat}
                                         className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-gray-300 hover:bg-white/10 transition"
                                     >
-                                        <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
+                                        <span className="w-2 h-2 rounded-full bg-cyan-400" />
                                         {feat}
                                     </li>
                                 ))}
@@ -159,25 +158,28 @@ export default function ServicesPage() {
                     ))}
                 </div>
 
-                {/* 🧭 Proses Kerja */}
+                {/* Workflow (Bagaimana Kami Bekerja) */}
                 <div className="max-w-6xl mx-auto text-center space-y-10">
                     <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                         Bagaimana Kami Bekerja
                     </h2>
+
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {workflow.map((step, i) => (
                             <motion.div
-                                key={i}
+                                key={step.title}
                                 initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.1 }}
                                 onMouseMove={handleMouseMove}
-                                data-color="purple"
-                                className="card-reactive border-reactive p-6"
+                                data-color={step.color}
+                                className="workflow-card flex flex-col items-center justify-center text-center p-8 h-[320px]"
                             >
-                                <div className="text-cyan-400 mb-3">{step.icon}</div>
-                                <h3 className="font-semibold text-lg">{step.title}</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
+                                <div className="p-4 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 flex items-center justify-center">
+                                    <div className="text-cyan-400 w-7 h-7">{step.icon}</div>
+                                </div>
+                                <h3 className="font-semibold text-lg text-white mt-4">{step.title}</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed mt-2 max-w-[240px]">
                                     {step.text}
                                 </p>
                             </motion.div>
@@ -190,25 +192,42 @@ export default function ServicesPage() {
                     <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                         Teknologi yang Kami Gunakan
                     </h2>
+
                     <div className="flex flex-wrap justify-center gap-6">
                         {tools.map((tool, i) => (
                             <motion.div
-                                key={i}
+                                key={tool.name}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                className="tech-item px-5 py-3 bg-white/5 border border-white/10 rounded-xl flex items-center gap-3 backdrop-blur-lg"
+                                transition={{ delay: i * 0.1, duration: 0.4 }}
+                                onMouseMove={(e) => {
+                                    const rect = e.currentTarget.getBoundingClientRect();
+                                    e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                                    e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+                                }}
+                                data-color={
+                                    i === 0
+                                        ? "cyan"
+                                        : i === 1
+                                            ? "pink"
+                                            : i === 2
+                                                ? "teal"
+                                                : i === 3
+                                                    ? "purple"
+                                                    : i === 4
+                                                        ? "indigo"
+                                                        : "cyan"
+                                }
+                                className="tech-reactive flex items-center gap-3 px-5 py-3"
                             >
                                 {tool.icon}
-                                <span className="text-gray-300 text-sm font-medium">
-                                    {tool.name}
-                                </span>
+                                <span className="text-gray-300 text-sm font-medium">{tool.name}</span>
                             </motion.div>
                         ))}
                     </div>
                 </div>
 
-                {/* 💎 CTA */}
+                {/* CTA */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -225,18 +244,8 @@ export default function ServicesPage() {
                         href="/order"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative inline-flex items-center gap-3 px-8 py-4 mt-8 rounded-full font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 shadow-[0_0_25px_rgba(56,189,248,0.25)] transition-all duration-500 ease-out hover:shadow-[0_0_35px_rgba(56,189,248,0.35)] overflow-hidden group"
-                        onMouseMove={(e) => {
-                            const rect = e.currentTarget.getBoundingClientRect();
-                            const x = e.clientX - rect.left;
-                            const y = e.clientY - rect.top;
-                            e.currentTarget.style.setProperty("--x", `${x}px`);
-                            e.currentTarget.style.setProperty("--y", `${y}px`);
-                        }}
+                        className="relative inline-flex items-center gap-3 px-8 py-4 mt-8 rounded-full font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 shadow-[0_0_25px_rgba(56,189,248,0.25)] transition-all duration-500 ease-out hover:shadow-[0_0_35px_rgba(56,189,248,0.35)] overflow-hidden"
                     >
-                        <span
-                            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 before:content-[''] before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(circle_at_var(--x)_var(--y),rgba(255,255,255,0.4),transparent_60%)]"
-                        ></span>
                         <span className="relative z-10 flex items-center gap-3">
                             Isi Form Order <ArrowRight className="w-5 h-5" />
                         </span>

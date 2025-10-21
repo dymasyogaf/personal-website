@@ -47,8 +47,19 @@ export default function ProjectPage() {
 
                 {/* 🔹 Header */}
                 <div className="text-center space-y-6">
+                    {/* 🌟 Badge kecil */}
+                    <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300"
+                    >
+                        Proyek yang Telah Dikerjakan
+                    </motion.span>
+
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                        Proyek & Karya Dyogaf
+                        Siap Berkarya Bersamamu
                     </h1>
                     <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
                         Setiap karya adalah perjalanan digital yang bermakna — membangun, menulis, dan merancang

@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import "../../styles/about.css";
 import { useCallback } from 'react';
+import { motion } from "framer-motion";
 
 export default function AboutPage() {
     // 🌀 Efek mouse reactive border
@@ -26,13 +27,30 @@ export default function AboutPage() {
 
     return (
         <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 text-white bg-transparent overflow-visible">
-            {/* 🌌 Background */}
             <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
-                {/* 🔹 1. Header */}
+
+                {/* 🔹 1. Header (mirip bagian Hubungi Saya) */}
                 <div className="text-center space-y-6">
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                        Tentang Dyogaf
+                    {/* ✨ Label kecil */}
+                    <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300"
+                    >
+                        Tentang Kami
+                    </motion.span>
+
+                    {/* 🌈 Judul besar */}
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold">
+                        <span className="text-white">Kenali Lebih Dekat </span>
+                        <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                            Tentang Dyogaf
+                        </span>
                     </h1>
+
+                    {/* 📄 Deskripsi singkat */}
                     <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
                         <span className="text-cyan-400 font-semibold">Dyogaf Digital Studio</span> adalah ruang kolaboratif
                         yang lahir dari semangat eksplorasi, teknologi, dan kemanusiaan.
