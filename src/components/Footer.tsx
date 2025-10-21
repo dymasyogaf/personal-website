@@ -59,10 +59,10 @@ export default function Footer() {
                         <li className="flex items-center gap-3">
                             <Mail className="w-4 h-4 text-cyan-400" />
                             <Link
-                                href="mailto:dymasyoga02@gmail.com"
+                                href="mailto:dymasyoga11@gmail.com"
                                 className="hover:text-cyan-400 transition"
                             >
-                                dymasyoga02@gmail.com
+                                dymasyoga11@gmail.com
                             </Link>
                         </li>
                         <li className="flex items-center gap-3">
@@ -72,11 +72,11 @@ export default function Footer() {
                         <li className="flex items-center gap-3">
                             <Phone className="w-4 h-4 text-cyan-400" />
                             <Link
-                                href="https://wa.me/6281234567890"
+                                href="https://wa.me/6283178772170"
                                 target="_blank"
                                 className="hover:text-cyan-400 transition"
                             >
-                                +62 812-3456-7890
+                                +62 831-7877-2170
                             </Link>
                         </li>
                     </ul>
@@ -84,9 +84,9 @@ export default function Footer() {
                     {/* 🔗 Social Media */}
                     <div className="flex gap-4 mt-6">
                         {[
-                            { icon: <Github className="w-5 h-5" />, href: 'https://github.com/' },
-                            { icon: <Linkedin className="w-5 h-5" />, href: 'https://linkedin.com/' },
-                            { icon: <Instagram className="w-5 h-5" />, href: 'https://instagram.com/' },
+                            { icon: <Github className="w-5 h-5" />, href: 'https://github.com/dymasyogaf' },
+                            { icon: <Linkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/dymasyogaf/' },
+                            { icon: <Instagram className="w-5 h-5" />, href: 'https://www.instagram.com/dymasyogaf' },
                         ].map((social, i) => (
                             <Link
                                 key={i}

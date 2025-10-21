@@ -79,14 +79,14 @@ export default function Kontak() {
                         {
                             icon: <Mail className="w-6 h-6 text-cyan-400" />,
                             title: 'Email',
-                            value: 'dymasyoga02@gmail.com',
-                            href: 'mailto:dymasyoga02@gmail.com',
+                            value: 'dymasyoga11@gmail.com',
+                            href: 'mailto:dymasyoga11@gmail.com',
                         },
                         {
                             icon: <Phone className="w-6 h-6 text-cyan-400" />,
                             title: 'Telepon / WhatsApp',
-                            value: '+62 812-3456-7890',
-                            href: 'https://wa.me/6281234567890',
+                            value: '+62 831-7877-2170',
+                            href: 'https://wa.me/6283178772170',
                         },
                         {
                             icon: <MapPin className="w-6 h-6 text-cyan-400" />,

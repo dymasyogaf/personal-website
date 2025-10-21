@@ -7,6 +7,7 @@ import Projek from './homepage/project';
 import Testimoni from './homepage/testimoni';
 import Tentang from './homepage/tentang';
 import Kontak from './homepage/kontak';
+import LazySection from '@/components/LazySection';
 
 // ✅ Background global dengan efek gradient animasi dan orbs lembut
 export default function HomePage() {
@@ -20,14 +21,30 @@ export default function HomePage() {
         <div className="absolute bottom-[10%] right-[5%] w-[600px] h-[600px] bg-cyan-500/25 rounded-full blur-[200px]" />
       </section>
 
-      {/* 🌟 Section Components */}
+      {/* 🌟 Section Components - Critical sections load immediately */}
       <Hero />
       <Highlight />
-      <Layanan />
-      <Projek />
-      <Testimoni />
-      <Tentang />
-      <Kontak />
+      
+      {/* 🚀 Lazy loaded sections for better performance */}
+      <LazySection rootMargin="100px">
+        <Layanan />
+      </LazySection>
+      
+      <LazySection rootMargin="100px">
+        <Projek />
+      </LazySection>
+      
+      <LazySection rootMargin="100px">
+        <Testimoni />
+      </LazySection>
+      
+      <LazySection rootMargin="100px">
+        <Tentang />
+      </LazySection>
+      
+      <LazySection rootMargin="50px">
+        <Kontak />
+      </LazySection>
     </>
   );
 }

@@ -3,18 +3,20 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import "../../styles/project.css";
 import { Sparkles, Globe2, PenTool, MonitorSmartphone, Megaphone } from 'lucide-react';
 
 export default function ProjectPage() {
+    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+    
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
         e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
         e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
     }, []);
 
-    const projects = [
+    const projects = useMemo(() => [
         {
             title: "Website Portfolio Personal",
             desc: "Website elegan dengan konsep glassmorphism dan animasi halus. Dibangun dengan Next.js & Tailwind.",
@@ -39,7 +41,35 @@ export default function ProjectPage() {
             link: "/projects/landing",
             color: "teal",
         },
-    ];
+    ], []);
+
+    const handleImageLoad = useCallback((index: number) => {
+        setLoadedImages(prev => new Set(prev).add(index));
+    }, []);
+
+    const narrativeData = useMemo(() => [
+        {
+            icon: <PenTool className="w-7 h-7 text-cyan-400" />,
+            title: "Artikel SEO",
+            desc: "Meningkatkan visibilitas website melalui artikel SEO-friendly. Mulai dari topik keislaman, rental kendaraan, hingga layanan hukum. Semua dengan strategi kata kunci yang terukur.",
+            clients: "al-fatihah.com, rentalmotor99.com, birohukumindonesia.com",
+            color: "cyan",
+        },
+        {
+            icon: <MonitorSmartphone className="w-7 h-7 text-indigo-400" />,
+            title: "Website Development",
+            desc: "Membangun website modern, cepat, dan mobile-friendly. Fokus pada pengalaman pengguna dan performa, dari portal berita hingga platform milenial.",
+            clients: "WordPress, Next.js, Laravel, Elementor",
+            color: "indigo",
+        },
+        {
+            icon: <Megaphone className="w-7 h-7 text-purple-400" />,
+            title: "Landing Page Konversi",
+            desc: "Desain landing page futuristik dengan CTA kuat untuk karantina Qur'an, pesantren, hingga platform qurban — tampil menarik dan siap konversi.",
+            clients: "Program Karantina Qur'an, Gerakan Wakaf Sumur",
+            color: "purple",
+        },
+    ], []);
 
     return (
         <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 text-white overflow-visible">
@@ -69,29 +99,7 @@ export default function ProjectPage() {
 
                 {/* 🧭 Narasi Utama */}
                 <div className="grid md:grid-cols-3 gap-10">
-                    {[
-                        {
-                            icon: <PenTool className="w-7 h-7 text-cyan-400" />,
-                            title: "Artikel SEO",
-                            desc: "Meningkatkan visibilitas website melalui artikel SEO-friendly. Mulai dari topik keislaman, rental kendaraan, hingga layanan hukum. Semua dengan strategi kata kunci yang terukur.",
-                            clients: "al-fatihah.com, rentalmotor99.com, birohukumindonesia.com",
-                            color: "cyan",
-                        },
-                        {
-                            icon: <MonitorSmartphone className="w-7 h-7 text-indigo-400" />,
-                            title: "Website Development",
-                            desc: "Membangun website modern, cepat, dan mobile-friendly. Fokus pada pengalaman pengguna dan performa, dari portal berita hingga platform milenial.",
-                            clients: "WordPress, Next.js, Laravel, Elementor",
-                            color: "indigo",
-                        },
-                        {
-                            icon: <Megaphone className="w-7 h-7 text-purple-400" />,
-                            title: "Landing Page Konversi",
-                            desc: "Desain landing page futuristik dengan CTA kuat untuk karantina Qur’an, pesantren, hingga platform qurban — tampil menarik dan siap konversi.",
-                            clients: "Program Karantina Qur’an, Gerakan Wakaf Sumur",
-                            color: "purple",
-                        },
-                    ].map((item, i) => (
+                    {narrativeData.map((item, i) => (
                         <div
                             key={i}
                             onMouseMove={handleMouseMove}
@@ -126,11 +134,16 @@ export default function ProjectPage() {
                             className="card-reactive border-reactive relative rounded-3xl overflow-hidden transition-all duration-500 group"
                         >
                             <div className="relative w-full h-56 sm:h-64 overflow-hidden rounded-t-3xl">
+                                <div className={`absolute inset-0 bg-gray-800/20 rounded-t-3xl ${loadedImages.has(i) ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`} />
                                 <Image
                                     src={project.image}
                                     alt={project.title}
                                     fill
-                                    className="object-cover opacity-80 group-hover:opacity-100 transition-all duration-500"
+                                    className={`object-cover transition-all duration-500 ${loadedImages.has(i) ? 'opacity-80 group-hover:opacity-100' : 'opacity-0'}`}
+                                    loading="lazy"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    onLoad={() => handleImageLoad(i)}
+                                    onError={() => handleImageLoad(i)}
                                 />
                             </div>
 

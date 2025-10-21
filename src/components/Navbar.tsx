@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
 import { Sun, Moon, ArrowUpRight, Menu, X } from 'lucide-react';
 import Link from 'next/link';
@@ -9,25 +9,43 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function Navbar() {
     const [isDark, setIsDark] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {
         document.documentElement.classList.toggle('dark', isDark);
     }, [isDark]);
 
-    const menuItems = [
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const menuItems = useMemo(() => [
         { name: 'Home', href: '/' },
         { name: 'Tentang', href: '/about' },
         { name: 'Layanan', href: '/services' },
         { name: 'Proyek', href: '/projects' },
         { name: 'Blog', href: 'https://baca.dymasyogaf.my.id/' },
         { name: 'Kontak', href: '/contact' },
-    ];
+    ], []);
+
+    const toggleMenu = useCallback(() => {
+        setIsMenuOpen(prev => !prev);
+    }, []);
+
+    const closeMenu = useCallback(() => {
+        setIsMenuOpen(false);
+    }, []);
 
     return (
         <header className="fixed top-0 left-0 z-50 w-full flex justify-center">
             <nav
-                className="
+                className={`
                     flex items-center justify-between
                     w-[94%] sm:w-[90%] md:w-[88%] lg:w-[82%] xl:w-[75%]
                     px-5 sm:px-8 md:px-10 py-3
@@ -38,7 +56,8 @@ export default function Navbar() {
                     rounded-2xl
                     mt-4
                     transition-all duration-300
-                "
+                    ${isScrolled ? 'bg-white/20 dark:bg-[#0b1120]/80 shadow-[0_12px_40px_rgba(0,0,0,0.4)]' : ''}
+                `}
             >
                 {/* 🌈 Logo */}
                 <Link
@@ -52,8 +71,9 @@ export default function Navbar() {
 
                 {/* 📱 Tombol Menu Mobile / Tablet */}
                 <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="md:hidden flex items-center justify-center w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition"
+                    onClick={toggleMenu}
+                    className="md:hidden flex items-center justify-center w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
+                    aria-label={isMenuOpen ? 'Tutup menu' : 'Buka menu'}
                 >
                     {isMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
                 </button>
@@ -90,7 +110,8 @@ export default function Navbar() {
                 <div className="hidden md:flex items-center gap-3 lg:gap-5 whitespace-nowrap">
                     <button
                         onClick={() => setIsDark(!isDark)}
-                        className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
+                        className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
+                        aria-label={isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap'}
                     >
                         {isDark ? (
                             <Sun className="w-4 h-4 text-yellow-400" />
@@ -127,8 +148,9 @@ export default function Navbar() {
                         className="md:hidden fixed inset-0 z-40 bg-[#0b1120]/95 backdrop-blur-2xl flex flex-col justify-start items-center pt-28 px-6"
                     >
                         <button
-                            onClick={() => setIsMenuOpen(false)}
-                            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
+                            onClick={closeMenu}
+                            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
+                            aria-label="Tutup menu"
                         >
                             <X className="w-6 h-6 text-white" />
                         </button>
@@ -163,7 +185,7 @@ export default function Navbar() {
 
                             <Link
                                 href="/contact"
-                                onClick={() => setIsMenuOpen(false)}
+                                onClick={closeMenu}
                                 className="mt-6 w-full inline-flex justify-center items-center gap-2 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 text-white font-semibold hover:scale-[1.02] transition text-sm"
                             >
                                 HUBUNGI KAMI <ArrowUpRight className="w-4 h-4" />

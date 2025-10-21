@@ -66,10 +66,10 @@ export default function CTA() {
                         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/10 to-indigo-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
                         
                         <Link
-                            href="/order"
+                            href="/contact"
                             className="relative inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-indigo-500 to-cyan-400 transition-all duration-300 hover:shadow-[0_0_35px_rgba(99,102,241,0.3)]"
                         >
-                            Isi Form Order <ArrowRight className="w-5 h-5" />
+                            Hubungi Kami <ArrowRight className="w-5 h-5" />
                         </Link>
                     </motion.div>
                 </div>

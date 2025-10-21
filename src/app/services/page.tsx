@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import "../../styles/services.css";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import {
     Globe,
     Rocket,
@@ -32,7 +32,7 @@ export default function ServicesPage() {
         []
     );
 
-    const services = [
+    const services = useMemo(() => [
         {
             title: "Website Development",
             desc: "Kami membangun website profesional, cepat, dan memukau — dirancang untuk menonjolkan identitas brand dan mengoptimalkan pengalaman pengguna.",
@@ -50,13 +50,13 @@ export default function ServicesPage() {
         {
             title: "Berdu Platform",
             desc: "Bangun sistem berbasis Berdu — solusi platform lokal yang kuat untuk website, toko online, dan dashboard bisnis.",
-            icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-8 h-8" />,
+            icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-8 h-8" loading="lazy" />,
             features: ["Admin Dashboard", "User Management", "Data Analytics", "Cloud Hosting"],
             color: "sky",
         },
-    ] as const;
+    ] as const, []);
 
-    const workflow = [
+    const workflow = useMemo(() => [
         {
             icon: <Lightbulb />,
             title: "Konsultasi & Ideasi",
@@ -81,16 +81,16 @@ export default function ServicesPage() {
             text: "Kami bantu Anda meluncurkan proyek dan menyediakan dukungan berkelanjutan.",
             color: "indigo",
         },
-    ] as const;
+    ] as const, []);
 
-    const tools = [
+    const tools = useMemo(() => [
         { name: "Next.js", icon: <SiNextdotjs className="w-6 h-6 text-white" /> },
         { name: "Laravel", icon: <SiLaravel className="w-6 h-6 text-red-500" /> },
         { name: "Tailwind CSS", icon: <SiTailwindcss className="w-6 h-6 text-cyan-400" /> },
         { name: "Framer Motion", icon: <SiFramer className="w-6 h-6 text-purple-400" /> },
         { name: "WordPress", icon: <SiWordpress className="w-6 h-6 text-[#21759B]" /> },
-        { name: "Berdu", icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-6 h-6" /> },
-    ] as const;
+        { name: "Berdu", icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-6 h-6" loading="lazy" /> },
+    ] as const, []);
 
     const MotionLink = motion(Link);
 
@@ -241,7 +241,7 @@ export default function ServicesPage() {
                     </p>
 
                     <MotionLink
-                        href="/order"
+                        href="/contact"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="relative inline-flex items-center gap-3 px-8 py-4 mt-8 rounded-full font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 shadow-[0_0_25px_rgba(56,189,248,0.25)] transition-all duration-500 ease-out hover:shadow-[0_0_35px_rgba(56,189,248,0.35)] overflow-hidden"

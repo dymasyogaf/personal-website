@@ -2,17 +2,18 @@
 
 import { ArrowRight, Play, Sparkles, Globe2, Compass, Lightbulb } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import "../../styles/homepage.css";
 
 // ✨ Efek Typewriter
 function DynamicFocus() {
-  const texts = [
+  const texts = useMemo(() => [
     'Website Futuristik',
     'Digital Branding Humanis',
     'Web Development Modern',
     'Strategi Kreatif & SEO',
-  ];
+  ], []);
+  
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -34,7 +35,7 @@ function DynamicFocus() {
     }, speed);
 
     return () => clearTimeout(timeout);
-  }, [subIndex, isDeleting, index]);
+  }, [subIndex, isDeleting, index, texts]);
 
   return (
     <div className="relative h-7 overflow-hidden w-max">
@@ -53,6 +54,33 @@ export default function Hero() {
     e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
     e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
   }, []);
+
+  const cardData = useMemo(() => [
+    {
+      icon: <Sparkles className="w-6 h-6 text-cyan-400" />,
+      label: 'Inovasi',
+      value: 'Futuristik',
+      color: 'cyan',
+    },
+    {
+      icon: <Lightbulb className="w-6 h-6 text-indigo-400" />,
+      label: 'Kreativitas',
+      value: 'Tanpa Batas',
+      color: 'indigo',
+    },
+    {
+      icon: <Compass className="w-6 h-6 text-teal-400" />,
+      label: 'Petualangan',
+      value: 'Digital',
+      color: 'teal',
+    },
+    {
+      icon: <Globe2 className="w-6 h-6 text-purple-400" />,
+      label: 'Klien',
+      value: 'Global',
+      color: 'purple',
+    },
+  ], []);
 
   return (
     <section className="relative z-10 flex items-center justify-center min-h-[90vh] pt-24 sm:pt-28 lg:pt-32 px-4 sm:px-8 md:px-16 text-white overflow-hidden">
@@ -106,32 +134,7 @@ export default function Hero() {
 
         {/* ⚡ KANAN — 4 Card Kecil */}
         <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-5 w-full max-w-md mx-auto">
-          {[
-            {
-              icon: <Sparkles className="w-6 h-6 text-cyan-400" />,
-              label: 'Inovasi',
-              value: 'Futuristik',
-              color: 'cyan',
-            },
-            {
-              icon: <Lightbulb className="w-6 h-6 text-indigo-400" />,
-              label: 'Kreativitas',
-              value: 'Tanpa Batas',
-              color: 'indigo',
-            },
-            {
-              icon: <Compass className="w-6 h-6 text-teal-400" />,
-              label: 'Petualangan',
-              value: 'Digital',
-              color: 'teal',
-            },
-            {
-              icon: <Globe2 className="w-6 h-6 text-purple-400" />,
-              label: 'Klien',
-              value: 'Global',
-              color: 'purple',
-            },
-          ].map((card, index) => (
+          {cardData.map((card, index) => (
             <div
               key={index}
               data-color={card.color}

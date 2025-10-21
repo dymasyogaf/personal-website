@@ -3,10 +3,12 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import "../../styles/homepage.css";
 
 export default function Project() {
+    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+    
     // ✨ Efek kursor reaktif
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -14,7 +16,7 @@ export default function Project() {
         e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
     }, []);
 
-    const projects = [
+    const projects = useMemo(() => [
         {
             title: "Website Portfolio Personal",
             desc: "Website elegan dengan konsep glassmorphism dan animasi halus. Dibangun dengan Next.js & Tailwind.",
@@ -39,7 +41,11 @@ export default function Project() {
             link: "/projects/landing",
             color: "teal",
         },
-    ];
+    ], []);
+
+    const handleImageLoad = useCallback((index: number) => {
+        setLoadedImages(prev => new Set(prev).add(index));
+    }, []);
 
 
     return (
@@ -72,11 +78,16 @@ export default function Project() {
                     >
                         {/* 🖼️ Gambar */}
                         <div className="relative w-full h-56 sm:h-64 overflow-hidden rounded-t-3xl">
+                            <div className={`absolute inset-0 bg-gray-800/20 rounded-t-3xl ${loadedImages.has(i) ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`} />
                             <Image
                                 src={project.image}
                                 alt={project.title}
                                 fill
-                                className="object-cover opacity-80 group-hover:opacity-100 transition-all duration-500"
+                                className={`object-cover transition-all duration-500 ${loadedImages.has(i) ? 'opacity-80 group-hover:opacity-100' : 'opacity-0'}`}
+                                loading="lazy"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                onLoad={() => handleImageLoad(i)}
+                                onError={() => handleImageLoad(i)} // Handle error to show placeholder
                             />
                         </div>
 

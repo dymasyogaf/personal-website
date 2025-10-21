@@ -18,18 +18,48 @@
   }
 }
 
+/* 🚀 Optimasi performa dan aksesibilitas */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* 🧍 Style Global */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   transition: background 0.3s ease, color 0.3s ease;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html,
 body {
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+/* 🎯 Optimasi gambar */
+img {
+  max-width: 100%;
+  height: auto;
+  content-visibility: auto;
+}
+
+/* 🚀 Optimasi performa rendering */
+* {
+  box-sizing: border-box;
+}
+
+/* 🎯 Hardware acceleration untuk elemen animasi */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* 🌈 Global Gradient Animation */
@@ -51,6 +81,7 @@ body {
   background: linear-gradient(120deg, #0f172a, #1e293b, #0a0f24);
   background-size: 300% 300%;
   animation: gradientMove 20s ease infinite;
+  will-change: background-position;
 }
 
 /* 💡 Floating Orbs — Soft Ambient Light */
@@ -61,19 +92,21 @@ body {
   border-radius: 50%;
   filter: blur(120px);
   animation: floatOrb 20s ease-in-out infinite;
+  will-change: transform;
+  contain: layout style paint;
 }
 
 @keyframes floatOrb {
   0% {
-    transform: translateY(0px) translateX(0px);
+    transform: translateY(0px) translateX(0px) translateZ(0);
   }
 
   50% {
-    transform: translateY(-40px) translateX(20px);
+    transform: translateY(-40px) translateX(20px) translateZ(0);
   }
 
   100% {
-    transform: translateY(0px) translateX(0px);
+    transform: translateY(0px) translateX(0px) translateZ(0);
   }
 }
 
@@ -135,6 +168,8 @@ body {
   border-radius: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: border 0.3s ease, transform 0.3s ease;
+  will-change: transform;
+  contain: layout style paint;
 }
 
 .card-reactive::before {
@@ -149,6 +184,7 @@ body {
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 1;
+  will-change: opacity;
 }
 
 .card-reactive:hover::before {
@@ -156,7 +192,7 @@ body {
 }
 
 .card-reactive:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) translateZ(0);
 }
 
 /* ✨ Glow Soft untuk Hover di Elemen Kecil */
