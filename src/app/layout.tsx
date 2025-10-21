@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import { GeistSans, GeistMono } from "geist/font";
 
 export const metadata = {
-  title: "Dymas Yoga Febratama",
+  title: "Dyogaf Studio",
   description: "Digital Marketer • Web Developer • Adventurer",
 };
 
