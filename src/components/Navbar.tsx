@@ -20,7 +20,7 @@ export default function Navbar() {
         { name: 'Tentang', href: '/about' },
         { name: 'Layanan', href: '/services' },
         { name: 'Proyek', href: '/projects' },
-        { name: 'Blog', href: '/blog' },
+        { name: 'Blog', href: 'https://baca.dymasyogaf.my.id/' },
         { name: 'Kontak', href: '/contact' },
     ];
 
