@@ -22,10 +22,7 @@ export default function Footer() {
                         Dyogaf Studio
                     </h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                        Dymas Yoga Febratama — Digital Marketer, Web Developer (WordPress),
-                        dan Adventurer.  
-                        <br />
-                        Membangun ekosistem digital yang humanis, modern, dan berkarakter.
+                        Dyogaf studio adalah ruang kolaboratif yang lahir dari semangat eksplorasi, teknologi, dan kemanusiaan. Kami percaya bahwa desain dan kode bukan hanya tampilan — tapi perjalanan yang penuh makna dan nilai.
                     </p>
                 </div>
 
