@@ -14,11 +14,14 @@ export default function HomePage() {
   return (
     <>
       {/* 🌈 Background Global */}
-      <section className="fixed inset-0 -z-10 animate-[gradientFlow_20s_ease_infinite] bg-[linear-gradient(135deg,#0f172a,#1e293b,#0a0f24)] bg-[length:300%_300%] overflow-hidden">
+      <section className="fixed inset-0 -z-10 animate-[gradientFlow_20s_ease_infinite bg-[length:300%_300%] overflow-hidden"
+                 style={{ background: 'linear-gradient(135deg, var(--background), var(--card), var(--background))' }}>
         {/* Orb Kiri */}
-        <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-indigo-600/25 rounded-full blur-[180px]" />
+        <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] rounded-full blur-[180px]"
+             style={{ background: 'var(--orb-1)' }} />
         {/* Orb Kanan */}
-        <div className="absolute bottom-[10%] right-[5%] w-[600px] h-[600px] bg-cyan-500/25 rounded-full blur-[200px]" />
+        <div className="absolute bottom-[10%] right-[5%] w-[600px] h-[600px] rounded-full blur-[200px]"
+             style={{ background: 'var(--orb-2)' }} />
       </section>
 
       {/* 🌟 Section Components - Critical sections load immediately */}

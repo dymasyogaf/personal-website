@@ -49,16 +49,23 @@ export default function Project() {
 
 
     return (
-        <section className="relative z-10 py-24 px-6 sm:px-12 text-white overflow-hidden">
+        <section className="relative z-10 py-24 px-6 sm:px-12 overflow-hidden" style={{ color: 'var(--foreground)' }}>
             {/* 🌟 Heading */}
             <div className="text-center mb-16">
-                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">
+                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect" style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--accent)',
+                    borderWidth: '2px',
+                    color: 'var(--accent)',
+                    boxShadow: '0 4px 20px var(--shadow-light)',
+                    textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                }}>
                     Karya Kami
                 </span>
                 <h2 className="mt-5 section-title">
                     Proyek Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Dyogaf</span>
                 </h2>
-                <p className="mt-4 text-gray-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+                <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Kami mengubah ide menjadi pengalaman digital yang interaktif dan bernilai tinggi.
                 </p>
             </div>
@@ -75,6 +82,7 @@ export default function Project() {
                         onMouseMove={handleMouseMove}
                         data-color={project.color}
                         className="card-reactive relative rounded-3xl overflow-hidden transition-all duration-500 group"
+                        style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
                     >
                         {/* 🖼️ Gambar */}
                         <div className="relative w-full h-56 sm:h-64 overflow-hidden rounded-t-3xl">
@@ -93,11 +101,11 @@ export default function Project() {
 
                         {/* 📄 Konten */}
                         <div className="p-6 relative z-10 content">
-                            <span className="text-xs uppercase text-cyan-400 font-medium tracking-wider">
+                            <span className="text-xs uppercase font-medium tracking-wider" style={{ color: 'var(--accent)' }}>
                                 {project.tag}
                             </span>
-                            <h3 className="mt-2 text-xl font-bold">{project.title}</h3>
-                            <p className="mt-3 text-sm text-gray-400 leading-relaxed">{project.desc}</p>
+                            <h3 className="mt-2 text-xl font-bold" style={{ color: 'var(--foreground)' }}>{project.title}</h3>
+                            <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{project.desc}</p>
 
                             <Link
                                 href={project.link}
@@ -108,7 +116,11 @@ export default function Project() {
                         </div>
 
                         {/* ✨ Hover Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b1120]/40 to-[#0b1120]/90 opacity-0 group-hover:opacity-100 transition duration-500 rounded-3xl" />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 rounded-3xl"
+                             style={{
+                                 background: 'linear-gradient(to bottom, transparent, var(--card-bg))',
+                                 opacity: 0.9
+                             }} />
                     </motion.div>
                 ))}
             </div>

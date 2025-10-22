@@ -33,23 +33,30 @@ export default function Layanan() {
         {
             title: 'Berdu Platform',
             desc: 'Solusi platform berdu yang powerful untuk kebutuhan bisnis modern.',
-            icon: <SiGooglecloud className="w-6 h-6 text-teal-400" />, // ☁️ Mirip gaya platform
+            icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-6 h-6" loading="lazy" />, // 🏢 Logo Berdu Original
             features: ['Admin Dashboard', 'User Management', 'Data Analytics', 'Cloud Hosting'],
             color: 'teal',
         },
     ];
 
     return (
-        <section className="relative z-10 py-24 px-6 sm:px-12 text-white overflow-hidden">
+        <section className="relative z-10 py-24 px-6 sm:px-12 overflow-hidden" style={{ color: 'var(--foreground)' }}>
             {/* 🌟 Heading */}
             <div className="text-center mb-16">
-                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">
+                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect" style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--accent)',
+                    borderWidth: '2px',
+                    color: 'var(--accent)',
+                    boxShadow: '0 4px 20px var(--shadow-light)',
+                    textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                }}>
                     Layanan Utama
                 </span>
                 <h2 className="mt-5 section-title">
                     Transformasi digital dengan sentuhan berkelas
                 </h2>
-                <p className="mt-4 text-gray-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+                <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Kreasikan pengalaman digital yang berbeda dengan elemen 3D, glassmorphism, dan animasi interaktif yang menjaga pengguna tetap terlibat.
                 </p>
             </div>
@@ -73,14 +80,19 @@ export default function Layanan() {
                                 {service.icon}
                             </div>
 
-                            <h3 className="text-xl font-semibold mb-3 text-white">{service.title}</h3>
-                            <p className="text-gray-400 leading-relaxed mb-6">{service.desc}</p>
+                            <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--foreground)' }}>{service.title}</h3>
+                            <p className="leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>{service.desc}</p>
 
                             <ul className="space-y-3 w-full">
                                 {service.features.map((feat, j) => (
                                     <li
                                         key={j}
-                                        className="flex items-center gap-2 text-sm bg-white/5 px-4 py-2 rounded-full text-gray-300 border border-white/10 hover:bg-white/10 transition justify-center"
+                                        className="flex items-center gap-2 text-sm px-4 py-2 rounded-full border hover:bg-white/10 transition justify-center"
+                                        style={{
+                                            backgroundColor: 'var(--card-bg)',
+                                            borderColor: 'var(--card-border)',
+                                            color: 'var(--text-secondary)'
+                                        }}
                                     >
                                         <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
                                         {feat}

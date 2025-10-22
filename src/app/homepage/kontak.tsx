@@ -14,7 +14,7 @@ export default function CTA() {
     }, []);
 
     return (
-        <section className="relative z-10 py-28 px-6 sm:px-12 text-white overflow-hidden">
+        <section className="relative z-10 py-28 px-6 sm:px-12 overflow-hidden" style={{ color: 'var(--foreground)' }}>
             {/* 🌌 Cahaya lembut di background */}
             <motion.div
                 initial={{ opacity: 0 }}
@@ -36,7 +36,14 @@ export default function CTA() {
                 {/* ✨ Label kecil */}
                 <div className="flex items-center justify-center gap-2 mb-4 relative z-10">
                     <Sparkles className="w-5 h-5 text-cyan-400 animate-pulse" />
-                    <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 rounded-full text-gray-300">
+                    <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] rounded-full border glow-effect" style={{
+                        backgroundColor: 'var(--card-bg)',
+                        borderColor: 'var(--accent)',
+                        borderWidth: '2px',
+                        color: 'var(--accent)',
+                        boxShadow: '0 4px 20px var(--shadow-light)',
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                    }}>
                         Siap Berkolaborasi
                     </span>
                 </div>
@@ -49,7 +56,7 @@ export default function CTA() {
                     </span>
                 </h2>
 
-                <p className="mt-5 text-gray-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed relative z-10">
+                <p className="mt-5 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed relative z-10" style={{ color: 'var(--text-secondary)' }}>
                     Kami siap membantu membangun website, strategi SEO, dan branding digital yang futuristik, fungsional, dan berkarakter. 
                 </p>
 
@@ -75,7 +82,7 @@ export default function CTA() {
                 </div>
 
                 {/* 📍 Info bawah */}
-                <div className="mt-10 text-sm text-gray-400 relative z-10">
+                <div className="mt-10 text-sm relative z-10" style={{ color: 'var(--text-muted)' }}>
                     <p>📍 Palembang, Indonesia</p>
                     <p>💬 Terbuka untuk proyek freelance & kolaborasi jangka panjang</p>
                 </div>

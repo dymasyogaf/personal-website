@@ -14,10 +14,17 @@ export default function Tentang() {
     }, []);
 
     return (
-        <section className="relative z-10 py-24 px-6 sm:px-12 text-white overflow-hidden">
+        <section className="relative z-10 py-24 px-6 sm:px-12 overflow-hidden" style={{ color: 'var(--foreground)' }}>
             {/* ✨ Heading */}
             <div className="text-center mb-16">
-                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">
+                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect" style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--accent)',
+                    borderWidth: '2px',
+                    color: 'var(--accent)',
+                    boxShadow: '0 4px 20px var(--shadow-light)',
+                    textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                }}>
                     Tentang Dyogaf
                 </span>
 
@@ -27,7 +34,7 @@ export default function Tentang() {
                     </span>{' '}
                     — Studio Digital Kreatif
                 </h2>
-                <p className="mt-4 text-gray-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+                <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Kami menciptakan pengalaman digital berjiwa manusia dengan pendekatan futuristik.
                     Dyogaf hadir untuk membantu brand tumbuh, berinteraksi, dan menginspirasi melalui
                     desain, strategi, dan teknologi.
@@ -57,7 +64,7 @@ export default function Tentang() {
                             <h3 className="text-2xl font-semibold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">
                                 Visi Kami
                             </h3>
-                            <p className="text-gray-300 leading-relaxed">
+                            <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                                 Menjadi studio digital yang tidak hanya membangun website, tetapi juga
                                 menghadirkan *experience* yang hidup — menghubungkan manusia, nilai, dan teknologi
                                 dalam satu kesatuan yang bermakna.
@@ -104,8 +111,8 @@ export default function Tentang() {
                                         <div className="absolute inset-0 rounded-lg blur-md bg-gradient-to-br from-cyan-400/15 to-indigo-500/15"></div>
                                         <div className="relative z-10">{item.icon}</div>
                                     </div>
-                                    <h4 className="text-lg font-semibold text-white mt-3">{item.title}</h4>
-                                    <p className="text-sm text-gray-400 mt-1">{item.text}</p>
+                                    <h4 className="text-lg font-semibold mt-3" style={{ color: 'var(--foreground)' }}>{item.title}</h4>
+                                    <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{item.text}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -136,7 +143,7 @@ export default function Tentang() {
                                     <h4 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-1">
                                         {stat.number}
                                     </h4>
-                                    <p className="uppercase tracking-widest text-sm text-gray-400">
+                                    <p className="uppercase tracking-widest text-sm" style={{ color: 'var(--text-muted)' }}>
                                         {stat.label}
                                     </p>
                                 </div>

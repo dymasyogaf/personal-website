@@ -2,19 +2,15 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
-import { Sun, Moon, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
-    const [isDark, setIsDark] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
-
-    useEffect(() => {
-        document.documentElement.classList.toggle('dark', isDark);
-    }, [isDark]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -49,20 +45,24 @@ export default function Navbar() {
                     flex items-center justify-between
                     w-[94%] sm:w-[90%] md:w-[88%] lg:w-[82%] xl:w-[75%]
                     px-5 sm:px-8 md:px-10 py-3
-                    border border-white/10
-                    bg-white/10 dark:bg-[#0b1120]/70
+                    border border-[var(--nav-border)]
                     backdrop-blur-2xl
-                    shadow-[0_8px_32px_rgba(0,0,0,0.3)]
                     rounded-2xl
                     mt-4
                     transition-all duration-300
-                    ${isScrolled ? 'bg-white/20 dark:bg-[#0b1120]/80 shadow-[0_12px_40px_rgba(0,0,0,0.4)]' : ''}
                 `}
+                style={{
+                    backgroundColor: 'var(--nav-bg)',
+                    boxShadow: isScrolled
+                        ? '0 12px 40px var(--shadow-hover)'
+                        : '0 8px 32px var(--shadow-light)'
+                }}
             >
                 {/* 🌈 Logo */}
                 <Link
                     href="/"
-                    className="font-extrabold text-lg md:text-xl tracking-widest text-white select-none whitespace-nowrap"
+                    className="font-extrabold text-lg md:text-xl tracking-widest select-none whitespace-nowrap"
+                    style={{ color: 'var(--foreground)' }}
                 >
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
                         Dyogaf
@@ -72,14 +72,21 @@ export default function Navbar() {
                 {/* 📱 Tombol Menu Mobile / Tablet */}
                 <button
                     onClick={toggleMenu}
-                    className="md:hidden flex items-center justify-center w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
+                    className="md:hidden flex items-center justify-center w-9 h-9 rounded-full transition focus:outline-none focus:ring-2 focus:ring-cyan-400/50 hover-theme glow-effect"
                     aria-label={isMenuOpen ? 'Tutup menu' : 'Buka menu'}
+                    style={{
+                        color: 'var(--foreground)',
+                        backgroundColor: 'var(--card-bg)',
+                        borderColor: 'var(--card-border)',
+                        border: '1px solid',
+                        boxShadow: '0 2px 8px var(--shadow-light)'
+                    }}
                 >
-                    {isMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
+                    {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                 </button>
 
                 {/* 🧭 Menu Desktop / Tablet */}
-                <ul className="hidden md:flex flex-wrap items-center justify-center gap-6 lg:gap-8 xl:gap-10 text-sm font-medium text-gray-300">
+                <ul className="hidden md:flex flex-wrap items-center justify-center gap-6 lg:gap-8 xl:gap-10 text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
                     {menuItems.map((item) => {
                         const isActive =
                             pathname === item.href ||
@@ -94,10 +101,13 @@ export default function Navbar() {
                                         after:absolute after:left-0 after:-bottom-1 after:h-[2px]
                                         after:bg-gradient-to-r after:from-indigo-400 after:to-cyan-400
                                         ${isActive
-                                            ? 'text-white after:w-full'
-                                            : 'hover:text-white after:w-0 hover:after:w-full text-gray-300'}
-                                        after:transition-all after:duration-300
+                                            ? 'after:w-full'
+                                            : 'hover:after:w-full after:w-0'}
+                                        after:transition-all after:duration-300 hover-theme
                                     `}
+                                    style={{
+                                        color: isActive ? 'var(--foreground)' : 'var(--text-secondary)'
+                                    }}
                                 >
                                     {item.name}
                                 </Link>
@@ -108,29 +118,22 @@ export default function Navbar() {
 
                 {/* ☀️ Mode & CTA */}
                 <div className="hidden md:flex items-center gap-3 lg:gap-5 whitespace-nowrap">
-                    <button
-                        onClick={() => setIsDark(!isDark)}
-                        className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
-                        aria-label={isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap'}
-                    >
-                        {isDark ? (
-                            <Sun className="w-4 h-4 text-yellow-400" />
-                        ) : (
-                            <Moon className="w-4 h-4 text-gray-300" />
-                        )}
-                    </button>
+                    <ThemeToggle />
 
                     <Link
                         href="/contact"
                         className="
                             inline-flex items-center gap-2
                             px-4 md:px-5 py-2 rounded-full
-                            bg-gradient-to-r from-indigo-500 to-cyan-400
-                            text-white font-semibold
+                            font-semibold
                             hover:scale-[1.03] active:scale-95 transition
-                            shadow-[0_0_20px_rgba(99,102,241,0.3)]
-                            text-sm md:text-base
+                            text-sm md:text-base hover-theme
                         "
+                        style={{
+                            background: 'linear-gradient(to right, var(--gradient-from), var(--gradient-to))',
+                            color: 'white',
+                            boxShadow: '0 0 20px var(--glow-hover)'
+                        }}
                     >
                         HUBUNGI KAMI <ArrowUpRight className="w-4 h-4" />
                     </Link>
@@ -145,18 +148,26 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.25, ease: 'easeOut' }}
-                        className="md:hidden fixed inset-0 z-40 bg-[#0b1120]/95 backdrop-blur-2xl flex flex-col justify-start items-center pt-28 px-6"
+                        className="md:hidden fixed inset-0 z-40 backdrop-blur-2xl flex flex-col justify-start items-center pt-28 px-6"
+                        style={{ backgroundColor: 'var(--overlay-bg)' }}
                     >
                         <button
                             onClick={closeMenu}
                             className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
                             aria-label="Tutup menu"
+                            style={{ color: 'var(--foreground)' }}
                         >
-                            <X className="w-6 h-6 text-white" />
+                            <X className="w-6 h-6" />
                         </button>
 
-                        <div className="w-full max-w-sm bg-white/10 border border-white/10 rounded-3xl p-8 text-center text-gray-200 shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
-                            <p className="uppercase tracking-widest text-xs text-indigo-300 mb-6">
+                        <div className="w-full max-w-sm rounded-3xl p-8 text-center glow-effect"
+                             style={{
+                                 backgroundColor: 'var(--card-bg)',
+                                 border: '1px solid var(--card-border)',
+                                 color: 'var(--text-secondary)',
+                                 boxShadow: '0 8px 40px var(--shadow-hover)'
+                             }}>
+                            <p className="uppercase tracking-widest text-xs mb-6" style={{ color: 'var(--accent)' }}>
                                 Navigasi
                             </p>
 
@@ -171,11 +182,16 @@ export default function Navbar() {
                                             key={item.name}
                                             href={item.href}
                                             onClick={() => setIsMenuOpen(false)}
-                                            className={`w-full py-3 rounded-xl text-base font-medium transition
+                                            className={`w-full py-3 rounded-xl text-base font-medium transition hover-theme
                                                 ${isActive
                                                     ? 'bg-gradient-to-r from-indigo-500 to-cyan-400 text-white'
-                                                    : 'bg-white/5 hover:bg-white/15 text-gray-200'}
+                                                    : ''}
                                             `}
+                                            style={{
+                                                backgroundColor: isActive ? '' : 'var(--card-bg)',
+                                                color: isActive ? 'white' : 'var(--text-secondary)',
+                                                borderColor: 'var(--card-border)'
+                                            }}
                                         >
                                             {item.name}
                                         </Link>
@@ -186,26 +202,19 @@ export default function Navbar() {
                             <Link
                                 href="/contact"
                                 onClick={closeMenu}
-                                className="mt-6 w-full inline-flex justify-center items-center gap-2 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 text-white font-semibold hover:scale-[1.02] transition text-sm"
+                                className="mt-6 w-full inline-flex justify-center items-center gap-2 py-3 rounded-xl text-white font-semibold hover:scale-[1.02] transition text-sm hover-theme"
+                                style={{
+                                    background: 'linear-gradient(to right, var(--gradient-from), var(--gradient-to))'
+                                }}
                             >
                                 HUBUNGI KAMI <ArrowUpRight className="w-4 h-4" />
                             </Link>
 
-                            <div className="mt-6 flex items-center justify-center gap-2 pt-3 border-t border-white/10">
-                                <button
-                                    onClick={() => setIsDark(!isDark)}
-                                    className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition"
-                                >
-                                    {isDark ? (
-                                        <>
-                                            <Sun className="w-4 h-4 text-yellow-400" /> <span>Mode Terang</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Moon className="w-4 h-4 text-gray-400" /> <span>Mode Gelap</span>
-                                        </>
-                                    )}
-                                </button>
+                            <div className="mt-6 flex items-center justify-center gap-2 pt-3" style={{ borderTop: '1px solid var(--card-border)' }}>
+                                <ThemeToggle />
+                                <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                                    Theme
+                                </span>
                             </div>
                         </div>
                     </motion.div>

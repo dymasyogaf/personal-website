@@ -27,10 +27,19 @@ Futuristic + Glossy Elegance
     cursor: default;
     isolation: isolate;
     border-radius: 9999px;
-    box-shadow: 0 0 25px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 0 25px var(--glow-light);
     animation: breathing-glow 5s ease-in-out infinite;
     will-change: transform, box-shadow;
     transform: translateZ(0); /* Hardware acceleration */
+}
+
+/* Enhanced light mode button effects */
+[data-theme="light"] .button-reactive {
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2), 0 0 0 1px rgba(99, 102, 241, 0.1);
+}
+
+[data-theme="light"] .button-reactive:hover {
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3), 0 0 0 1px rgba(99, 102, 241, 0.2);
 }
 
 /* 🌈 Gradient interaktif mengikuti kursor */
@@ -80,9 +89,21 @@ Futuristic + Glossy Elegance
 
 /* 🌌 Varian Sekunder (border + transparan) */
 .button-reactive[data-color="secondary"] {
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--card-bg);
+    box-shadow: inset 0 0 10px var(--glow-light);
+    border: 1px solid var(--card-border);
+}
+
+/* Enhanced light mode secondary button */
+[data-theme="light"] .button-reactive[data-color="secondary"] {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--accent);
+    box-shadow: 0 2px 10px var(--shadow-light), inset 0 0 10px rgba(99, 102, 241, 0.05);
+}
+
+[data-theme="light"] .button-reactive[data-color="secondary"]:hover {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px var(--shadow-hover), inset 0 0 15px rgba(99, 102, 241, 0.1);
 }
 
 .button-reactive[data-color="secondary"]::before {
@@ -95,21 +116,37 @@ Futuristic + Glossy Elegance
 @keyframes breathing-glow {
     0%,
     100% {
-        box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+        box-shadow: 0 0 20px var(--glow-light);
     }
 
     50% {
-        box-shadow: 0 0 30px rgba(56, 189, 248, 0.35);
+        box-shadow: 0 0 30px var(--glow-hover);
     }
 }
 
-/* 🚀 Optimasi performa untuk card */
+/* Enhanced light mode breathing animation */
+@keyframes breathing-glow-light {
+    0%,
+    100% {
+        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 8px 30px rgba(99, 102, 241, 0.25);
+    }
+}
+
+[data-theme="light"] .button-reactive {
+    animation: breathing-glow-light 5s ease-in-out infinite;
+}
+
+/* 🚀 Optimasi performa untuk card - Identical to About page */
 .card-reactive {
     position: relative;
     border-radius: 18px;
     overflow: hidden;
-    background: rgba(20, 20, 35, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     transition: all 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -117,6 +154,18 @@ Futuristic + Glossy Elegance
     will-change: transform, box-shadow;
     transform: translateZ(0); /* Hardware acceleration */
     contain: layout style paint; /* Optimasi rendering */
+    box-shadow: 0 4px 20px var(--shadow-light);
+}
+
+/* Enhanced light mode card effects - Identical to About page */
+[data-theme="light"] .card-reactive {
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--card-border);
+}
+
+[data-theme="light"] .card-reactive:hover {
+    border: 1px solid var(--card-border);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--accent);
 }
 
 /* ✨ Efek cahaya mengikuti kursor */
@@ -186,12 +235,24 @@ Futuristic + Glossy Elegance
     position: relative;
     border-radius: 1.5rem;
     overflow: hidden;
-    background: rgba(25, 25, 40, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     cursor: default;
     transition: all 0.4s ease;
+    box-shadow: 0 4px 20px var(--shadow-light);
+}
+
+/* Enhanced light mode service reactive effects - Border only on hover */
+[data-theme="light"] .service-reactive {
+    border: 1px solid transparent;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--card-border);
+}
+
+[data-theme="light"] .service-reactive:hover {
+    border: 1px solid var(--accent);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15), 0 0 0 1px var(--accent);
 }
 
 .service-reactive::before {
@@ -257,18 +318,30 @@ Futuristic + Glossy Elegance
 
 /* 🧱 Service Card */
 .service-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
     border-radius: 1.5rem;
     padding: 2rem;
     backdrop-filter: blur(20px);
     transition: all 0.4s ease;
+    box-shadow: 0 4px 20px var(--shadow-light);
 }
 
 .service-card:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--card-bg);
     transform: translateY(-6px);
-    box-shadow: 0 0 25px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 0 25px var(--glow-hover);
+}
+
+/* Enhanced light mode service card effects */
+[data-theme="light"] .service-card {
+    border: 2px solid var(--accent);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15), 0 0 0 1px var(--card-border);
+}
+
+[data-theme="light"] .service-card:hover {
+    border: 2px solid var(--accent);
+    box-shadow: 0 12px 40px rgba(99, 102, 241, 0.25), 0 0 0 2px var(--accent);
 }
 
 /* Tentang Dyogaf */
@@ -353,4 +426,10 @@ Futuristic + Glossy Elegance
     -webkit-background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px var(--shadow-light);
+}
+
+/* Enhanced light mode section title */
+[data-theme="light"] .section-title {
+    text-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
 }

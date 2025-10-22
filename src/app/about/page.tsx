@@ -26,7 +26,8 @@ export default function AboutPage() {
     }, []);
 
     return (
-        <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 text-white bg-transparent overflow-visible">
+        <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 bg-transparent overflow-visible"
+                 style={{ color: 'var(--foreground)' }}>
             <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
 
                 {/* 🔹 1. Header (mirip bagian Hubungi Saya) */}
@@ -37,22 +38,30 @@ export default function AboutPage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300"
+                        className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect"
+                        style={{
+                            backgroundColor: 'var(--card-bg)',
+                            borderColor: 'var(--accent)',
+                            borderWidth: '2px',
+                            color: 'var(--accent)',
+                            boxShadow: '0 4px 20px var(--shadow-light)',
+                            textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                        }}
                     >
                         Tentang Kami
                     </motion.span>
 
                     {/* 🌈 Judul besar */}
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold">
-                        <span className="text-white">Kenali Lebih Dekat </span>
+                        <span style={{ color: 'var(--foreground)' }}>Kenali Lebih Dekat </span>
                         <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
                             Tentang Dyogaf
                         </span>
                     </h1>
 
                     {/* 📄 Deskripsi singkat */}
-                    <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
-                        <span className="text-cyan-400 font-semibold">Dyogaf Digital Studio</span> adalah ruang kolaboratif
+                    <p className="max-w-3xl mx-auto text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        <span className="font-semibold" style={{ color: 'var(--accent)' }}>Dyogaf Digital Studio</span> adalah ruang kolaboratif
                         yang lahir dari semangat eksplorasi, teknologi, dan kemanusiaan.
                         Kami percaya bahwa desain dan kode bukan hanya tampilan —
                         tapi perjalanan yang penuh makna dan nilai.
@@ -65,14 +74,14 @@ export default function AboutPage() {
                         <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                             Filosofi & Awal Mula
                         </h2>
-                        <p className="text-gray-300 leading-relaxed text-base">
-                            Nama <span className="text-cyan-400 font-semibold">Dyogaf</span> diambil dari pendirinya,
+                        <p className="leading-relaxed text-base" style={{ color: 'var(--text-secondary)' }}>
+                            Nama <span className="font-semibold" style={{ color: 'var(--accent)' }}>Dyogaf</span> diambil dari pendirinya,
                             <strong> Dymas Yoga Febratama</strong> — seorang digital creator dan petualang
                             yang percaya bahwa setiap karya digital harus punya <em>jiwa</em> dan <em>arah</em>.
                             Dari perjalanan mandiri hingga kolaborasi global,
                             Dyogaf tumbuh sebagai studio yang menghadirkan teknologi dengan rasa kemanusiaan.
                         </p>
-                        <p className="text-gray-400 text-sm sm:text-base">
+                        <p className="text-sm sm:text-base" style={{ color: 'var(--text-muted)' }}>
                             Kami tidak hanya membangun website, tapi merancang <strong>pengalaman digital</strong> —
                             hidup, interaktif, dan menyentuh sisi manusia. Setiap proyek adalah ekspedisi kreatif,
                             dan setiap piksel adalah langkah menuju makna.
@@ -82,15 +91,19 @@ export default function AboutPage() {
                     <div
                         onMouseMove={handleMouseMove}
                         data-color="cyan"
-                        className="card-reactive border-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-lg transition-all"
+                        className="card-reactive border-reactive backdrop-blur-xl rounded-2xl p-8 shadow-lg transition-all"
+                        style={{
+                            backgroundColor: 'var(--card-bg)',
+                            borderColor: 'var(--card-border)'
+                        }}
                     >
                         <div className="gloss-top"></div>
                         <div className="inner-shadow"></div>
-                        <p className="text-gray-300 text-base leading-relaxed">
+                        <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                             “Kami percaya setiap pixel punya makna, setiap interaksi punya emosi,
                             dan setiap proyek adalah ekspedisi menuju masa depan yang lebih bernilai.”
                         </p>
-                        <p className="mt-4 text-right text-cyan-400 font-semibold">— Tim Dyogaf</p>
+                        <p className="mt-4 text-right font-semibold" style={{ color: 'var(--accent)' }}>— Tim Dyogaf</p>
                     </div>
                 </div>
 
@@ -105,12 +118,16 @@ export default function AboutPage() {
                         <div
                             onMouseMove={handleMouseMove}
                             data-color="indigo"
-                            className="card-reactive border-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8"
+                            className="card-reactive border-reactive backdrop-blur-xl rounded-2xl p-8"
+                            style={{
+                                backgroundColor: 'var(--card-bg)',
+                                borderColor: 'var(--card-border)'
+                            }}
                         >
                             <div className="gloss-top"></div>
                             <div className="inner-shadow"></div>
-                            <h3 className="text-xl font-semibold text-cyan-300 mb-4">Visi Kami</h3>
-                            <p className="text-gray-300 text-base leading-relaxed">
+                            <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--accent)' }}>Visi Kami</h3>
+                            <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                                 Menjadi <strong>studio digital petualang</strong> yang tak hanya membangun website,
                                 tapi juga menghadirkan <em>pengalaman hidup</em> — menghubungkan nilai, manusia, dan teknologi
                                 menjadi satu kesatuan yang bermakna.
@@ -129,13 +146,17 @@ export default function AboutPage() {
                                     key={i}
                                     onMouseMove={handleMouseMove}
                                     data-color={stat.color}
-                                    className="card-reactive border-reactive flex flex-col justify-center items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center"
+                                    className="card-reactive border-reactive flex flex-col justify-center items-center gap-3 backdrop-blur-xl rounded-2xl p-8 text-center"
+                                    style={{
+                                        backgroundColor: 'var(--card-bg)',
+                                        borderColor: 'var(--card-border)'
+                                    }}
                                 >
                                     <div className="gloss-top"></div>
                                     <div className="inner-shadow"></div>
-                                    <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">{stat.icon}</div>
-                                    <h3 className="text-3xl font-bold text-cyan-300">{stat.value}</h3>
-                                    <p className="text-gray-400 text-xs tracking-wider uppercase">{stat.label}</p>
+                                    <div className="p-3 rounded-xl" style={{ background: 'linear-gradient(to bottom right, var(--card-bg), var(--card-border))' }}>{stat.icon}</div>
+                                    <h3 className="text-3xl font-bold" style={{ color: 'var(--accent)' }}>{stat.value}</h3>
+                                    <p className="text-xs tracking-wider uppercase" style={{ color: 'var(--text-muted)' }}>{stat.label}</p>
                                 </div>
                             ))}
                         </div>
@@ -173,16 +194,20 @@ export default function AboutPage() {
                                 key={i}
                                 onMouseMove={handleMouseMove}
                                 data-color={item.color}
-                                className="card-reactive border-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center"
+                                className="card-reactive border-reactive backdrop-blur-xl rounded-2xl p-6 text-center"
+                                style={{
+                                    backgroundColor: 'var(--card-bg)',
+                                    borderColor: 'var(--card-border)'
+                                }}
                             >
                                 <div className="gloss-top"></div>
                                 <div className="inner-shadow"></div>
                                 <div className="flex flex-col items-center gap-3">
-                                    <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">
+                                    <div className="p-3 rounded-xl" style={{ background: 'linear-gradient(to bottom right, var(--card-bg), var(--card-border))' }}>
                                         {item.icon}
                                     </div>
-                                    <h3 className="text-lg font-semibold">{item.title}</h3>
-                                    <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+                                    <h3 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>{item.title}</h3>
+                                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{item.desc}</p>
                                 </div>
                             </div>
                         ))}
@@ -195,7 +220,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                         Kolaborasi & Dampak Global
                     </h2>
-                    <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-sm sm:text-base max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                         Dari Palembang ke dunia 🌍 — Dyogaf telah bekerja sama dengan berbagai klien di bidang kreatif,
                         edukasi, dan bisnis digital. Kami hadir bukan hanya untuk membangun website,
                         tapi untuk menanamkan makna di dunia digital.
@@ -207,9 +232,9 @@ export default function AboutPage() {
                     onMouseMove={handleMouseMove}
                     className="footer-reactive relative mt-20 text-center max-w-3xl mx-auto p-6"
                 >
-                    <p className="text-gray-300 text-base leading-relaxed">
-                        <Sparkles className="w-5 h-5 text-cyan-400 inline-block mr-2" />
-                        <span className="font-semibold text-cyan-400">Dyogaf</span> — menjelajah dunia digital
+                    <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        <Sparkles className="w-5 h-5 inline-block mr-2" style={{ color: 'var(--accent)' }} />
+                        <span className="font-semibold" style={{ color: 'var(--accent)' }}>Dyogaf</span> — menjelajah dunia digital
                         dengan jiwa petualang dan hati yang bermakna. Setiap proyek adalah perjalanan menuju masa depan yang lebih indah. ✨
                     </p>
                 </div>

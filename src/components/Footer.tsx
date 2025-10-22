@@ -6,7 +6,13 @@ import { motion } from 'framer-motion';
 
 export default function Footer() {
     return (
-        <footer className="relative z-10 text-white py-20 px-6 sm:px-12 border-t border-white/10 bg-transparent backdrop-blur-xl">
+        <footer className="relative z-10 py-20 px-6 sm:px-12 backdrop-blur-xl glow-effect"
+                style={{
+                    color: 'var(--foreground)',
+                    borderTop: '1px solid var(--border)',
+                    backgroundColor: 'var(--card-bg)',
+                    boxShadow: '0 -4px 20px var(--shadow-light)'
+                }}>
             {/* ✨ Garis cahaya lembut di atas footer */}
             <motion.div
                 initial={{ opacity: 0 }}
@@ -21,15 +27,15 @@ export default function Footer() {
                     <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
                         Dyogaf Studio
                     </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-sm leading-relaxed text-shadow-theme" style={{ color: 'var(--text-secondary)' }}>
                         Dyogaf studio adalah ruang kolaboratif yang lahir dari semangat eksplorasi, teknologi, dan kemanusiaan. Kami percaya bahwa desain dan kode bukan hanya tampilan — tapi perjalanan yang penuh makna dan nilai.
                     </p>
                 </div>
 
                 {/* 🔗 Navigasi */}
                 <div>
-                    <h4 className="text-lg font-semibold mb-4 text-indigo-300">Navigasi</h4>
-                    <ul className="space-y-2 text-sm text-gray-300">
+                    <h4 className="text-lg font-semibold mb-4" style={{ color: 'var(--accent)' }}>Navigasi</h4>
+                    <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         {[
                             { href: '/', label: 'Beranda' },
                             { href: '/projects', label: 'Proyek' },
@@ -41,7 +47,7 @@ export default function Footer() {
                                 whileHover={{ x: 6 }}
                                 transition={{ type: 'spring', stiffness: 300 }}
                             >
-                                <Link href={item.href} className="hover:text-cyan-400 transition">
+                                <Link href={item.href} className="hover:text-cyan-400 transition hover-theme" style={{ color: 'var(--text-secondary)' }}>
                                     {item.label}
                                 </Link>
                             </motion.li>
@@ -51,27 +57,29 @@ export default function Footer() {
 
                 {/* 📞 Kontak & Sosial Media */}
                 <div>
-                    <h4 className="text-lg font-semibold mb-4 text-indigo-300">Hubungi Saya</h4>
-                    <ul className="space-y-3 text-sm text-gray-300">
+                    <h4 className="text-lg font-semibold mb-4" style={{ color: 'var(--accent)' }}>Hubungi Saya</h4>
+                    <ul className="space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         <li className="flex items-center gap-3">
-                            <Mail className="w-4 h-4 text-cyan-400" />
+                            <Mail className="w-4 h-4" style={{ color: 'var(--accent)' }} />
                             <Link
                                 href="mailto:dymasyoga11@gmail.com"
-                                className="hover:text-cyan-400 transition"
+                                className="hover:text-cyan-400 transition hover-theme"
+                                style={{ color: 'var(--text-secondary)' }}
                             >
                                 dymasyoga11@gmail.com
                             </Link>
                         </li>
                         <li className="flex items-center gap-3">
-                            <MapPin className="w-4 h-4 text-cyan-400" />
-                            Palembang, Indonesia
+                            <MapPin className="w-4 h-4" style={{ color: 'var(--accent)' }} />
+                            <span style={{ color: 'var(--text-secondary)' }}>Palembang, Indonesia</span>
                         </li>
                         <li className="flex items-center gap-3">
-                            <Phone className="w-4 h-4 text-cyan-400" />
+                            <Phone className="w-4 h-4" style={{ color: 'var(--accent)' }} />
                             <Link
                                 href="https://wa.me/6283178772170"
                                 target="_blank"
-                                className="hover:text-cyan-400 transition"
+                                className="hover:text-cyan-400 transition hover-theme"
+                                style={{ color: 'var(--text-secondary)' }}
                             >
                                 +62 831-7877-2170
                             </Link>
@@ -89,7 +97,14 @@ export default function Footer() {
                                 key={i}
                                 href={social.href}
                                 target="_blank"
-                                className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all hover:scale-110 text-gray-300 hover:text-cyan-400"
+                                className="p-2 rounded-full transition-all hover:scale-110 hover-theme glow-effect"
+                                style={{
+                                    color: 'var(--text-secondary)',
+                                    backgroundColor: 'var(--card-bg)',
+                                    borderColor: 'var(--card-border)',
+                                    border: '1px solid',
+                                    boxShadow: '0 2px 8px var(--shadow-light)'
+                                }}
                             >
                                 {social.icon}
                             </Link>
@@ -103,7 +118,11 @@ export default function Footer() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="border-t border-white/10 mt-12 pt-6 text-center text-gray-400 text-xs tracking-wider"
+                className="mt-12 pt-6 text-center text-xs tracking-wider text-shadow-theme"
+                style={{
+                    borderTop: '1px solid var(--border)',
+                    color: 'var(--text-muted)'
+                }}
             >
                 © {new Date().getFullYear()} Dymas Yoga Febratama — All rights reserved.
             </motion.div>

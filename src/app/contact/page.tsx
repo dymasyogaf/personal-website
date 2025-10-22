@@ -26,7 +26,8 @@ export default function Kontak() {
     }, []);
 
     return (
-        <section className="relative z-10 pt-32 pb-24 px-6 sm:px-12 text-white overflow-hidden">
+        <section className="relative z-10 pt-32 pb-24 px-6 sm:px-12 overflow-hidden"
+                 style={{ color: 'var(--foreground)' }}>
             {/* 🌟 Heading */}
             <div className="text-center mb-16">
                 <motion.span
@@ -34,7 +35,15 @@ export default function Kontak() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300"
+                    className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect"
+                    style={{
+                        backgroundColor: 'var(--card-bg)',
+                        borderColor: 'var(--accent)',
+                        borderWidth: '2px',
+                        color: 'var(--accent)',
+                        boxShadow: '0 4px 20px var(--shadow-light)',
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                    }}
                 >
                     Hubungi Saya
                 </motion.span>
@@ -55,7 +64,8 @@ export default function Kontak() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                    className="mt-4 text-gray-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
+                    className="mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
+                    style={{ color: 'var(--text-muted)' }}
                 >
                     Jangan ragu untuk menghubungi saya melalui media sosial atau WhatsApp untuk proyek, kolaborasi, atau sekadar diskusi seputar ide digital.
                 </motion.p>
@@ -92,27 +102,32 @@ export default function Kontak() {
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: i * 0.2 }}
-                        className="card-reactive border-reactive flex items-center gap-5 bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-all duration-500"
+                        className="card-reactive border-reactive flex items-center gap-5 backdrop-blur-xl p-5 rounded-2xl transition-all duration-500"
+                        style={{
+                            backgroundColor: 'var(--card-bg)',
+                            borderColor: 'var(--card-border)'
+                        }}
                     >
                         <div className="gloss-top"></div>
                         <div className="inner-shadow"></div>
 
-                        <div className="p-3 bg-gradient-to-br from-indigo-500/20 to-cyan-400/20 rounded-xl">
+                        <div className="p-3 rounded-xl" style={{ background: 'linear-gradient(to bottom right, var(--card-bg), var(--card-border))' }}>
                             {item.icon}
                         </div>
 
                         <div>
-                            <h4 className="text-sm text-gray-400">{item.title}</h4>
+                            <h4 className="text-sm" style={{ color: 'var(--text-muted)' }}>{item.title}</h4>
                             {item.href ? (
                                 <Link
                                     href={item.href}
                                     target="_blank"
-                                    className="text-base sm:text-lg font-medium text-white hover:text-cyan-400 transition"
+                                    className="text-base sm:text-lg font-medium hover:text-cyan-400 transition"
+                                    style={{ color: 'var(--foreground)' }}
                                 >
                                     {item.value}
                                 </Link>
                             ) : (
-                                <p className="text-base sm:text-lg font-medium text-white">
+                                <p className="text-base sm:text-lg font-medium" style={{ color: 'var(--foreground)' }}>
                                     {item.value}
                                 </p>
                             )}
@@ -163,7 +178,11 @@ export default function Kontak() {
                             key={i}
                             onMouseMove={handleMouseMove}
                             data-color={social.color}
-                            className="card-reactive border-reactive p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-500 cursor-pointer"
+                            className="card-reactive border-reactive p-4 rounded-xl backdrop-blur-md transition-all duration-500 cursor-pointer"
+                            style={{
+                                backgroundColor: 'var(--card-bg)',
+                                borderColor: 'var(--card-border)'
+                            }}
                         >
                             <Link href={social.href} target="_blank" title={social.label}>
                                 {social.icon}

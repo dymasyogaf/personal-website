@@ -38,10 +38,16 @@ function DynamicFocus() {
   }, [subIndex, isDeleting, index, texts]);
 
   return (
-    <div className="relative h-7 overflow-hidden w-max">
-      <span className="font-semibold text-cyan-300 bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm text-sm sm:text-base">
+    <div className="relative h-8 overflow-hidden w-max">
+      <span className="font-semibold px-3 py-1 rounded-full backdrop-blur-sm text-sm sm:text-base"
+            style={{
+              color: 'var(--accent)',
+              backgroundColor: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              boxShadow: '0 2px 8px var(--shadow-light)'
+            }}>
         {texts[index].substring(0, subIndex)}
-        <span className="animate-pulse text-cyan-400">|</span>
+        <span className="animate-pulse" style={{ color: 'var(--accent)' }}>|</span>
       </span>
     </div>
   );
@@ -83,51 +89,74 @@ export default function Hero() {
   ], []);
 
   return (
-    <section className="relative z-10 flex items-center justify-center min-h-[90vh] pt-24 sm:pt-28 lg:pt-32 px-4 sm:px-8 md:px-16 text-white overflow-hidden">
+    <section className="relative z-10 flex items-center justify-center min-h-[90vh] pt-24 sm:pt-28 lg:pt-32 px-4 sm:px-8 md:px-16 overflow-hidden"
+             style={{ color: 'var(--foreground)' }}>
       <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-14 items-center">
 
         {/* 🧭 KIRI — Deskripsi */}
         <div className="text-left flex flex-col items-start space-y-6">
-          <span className="text-xs sm:text-sm uppercase tracking-[0.25em] text-cyan-300 bg-white/10 border border-white/10 backdrop-blur-md px-4 py-1 rounded-full">
+          <span className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect"
+                style={{
+                  color: 'var(--accent)',
+                  backgroundColor: 'var(--card-bg)',
+                  borderColor: 'var(--accent)',
+                  borderWidth: '2px',
+                  boxShadow: '0 4px 20px var(--shadow-light)',
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                }}>
             Studio Digital Kreatif
           </span>
 
-          <h1 className="text-[2rem] sm:text-[2.8rem] md:text-[3.5rem] lg:text-[4rem] font-extrabold leading-tight bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            Dyogaf
+          <h1 className="text-[2rem] sm:text-[2.8rem] md:text-[3.5rem] lg:text-[4rem] font-extrabold leading-tight">
+            <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+              Dyogaf
+            </span>
             <br className="hidden sm:block" />
-            <span className="block mt-1 text-white/70 text-[1.3rem] sm:text-[1.6rem] md:text-[1.9rem] font-light">
+            <span className="block mt-1 text-[1.3rem] sm:text-[1.6rem] md:text-[1.9rem] font-light"
+                  style={{ color: 'var(--foreground)' }}>
               Digital Studio for the Future
             </span>
           </h1>
 
-          <p className="text-[0.9rem] sm:text-base md:text-lg text-gray-300 leading-relaxed max-w-md sm:max-w-lg">
-            Kami membangun <span className="text-cyan-400 font-semibold">website</span> dan{' '}
-            <span className="text-cyan-400 font-semibold">identitas digital</span> dengan sentuhan futuristik
+          <p className="text-[0.9rem] sm:text-base md:text-lg leading-relaxed max-w-md sm:max-w-lg"
+             style={{ color: 'var(--text-secondary)' }}>
+            Kami membangun <span className="font-semibold" style={{ color: 'var(--accent)' }}>website</span> dan{' '}
+            <span className="font-semibold" style={{ color: 'var(--accent)' }}>identitas digital</span> dengan sentuhan futuristik
             dan nilai humanis. Setiap proyek adalah ekspedisi kreatif — menggabungkan teknologi, desain, dan makna.
           </p>
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm tracking-widest text-gray-300">
-            <span className="uppercase text-gray-400">Fokus saat ini:</span>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm tracking-widest"
+               style={{ color: 'var(--text-secondary)' }}>
+            <span className="uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>Fokus saat ini:</span>
             <DynamicFocus />
           </div>
 
           {/* 🎯 CTA */}
-          <div className="pt-3 flex flex-wrap gap-3">
+          <div className="pt-6 flex flex-wrap gap-4">
             <Link
               href="/projects"
               onMouseMove={handleMouseMove}
-              className="button-reactive from-cyan-500 to-indigo-500 text-white px-6 py-3 rounded-full font-semibold text-sm sm:text-base"
+              className="button-reactive px-6 py-3 rounded-full font-semibold text-base"
+              style={{
+                background: 'linear-gradient(to right, var(--gradient-from), var(--gradient-to))',
+                color: 'white'
+              }}
             >
-              Jelajahi Karya Kami <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
+              Jelajahi Karya Kami <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
 
             <Link
               href="/about"
               onMouseMove={handleMouseMove}
-              className="button-reactive border border-white/20 text-white/90 px-6 py-3 rounded-full text-sm sm:text-base backdrop-blur-md"
+              className="button-reactive px-6 py-3 rounded-full text-base"
               data-color="secondary"
+              style={{
+                border: '1px solid var(--card-border)',
+                color: 'var(--foreground)',
+                backgroundColor: 'var(--card-bg)'
+              }}
             >
-              <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" /> Tentang Dyogaf
+              <Play className="w-5 h-5 mr-2" /> Tentang Dyogaf
             </Link>
           </div>
         </div>
@@ -142,13 +171,18 @@ export default function Hero() {
               onMouseMove={handleMouseMove}
             >
               <div className="content flex flex-col items-center gap-2">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">
+                <div className="p-3 rounded-xl"
+                     style={{
+                       background: 'var(--card-bg)',
+                       border: '1px solid var(--card-border)',
+                       boxShadow: '0 2px 8px var(--shadow-light)'
+                     }}>
                   {card.icon}
                 </div>
                 <p className="text-lg sm:text-xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                   {card.value}
                 </p>
-                <p className="text-xs sm:text-sm text-gray-400 tracking-wide">{card.label}</p>
+                <p className="text-xs sm:text-sm tracking-wide font-medium" style={{ color: 'var(--text-muted)' }}>{card.label}</p>
               </div>
             </div>
           ))}

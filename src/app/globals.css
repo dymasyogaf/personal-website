@@ -1,26 +1,111 @@
 @import "tailwindcss";
 
-/* 🎨 Warna & Font Variables */
+/* 🎨 Warna & Font Variables - Light Theme (Default) */
 :root {
-  --background: #060b18;
-  --foreground: #ededed;
+  --background: #ffffff;
+  --foreground: #000000;
   --accent: #6366f1;
+  --accent-light: #818cf8;
+  --accent-dark: #4f46e5;
+  --muted: #64748b;
+  --muted-foreground: #64748b;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #6366f1;
+  --radius: 0.5rem;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Light theme specific colors - Enhanced visibility with black text */
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-border: rgba(226, 232, 240, 0.8);
+  --gradient-from: #6366f1;
+  --gradient-to: #06b6d4;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(226, 232, 240, 0.6);
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --overlay-bg: rgba(255, 255, 255, 0.98);
+  --orb-1: rgba(99, 102, 241, 0.08);
+  --orb-2: rgba(6, 182, 212, 0.08);
+  --orb-3: rgba(168, 85, 247, 0.05);
+  
+  /* Enhanced light mode effects - High contrast with black text */
+  --glow-light: rgba(99, 102, 241, 0.1);
+  --glow-hover: rgba(99, 102, 241, 0.15);
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
 }
 
-/* 🌙 Mode Gelap */
+/* 🌙 Dark Theme */
+[data-theme="dark"] {
+  --background: #060b18;
+  --foreground: #f1f1f1;
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --accent-dark: #4f46e5;
+  --muted: #64748b;
+  --muted-foreground: #94a3b8;
+  --card: #0f172a;
+  --card-foreground: #f1f1f1;
+  --border: #334155;
+  --input: #1e293b;
+  --ring: #6366f1;
+  --radius: 0.5rem;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Dark theme specific colors */
+  --nav-bg: rgba(11, 17, 32, 0.7);
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --gradient-from: #6366f1;
+  --gradient-to: #06b6d4;
+  --card-bg: rgba(20, 20, 35, 0.6);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --overlay-bg: rgba(11, 17, 32, 0.95);
+  --orb-1: rgba(99, 102, 241, 0.25);
+  --orb-2: rgba(6, 182, 212, 0.25);
+  --orb-3: rgba(168, 85, 247, 0.15);
+}
+
+/* 🌙 Fallback for prefers-color-scheme if no stored preference */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --background: #060b18;
     --foreground: #f1f1f1;
     --accent: #6366f1;
+    --accent-light: #818cf8;
+    --accent-dark: #4f46e5;
+    --muted: #64748b;
+    --muted-foreground: #94a3b8;
+    --card: #0f172a;
+    --card-foreground: #f1f1f1;
+    --border: #334155;
+    --input: #1e293b;
+    --ring: #6366f1;
+    --nav-bg: rgba(11, 17, 32, 0.7);
+    --nav-border: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(20, 20, 35, 0.6);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --overlay-bg: rgba(11, 17, 32, 0.95);
+    --orb-1: rgba(99, 102, 241, 0.25);
+    --orb-2: rgba(6, 182, 212, 0.25);
+    --orb-3: rgba(168, 85, 247, 0.15);
   }
 }
 
 /* 🚀 Optimasi performa dan aksesibilitas */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -78,7 +163,7 @@ img {
 }
 
 .animate-gradient {
-  background: linear-gradient(120deg, #0f172a, #1e293b, #0a0f24);
+  background: linear-gradient(120deg, var(--background), var(--card), var(--background));
   background-size: 300% 300%;
   animation: gradientMove 20s ease infinite;
   will-change: background-position;
@@ -110,24 +195,24 @@ img {
   }
 }
 
-/* 💫 Efek Bingkai Futuristik Konsisten & Elegan */
+/* 💫 Efek Bingkai Futuristik Konsisten & Elegan - Identical to About page */
 .section-glow {
   position: relative;
   overflow: hidden;
   border-radius: 1.5rem;
   padding: 4px;
   background: linear-gradient(135deg,
-      rgba(56, 189, 248, 0.2),
-      rgba(99, 102, 241, 0.2));
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+      rgba(56, 189, 248, 0.15),
+      rgba(99, 102, 241, 0.15));
+  box-shadow: 0 0 20px var(--glow-light);
   transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
 }
 
 .section-glow:hover {
   background: linear-gradient(135deg,
-      rgba(56, 189, 248, 0.3),
-      rgba(99, 102, 241, 0.3));
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
+      rgba(56, 189, 248, 0.25),
+      rgba(99, 102, 241, 0.25));
+  box-shadow: 0 0 30px var(--glow-hover);
   transform: translateY(-4px);
 }
 
@@ -136,7 +221,7 @@ img {
   position: absolute;
   inset: -40%;
   background: radial-gradient(900px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(56, 189, 248, 0.25),
+      rgba(56, 189, 248, 0.2),
       rgba(99, 102, 241, 0.15),
       transparent 80%);
   opacity: 0;
@@ -153,23 +238,40 @@ img {
   position: relative;
   z-index: 1;
   border-radius: inherit;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   backdrop-filter: blur(20px);
   padding: 2.8rem;
-  box-shadow: inset 0 0 25px rgba(99, 102, 241, 0.05),
+  box-shadow: inset 0 0 25px var(--glow-light),
     inset 0 0 8px rgba(255, 255, 255, 0.02);
 }
 
-/* ⚡ Efek Interaktif Card (Hover Reactive) */
+/* Enhanced light mode effects - Identical to About page */
+[data-theme="light"] .section-glow {
+  background: linear-gradient(135deg,
+      rgba(99, 102, 241, 0.2),
+      rgba(6, 182, 212, 0.2));
+  box-shadow: 0 4px 20px var(--shadow-light), 0 0 20px var(--glow-light);
+}
+
+[data-theme="light"] .section-glow:hover {
+  background: linear-gradient(135deg,
+      rgba(99, 102, 241, 0.3),
+      rgba(6, 182, 212, 0.3));
+  box-shadow: 0 8px 30px var(--shadow-hover), 0 0 30px var(--glow-hover);
+}
+
+/* ⚡ Efek Interaktif Card (Hover Reactive) - Identical to About page */
 .card-reactive {
   position: relative;
   overflow: hidden;
   border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: border 0.3s ease, transform 0.3s ease;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  transition: border 0.3s ease, transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
   contain: layout style paint;
+  box-shadow: 0 4px 20px var(--shadow-light);
 }
 
 .card-reactive::before {
@@ -178,7 +280,7 @@ img {
   inset: -2px;
   border-radius: inherit;
   background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(56, 189, 248, 0.25),
+      rgba(56, 189, 248, 0.2),
       rgba(99, 102, 241, 0.15),
       transparent 70%);
   opacity: 0;
@@ -193,24 +295,184 @@ img {
 
 .card-reactive:hover {
   transform: translateY(-4px) translateZ(0);
+  box-shadow: 0 8px 30px var(--shadow-hover), 0 0 20px var(--glow-hover);
+}
+
+/* Enhanced light mode card effects - Identical to About page */
+[data-theme="light"] .card-reactive {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--card-border);
+}
+
+[data-theme="light"] .card-reactive:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--accent);
 }
 
 /* ✨ Glow Soft untuk Hover di Elemen Kecil */
 .glow-hover {
   transition: all 0.3s ease;
+  box-shadow: 0 2px 10px var(--shadow-light);
 }
 
 .glow-hover:hover {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 20px var(--glow-hover);
   transform: translateY(-3px);
 }
 
+/* Enhanced light mode glow effects */
+[data-theme="light"] .glow-hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .glow-hover:hover {
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15), 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎨 Theme transition utilities */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
+}
+
+/* 🎨 Enhanced theme transitions for better UX */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 🌓 Theme-aware image filters */
+img {
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+[data-theme="light"] img {
+  filter: brightness(1) contrast(1);
+}
+
+[data-theme="dark"] img {
+  filter: brightness(0.95) contrast(1.05);
+}
+
+/* 🌓 Theme-aware gradient animations */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 🌓 Theme-aware glow effects */
+.glow-effect {
+  transition: box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+[data-theme="light"] .glow-effect {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+}
+
+[data-theme="dark"] .glow-effect {
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
+}
+
+/* 🌓 Theme-aware backdrop filters */
+.backdrop-blur-theme {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* 🌓 Theme-aware text shadows */
+.text-shadow-theme {
+  transition: text-shadow 0.3s ease;
+}
+
+[data-theme="light"] .text-shadow-theme {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .text-shadow-theme {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 🌓 Theme-aware borders */
+.border-theme {
+  border: 1px solid var(--card-border);
+  transition: border-color 0.3s ease;
+}
+
+/* 🌓 Theme-aware hover effects */
+.hover-theme:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .hover-theme:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* 🌓 Theme-aware text colors */
+.text-primary {
+  color: var(--foreground);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+/* 🌓 Theme-aware backgrounds */
+.bg-primary {
+  background-color: var(--background);
+}
+
+.bg-card {
+  background-color: var(--card);
+}
+
+.bg-nav {
+  background-color: var(--nav-bg);
+}
+
+.bg-overlay {
+  background-color: var(--overlay-bg);
+}
+
+/* 🌓 Theme-aware borders */
+.border-primary {
+  border-color: var(--border);
+}
+
+.border-card {
+  border-color: var(--card-border);
+}
+
+.border-nav {
+  border-color: var(--nav-border);
+}
+
 .page-section {
-  padding-top: 7rem; /* sama dengan pt-28 */
+  padding-top: 7rem;
+  /* sama dengan pt-28 */
   padding-bottom: 6rem;
 }
+
 @media (min-width: 640px) {
   .page-section {
-    padding-top: 8rem; /* sama dengan sm:pt-32 */
+    padding-top: 8rem;
+    /* sama dengan sm:pt-32 */
   }
 }

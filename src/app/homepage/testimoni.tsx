@@ -42,16 +42,23 @@ export default function Testimoni() {
     ];
 
     return (
-        <section className="relative z-10 py-24 px-6 sm:px-12 text-white overflow-hidden">
+        <section className="relative z-10 py-24 px-6 sm:px-12 overflow-hidden" style={{ color: 'var(--foreground)' }}>
             {/* 🧠 Heading */}
             <div className="text-center mb-16">
-                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300">
+                <span className="px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect" style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--accent)',
+                    borderWidth: '2px',
+                    color: 'var(--accent)',
+                    boxShadow: '0 4px 20px var(--shadow-light)',
+                    textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                }}>
                     Kata Mereka
                 </span>
                 <h2 className="mt-5 section-title">
                     Suara <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Klien Kami</span>
                 </h2>
-                <p className="mt-4 text-gray-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+                <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Bukti nyata bagaimana Dyogaf membantu bisnis dan kreator digital mencapai potensi terbaiknya.
                 </p>
             </div>
@@ -67,7 +74,11 @@ export default function Testimoni() {
                         viewport={{ once: true }}
                         onMouseMove={handleMouseMove}
                         data-color={t.color}
-                        className="service-reactive relative group bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-8 text-center transition-all duration-500"
+                        className="service-reactive relative group rounded-3xl p-8 text-center transition-all duration-500"
+                        style={{
+                            backgroundColor: 'var(--card-bg)',
+                            border: '1px solid var(--card-border)'
+                        }}
                     >
                         {/* ✨ Glow Hover */}
                         <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/10 via-transparent to-indigo-500/10 opacity-0 group-hover:opacity-20 transition duration-500"></div>
@@ -92,11 +103,11 @@ export default function Testimoni() {
                                 </div>
                             </div>
 
-                            <p className="text-gray-300 text-sm leading-relaxed italic mb-5">
+                            <p className="text-sm leading-relaxed italic mb-5" style={{ color: 'var(--text-secondary)' }}>
                                 “{t.message}”
                             </p>
-                            <h3 className="text-lg font-semibold text-white">{t.name}</h3>
-                            <p className="text-xs uppercase tracking-wider text-gray-400 mt-1">{t.role}</p>
+                            <h3 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>{t.name}</h3>
+                            <p className="text-xs uppercase tracking-wider mt-1" style={{ color: 'var(--text-muted)' }}>{t.role}</p>
                         </div>
                     </motion.div>
                 ))}

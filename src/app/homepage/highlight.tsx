@@ -47,7 +47,7 @@ export default function Highlight() {
     }, []);
 
     return (
-        <section className="relative z-10 py-20 px-6 sm:px-12 text-white overflow-hidden">
+        <section className="relative z-10 py-20 px-6 sm:px-12 overflow-hidden" style={{ color: 'var(--foreground)' }}>
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -67,12 +67,12 @@ export default function Highlight() {
                         className="card-reactive border-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center transition-all duration-500 hover:-translate-y-2"
                     >
                         <div className="content relative z-10 flex flex-col items-center text-center">
-                            <div className="p-3 rounded-xl bg-white/5 mb-3">{item.icon}</div>
+                            <div className="p-3 rounded-xl mb-3" style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>{item.icon}</div>
                             <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                                 {item.value}
                             </h3>
-                            <p className="text-sm font-semibold text-gray-300 mt-1">{item.title}</p>
-                            <p className="text-xs text-gray-400 mt-2 leading-relaxed">{item.desc}</p>
+                            <p className="text-sm font-semibold mt-1" style={{ color: 'var(--text-secondary)' }}>{item.title}</p>
+                            <p className="text-xs mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>{item.desc}</p>
                         </div>
                     </motion.div>
                 ))}

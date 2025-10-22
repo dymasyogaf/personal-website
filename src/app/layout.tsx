@@ -70,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Optimasi viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         
-        {/* Theme color untuk mobile browser */}
+        {/* Theme color untuk mobile browser - akan diupdate via JavaScript */}
         <meta name="theme-color" content="#060b18" />
         <meta name="msapplication-TileColor" content="#060b18" />
         
@@ -82,10 +82,50 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Manifest untuk PWA */}
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className="relative min-h-screen overflow-x-hidden text-white font-sans antialiased">
+      <body className="relative min-h-screen overflow-x-hidden font-sans antialiased" style={{ color: 'var(--foreground)' }}>
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              // Theme detection and persistence
+              (function() {
+                // Get stored theme or use system preference
+                const storedTheme = localStorage.getItem('theme');
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                
+                // Determine initial theme
+                let theme = 'light';
+                if (storedTheme) {
+                  theme = storedTheme;
+                } else if (systemPrefersDark) {
+                  theme = 'dark';
+                }
+                
+                // Apply theme to document
+                document.documentElement.setAttribute('data-theme', theme);
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+                
+                // Update meta theme-color
+                const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+                const metaTileColor = document.querySelector('meta[name="msapplication-TileColor"]');
+                const themeColor = theme === 'dark' ? '#060b18' : '#ffffff';
+                
+                if (metaThemeColor) metaThemeColor.content = themeColor;
+                if (metaTileColor) metaTileColor.content = themeColor;
+                
+                // Listen for system theme changes (only if no stored preference)
+                if (!storedTheme) {
+                  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+                    
+                    const newThemeColor = newTheme === 'dark' ? '#060b18' : '#ffffff';
+                    if (metaThemeColor) metaThemeColor.content = newThemeColor;
+                    if (metaTileColor) metaTileColor.content = newThemeColor;
+                  });
+                }
+              })();
+              
               // Service Worker Registration
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
@@ -125,16 +165,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         {/* 🌌 Animated Global Gradient Background */}
-        <div className="absolute inset-0 -z-20 animate-[gradient_20s_ease_infinite] bg-[radial-gradient(circle_at_20%_30%,rgba(99,102,241,0.25),transparent_50%),radial-gradient(circle_at_80%_70%,rgba(6,182,212,0.25),transparent_50%),linear-gradient(to_bottom,#060b18,#0a0f24,#060b18)] bg-[length:200%_200%]" />
+        <div className="absolute inset-0 -z-20 animate-[gradient_20s_ease_infinite]" style={{
+          background: 'radial-gradient(circle at 20% 30%, var(--orb-1), transparent 50%), radial-gradient(circle at 80% 70%, var(--orb-2), transparent 50%), linear-gradient(to bottom, var(--background), var(--card), var(--background))',
+          backgroundSize: '200% 200%'
+        }} />
 
         {/* 🌫️ Subtle Overlay Layer for smooth blending */}
-        <div className="absolute inset-0 -z-10 bg-black/20 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 -z-10" style={{
+          background: 'var(--background)',
+          opacity: 0.1,
+          filter: 'blur(2px)'
+        }} />
 
         {/* ✨ Floating Light Orbs (global aesthetic glow) */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-[15%] left-[10%] w-[400px] h-[400px] bg-indigo-600/25 blur-[160px] animate-pulse" />
-          <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-cyan-500/25 blur-[180px] animate-pulse" />
-          <div className="absolute top-[50%] left-[60%] w-[300px] h-[300px] bg-purple-500/15 blur-[120px] animate-pulse" />
+          <div className="absolute top-[15%] left-[10%] w-[400px] h-[400px] blur-[160px] animate-pulse" style={{ background: 'var(--orb-1)' }} />
+          <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] blur-[180px] animate-pulse" style={{ background: 'var(--orb-2)' }} />
+          <div className="absolute top-[50%] left-[60%] w-[300px] h-[300px] blur-[120px] animate-pulse" style={{ background: 'var(--orb-3)' }} />
         </div>
 
         {/* 🧭 Navbar Global */}

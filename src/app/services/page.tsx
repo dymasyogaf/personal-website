@@ -84,18 +84,36 @@ export default function ServicesPage() {
     ] as const, []);
 
     const tools = useMemo(() => [
-        { name: "Next.js", icon: <SiNextdotjs className="w-6 h-6 text-white" /> },
-        { name: "Laravel", icon: <SiLaravel className="w-6 h-6 text-red-500" /> },
-        { name: "Tailwind CSS", icon: <SiTailwindcss className="w-6 h-6 text-cyan-400" /> },
-        { name: "Framer Motion", icon: <SiFramer className="w-6 h-6 text-purple-400" /> },
-        { name: "WordPress", icon: <SiWordpress className="w-6 h-6 text-[#21759B]" /> },
-        { name: "Berdu", icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-6 h-6" loading="lazy" /> },
+        {
+            name: "Next.js",
+            icon: <SiNextdotjs className="w-6 h-6" style={{ color: 'var(--foreground)' }} />
+        },
+        {
+            name: "Laravel",
+            icon: <SiLaravel className="w-6 h-6" style={{ color: '#DC2626' }} />
+        },
+        {
+            name: "Tailwind CSS",
+            icon: <SiTailwindcss className="w-6 h-6" style={{ color: '#06B6D4' }} />
+        },
+        {
+            name: "Framer Motion",
+            icon: <SiFramer className="w-6 h-6" style={{ color: '#8B5CF6' }} />
+        },
+        {
+            name: "WordPress",
+            icon: <SiWordpress className="w-6 h-6" style={{ color: '#21759B' }} />
+        },
+        {
+            name: "Berdu",
+            icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-6 h-6" loading="lazy" />
+        },
     ] as const, []);
 
     const MotionLink = motion(Link);
 
     return (
-        <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 py-28 text-white bg-transparent overflow-visible">
+        <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 py-28 bg-transparent overflow-visible" style={{ color: 'var(--foreground)' }}>
             <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
                 {/* Hero */}
                 <motion.div
@@ -109,7 +127,14 @@ export default function ServicesPage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-gray-300"
+                        className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect" style={{
+                            backgroundColor: 'var(--card-bg)',
+                            borderColor: 'var(--accent)',
+                            borderWidth: '2px',
+                            color: 'var(--accent)',
+                            boxShadow: '0 4px 20px var(--shadow-light)',
+                            textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+                        }}
                     >
                         Layanan Kami
                     </motion.span>
@@ -117,7 +142,7 @@ export default function ServicesPage() {
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                         Siap Melayani Anda
                     </h1>
-                    <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
+                    <p className="max-w-3xl mx-auto text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                         Di Dyogaf Digital Studio, kami tak sekadar membuat website. Kami
                         menciptakan <em>pengalaman digital</em> — interaktif, berkarakter, dan bermakna.
                     </p>
@@ -139,15 +164,20 @@ export default function ServicesPage() {
                                 <div className="p-4 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20">
                                     {service.icon}
                                 </div>
-                                <h3 className="text-xl font-semibold">{service.title}</h3>
-                                <p className="text-gray-400 leading-relaxed">{service.desc}</p>
+                                <h3 className="text-xl font-semibold" style={{ color: 'var(--foreground)' }}>{service.title}</h3>
+                                <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{service.desc}</p>
                             </div>
 
                             <ul className="mt-6 space-y-2 text-left w-full">
                                 {service.features.map((feat) => (
                                     <li
                                         key={feat}
-                                        className="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-gray-300 hover:bg-white/10 transition"
+                                        className="flex items-center gap-3 px-4 py-2 rounded-xl border hover:bg-white/10 transition"
+                                        style={{
+                                            backgroundColor: 'var(--card-bg)',
+                                            borderColor: 'var(--card-border)',
+                                            color: 'var(--text-secondary)'
+                                        }}
                                     >
                                         <span className="w-2 h-2 rounded-full bg-cyan-400" />
                                         {feat}
@@ -178,8 +208,8 @@ export default function ServicesPage() {
                                 <div className="p-4 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 flex items-center justify-center">
                                     <div className="text-cyan-400 w-7 h-7">{step.icon}</div>
                                 </div>
-                                <h3 className="font-semibold text-lg text-white mt-4">{step.title}</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed mt-2 max-w-[240px]">
+                                <h3 className="font-semibold text-lg mt-4" style={{ color: 'var(--foreground)' }}>{step.title}</h3>
+                                <p className="text-sm leading-relaxed mt-2 max-w-[240px]" style={{ color: 'var(--text-secondary)' }}>
                                     {step.text}
                                 </p>
                             </motion.div>
@@ -221,7 +251,7 @@ export default function ServicesPage() {
                                 className="tech-reactive flex items-center gap-3 px-5 py-3"
                             >
                                 {tool.icon}
-                                <span className="text-gray-300 text-sm font-medium">{tool.name}</span>
+                                <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>{tool.name}</span>
                             </motion.div>
                         ))}
                     </div>
@@ -235,7 +265,7 @@ export default function ServicesPage() {
                     onMouseMove={handleMouseMove}
                     className="footer-reactive relative mt-20 text-center max-w-3xl mx-auto p-8"
                 >
-                    <p className="text-gray-300 text-base leading-relaxed">
+                    <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                         <Sparkles className="w-5 h-5 text-cyan-400 inline-block mr-2" />
                         Setiap proyek adalah perjalanan — dan kami siap menjadi kompas digitalmu. 🌍
                     </p>
