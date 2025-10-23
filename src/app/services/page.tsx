@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import "../../styles/services.css";
 import { useCallback, useMemo } from "react";
 import {
@@ -50,7 +51,7 @@ export default function ServicesPage() {
         {
             title: "Berdu Platform",
             desc: "Bangun sistem berbasis Berdu — solusi platform lokal yang kuat untuk website, toko online, dan dashboard bisnis.",
-            icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-8 h-8" loading="lazy" />,
+            icon: <Image src="/image/logo/berdu.jpeg" alt="Berdu" width={32} height={32} />,
             features: ["Admin Dashboard", "User Management", "Data Analytics", "Cloud Hosting"],
             color: "sky",
         },
@@ -106,7 +107,7 @@ export default function ServicesPage() {
         },
         {
             name: "Berdu",
-            icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-6 h-6" loading="lazy" />
+            icon: <Image src="/image/logo/berdu.jpeg" alt="Berdu" width={24} height={24} />
         },
     ] as const, []);
 

@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import "../../styles/homepage.css";
 import { useCallback } from 'react';
 import { Globe } from 'lucide-react';
-import { SiWordpress, SiGooglecloud } from 'react-icons/si'; // ✅ Logo WordPress & Berdu
-import { Rocket } from 'lucide-react';
+import { SiWordpress } from 'react-icons/si'; // ✅ Logo WordPress & Berdu
+import Image from 'next/image';
 
 export default function Layanan() {
     // ✨ Efek reaktif mengikuti kursor
@@ -33,7 +33,7 @@ export default function Layanan() {
         {
             title: 'Berdu Platform',
             desc: 'Solusi platform berdu yang powerful untuk kebutuhan bisnis modern.',
-            icon: <img src="/image/logo/berdu.jpeg" alt="Berdu" className="w-6 h-6" loading="lazy" />, // 🏢 Logo Berdu Original
+            icon: <Image src="/image/logo/berdu.jpeg" alt="Berdu" width={24} height={24} />, // 🏢 Logo Berdu Original
             features: ['Admin Dashboard', 'User Management', 'Data Analytics', 'Cloud Hosting'],
             color: 'teal',
         },

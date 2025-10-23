@@ -54,18 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://www.linkedin.com" />
         <link rel="dns-prefetch" href="https://www.instagram.com" />
         
-        {/* Preload untuk font Geist */}
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
-          as="style"
-        />
-        <noscript>
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
-          />
-        </noscript>
+        {/* Preload untuk font Geist - menggunakan next/font */}
         
         {/* Optimasi viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />

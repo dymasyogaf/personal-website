@@ -142,7 +142,7 @@ function testNavigation(viewport: ViewportSize): {
 /**
  * Test layout breakpoints for current viewport
  */
-function testLayoutBreakpoints(viewport: ViewportSize): {
+function testLayoutBreakpoints(): {
   navigation: boolean;
   content: boolean;
   footer: boolean;
@@ -205,7 +205,7 @@ export function testViewport(viewport: ViewportSize): ResponsiveTestResult {
   issues.push(...navigationTest.issues);
   
   // Test layout breakpoints
-  const layoutTest = testLayoutBreakpoints(viewport);
+  const layoutTest = testLayoutBreakpoints();
   issues.push(...layoutTest.issues);
   
   return {
