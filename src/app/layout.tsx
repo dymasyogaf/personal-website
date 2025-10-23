@@ -1,7 +1,11 @@
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PerformanceMonitor from "../components/PerformanceMonitor";
 import { GeistSans, GeistMono } from "geist/font";
+import { preloadCriticalResources } from "@/utils/performance-optimizer";
+import { initializeWebVitalsOptimization } from "@/utils/web-vitals-optimizer";
+import { enablePerformanceTesting } from "@/utils/performance-test";
 
 export const metadata = {
   title: "Dyogaf Studio",
@@ -75,9 +79,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Theme detection and persistence
+              // Performance optimization and theme detection
               (function() {
-                // Get stored theme or use system preference
+                // Preload critical resources immediately
+                if (typeof window !== 'undefined') {
+                  // Preload critical images
+                  const criticalImages = [
+                    '/image/logo/berdu.jpeg',
+                    '/image/homepage/website-portfolio-personal.png'
+                  ];
+                  
+                  criticalImages.forEach(src => {
+                    const link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = src;
+                    link.setAttribute('fetchpriority', 'high');
+                    document.head.appendChild(link);
+                  });
+                  
+                  // Optimize font loading
+                  const fontLink = document.createElement('link');
+                  fontLink.rel = 'preload';
+                  fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
+                  fontLink.as = 'style';
+                  document.head.appendChild(fontLink);
+                }
+                
+                // Theme detection and persistence
                 const storedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 
@@ -112,6 +141,38 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     if (metaThemeColor) metaThemeColor.content = newThemeColor;
                     if (metaTileColor) metaTileColor.content = newThemeColor;
                   });
+                }
+                
+                // Performance optimization: reduce layout shifts
+                if ('requestIdleCallback' in window) {
+                  requestIdleCallback(() => {
+                    // Preload non-critical resources during idle time
+                    const preloadResources = [
+                      '/image/homepage/website-fundrising.png',
+                      '/image/homepage/landing-page-produk.png'
+                    ];
+                    
+                    preloadResources.forEach(src => {
+                      const link = document.createElement('link');
+                      link.rel = 'prefetch';
+                      link.as = 'image';
+                      link.href = src;
+                      document.head.appendChild(link);
+                    });
+                    
+                    // Initialize Web Vitals optimization
+                    initializeWebVitalsOptimization();
+                  });
+                } else {
+                  // Fallback for browsers without requestIdleCallback
+                  setTimeout(() => {
+                    initializeWebVitalsOptimization();
+                  }, 100);
+                }
+                
+                // Enable performance testing in development
+                if (process.env.NODE_ENV === 'development') {
+                  enablePerformanceTesting();
                 }
               })();
               
@@ -183,6 +244,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* 🔗 footer Global */}
         <Footer />
+        
+        {/* 📊 Performance Monitor - Only in development */}
+        {process.env.NODE_ENV === 'development' && <PerformanceMonitor />}
       </body>
     </html>
   );
