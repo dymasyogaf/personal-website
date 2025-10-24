@@ -327,23 +327,23 @@ img {
   box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15), 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 🎨 Theme transition utilities */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
+/* 🎨 Optimized theme transitions - reduced for better performance */
+.theme-transition {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 /* 🎨 Enhanced theme transitions for better UX */
 html {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 body {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* 🌓 Theme-aware image filters */
+/* 🌓 Theme-aware image filters - optimized */
 img {
-  transition: filter 0.3s ease, opacity 0.3s ease;
+  transition: filter 0.2s ease;
 }
 
 [data-theme="light"] img {
@@ -367,9 +367,9 @@ img {
   }
 }
 
-/* 🌓 Theme-aware glow effects */
+/* 🌓 Theme-aware glow effects - optimized */
 .glow-effect {
-  transition: box-shadow 0.3s ease, filter 0.3s ease;
+  transition: box-shadow 0.2s ease;
 }
 
 [data-theme="light"] .glow-effect {
@@ -380,11 +380,19 @@ img {
   box-shadow: 0 0 30px rgba(99, 102, 241, 0.25);
 }
 
-/* 🌓 Theme-aware backdrop filters */
+/* 🌓 Theme-aware backdrop filters - optimized for mobile */
 .backdrop-blur-theme {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background-color 0.2s ease;
+}
+
+/* 🌓 Reduced backdrop blur for mobile performance */
+@media (max-width: 768px) {
+  .backdrop-blur-theme {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
 }
 
 /* 🌓 Theme-aware text shadows */
@@ -406,11 +414,14 @@ img {
   transition: border-color 0.3s ease;
 }
 
-/* 🌓 Theme-aware hover effects */
+/* 🌓 Theme-aware hover effects - optimized */
+.hover-theme {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
 .hover-theme:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 [data-theme="dark"] .hover-theme:hover {
@@ -462,6 +473,71 @@ img {
 
 .border-nav {
   border-color: var(--nav-border);
+}
+
+/* 🚀 Performance optimization classes */
+.nav-optimized {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.theme-toggle-optimized {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.menu-overlay-optimized {
+  will-change: opacity;
+  backface-visibility: hidden;
+}
+
+.card-optimized {
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+}
+
+/* 🎨 Navbar specific styles */
+.navbar-bg {
+  background-color: var(--nav-bg);
+}
+
+.navbar-border {
+  border-color: var(--nav-border);
+}
+
+.navbar-shadow-light {
+  box-shadow: 0 8px 32px var(--shadow-light);
+}
+
+.navbar-shadow-scrolled {
+  box-shadow: 0 12px 40px var(--shadow-hover);
+}
+
+/* 🎨 Card specific styles */
+.card-bg {
+  background-color: var(--card-bg);
+}
+
+.card-border {
+  border-color: var(--card-border);
+}
+
+.card-shadow {
+  box-shadow: 0 8px 40px var(--shadow-hover);
+}
+
+/* 🎨 Button specific styles */
+.button-bg {
+  background-color: var(--card-bg);
+}
+
+.button-border {
+  border-color: var(--card-border);
+}
+
+.button-shadow {
+  box-shadow: 0 2px 8px var(--shadow-light);
 }
 
 .page-section {

@@ -1,26 +1,31 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 
-export default function Navbar() {
+export default function OptimizedNavbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isReducedMotion, setIsReducedMotion] = useState(false);
     const pathname = usePathname();
+    const tickingRef = useRef(false);
 
     useEffect(() => {
-        let ticking = false;
+        // Check for reduced motion preference
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        setIsReducedMotion(mediaQuery.matches);
+        
         const handleScroll = () => {
-            if (!ticking) {
+            if (!tickingRef.current) {
                 requestAnimationFrame(() => {
                     setIsScrolled(window.scrollY > 20);
-                    ticking = false;
+                    tickingRef.current = false;
                 });
-                ticking = true;
+                tickingRef.current = true;
             }
         };
 
@@ -44,6 +49,17 @@ export default function Navbar() {
     const closeMenu = useCallback(() => {
         setIsMenuOpen(false);
     }, []);
+
+    // Optimized animation config based on user preferences
+    const animationConfig = useMemo(() => ({
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: {
+            duration: isReducedMotion ? 0.01 : 0.2,
+            ease: [0.25, 0.46, 0.45, 0.94] as const
+        }
+    }), [isReducedMotion]);
 
     return (
         <header className="fixed top-0 left-0 z-50 w-full flex justify-center">
@@ -132,14 +148,11 @@ export default function Navbar() {
                 </div>
             </nav>
 
-            {/* 📱 Overlay Menu (Mobile & Tablet) */}
+            {/* 📱 Overlay Menu (Mobile & Tablet) - Optimized */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        {...animationConfig}
                         className="md:hidden fixed inset-0 z-40 backdrop-blur-md flex flex-col justify-start items-center pt-28 px-6 bg-overlay menu-overlay-optimized"
                     >
                         <button

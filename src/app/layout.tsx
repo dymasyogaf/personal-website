@@ -1,7 +1,8 @@
 import "./globals.css";
-import Navbar from "../components/Navbar";
+import OptimizedNavbar from "../components/OptimizedNavbar";
 import Footer from "../components/Footer";
 import PerformanceMonitor from "../components/PerformanceMonitor";
+import NavbarPerformanceTest from "../components/NavbarPerformanceTest";
 import { GeistSans, GeistMono } from "geist/font";
 import { preloadCriticalResources } from "@/utils/performance-optimizer";
 import { initializeWebVitalsOptimization } from "@/utils/web-vitals-optimizer";
@@ -75,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Manifest untuk PWA */}
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className="relative min-h-screen overflow-x-hidden font-sans antialiased" style={{ color: 'var(--foreground)' }}>
+      <body className="relative min-h-screen overflow-x-hidden font-sans antialiased theme-transition" style={{ color: 'var(--foreground)' }}>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -235,7 +236,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
 
         {/* 🧭 Navbar Global */}
-        <Navbar />
+        <OptimizedNavbar />
 
         {/* 🪄 Main Page Content */}
         <main className="relative z-0">
@@ -247,6 +248,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         {/* 📊 Performance Monitor - Only in development */}
         {process.env.NODE_ENV === 'development' && <PerformanceMonitor />}
+        
+        {/* 🧪 Navbar Performance Test - Only in development */}
+        {process.env.NODE_ENV === 'development' && <NavbarPerformanceTest />}
       </body>
     </html>
   );
