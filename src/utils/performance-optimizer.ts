@@ -4,7 +4,7 @@
  */
 
 // Debounce function untuk优化 scroll events
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -16,7 +16,7 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 // Throttle function untuk优化 resize events
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {
@@ -77,8 +77,8 @@ export function measureWebVitals() {
     // First Input Delay (FID)
     new PerformanceObserver((entryList) => {
       const entries = entryList.getEntries();
-      entries.forEach((entry: any) => {
-        console.log('FID:', entry.processingStart - entry.startTime);
+      entries.forEach((entry: PerformanceEntry & { processingStart?: number }) => {
+        console.log('FID:', (entry.processingStart || 0) - entry.startTime);
       });
     }).observe({ entryTypes: ['first-input'] });
 
@@ -86,8 +86,8 @@ export function measureWebVitals() {
     let clsValue = 0;
     new PerformanceObserver((entryList) => {
       const entries = entryList.getEntries();
-      entries.forEach((entry: any) => {
-        if (!entry.hadRecentInput) {
+      entries.forEach((entry: PerformanceEntry & { hadRecentInput?: boolean; value?: number }) => {
+        if (!entry.hadRecentInput && entry.value) {
           clsValue += entry.value;
         }
       });
@@ -119,9 +119,27 @@ export function cleanupResources() {
 export function getDeviceCapabilities() {
   if (typeof window === 'undefined') return { isSlowConnection: false, isLowEndDevice: false };
 
-  const connection = (navigator as any).connection || 
-                    (navigator as any).mozConnection || 
-                    (navigator as any).webkitConnection;
+  const connection = (navigator as unknown as {
+    connection?: {
+      effectiveType?: string;
+    };
+    mozConnection?: {
+      effectiveType?: string;
+    };
+    webkitConnection?: {
+      effectiveType?: string;
+    };
+  }).connection ||
+                    (navigator as unknown as {
+                      mozConnection?: {
+                        effectiveType?: string;
+                      };
+                    }).mozConnection ||
+                    (navigator as unknown as {
+                      webkitConnection?: {
+                        effectiveType?: string;
+                      };
+                    }).webkitConnection;
 
   const isSlowConnection = connection ? 
     (connection.effectiveType === 'slow-2g' || 

@@ -89,8 +89,8 @@ class PerformanceTester {
   private measureFID(resolve: (value: number) => void) {
     new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: any) => {
-        resolve(entry.processingStart - entry.startTime);
+      entries.forEach((entry: PerformanceEntry & { processingStart?: number }) => {
+        resolve((entry.processingStart || 0) - entry.startTime);
       });
     }).observe({ entryTypes: ['first-input'] });
   }
@@ -99,8 +99,8 @@ class PerformanceTester {
     let clsValue = 0;
     new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: any) => {
-        if (!entry.hadRecentInput) {
+      entries.forEach((entry: PerformanceEntry & { hadRecentInput?: boolean; value?: number }) => {
+        if (!entry.hadRecentInput && entry.value) {
           clsValue += entry.value;
         }
       });

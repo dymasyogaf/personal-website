@@ -4,9 +4,9 @@ import Footer from "../components/Footer";
 import PerformanceMonitor from "../components/PerformanceMonitor";
 import NavbarPerformanceTest from "../components/NavbarPerformanceTest";
 import { GeistSans, GeistMono } from "geist/font";
-import { preloadCriticalResources } from "@/utils/performance-optimizer";
-import { initializeWebVitalsOptimization } from "@/utils/web-vitals-optimizer";
-import { enablePerformanceTesting } from "@/utils/performance-test";
+// import { preloadCriticalResources } from "@/utils/performance-optimizer";
+// import { initializeWebVitalsOptimization } from "@/utils/web-vitals-optimizer";
+// import { enablePerformanceTesting } from "@/utils/performance-test";
 
 export const metadata = {
   title: "Dyogaf Studio",

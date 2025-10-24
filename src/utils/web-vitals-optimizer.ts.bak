@@ -309,14 +309,13 @@ export function initializeWebVitalsOptimization() {
       const gtag = (window as unknown as { gtag?: (command: string, eventName: string, options?: Record<string, unknown>) => void }).gtag;
       if (gtag) {
         gtag('event', metric.name, {
-          event_category: 'Web Vitals',
-          value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
-          non_interaction: true,
-          custom_map: {
-            [metric.name]: metric.value,
-            [`${metric.name}_rating`]: metric.rating
-          }
-        });
+        event_category: 'Web Vitals',
+        value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+        non_interaction: true,
+        custom_map: {
+          [metric.name]: metric.value,
+          [`${metric.name}_rating`]: metric.rating
+        };
       }
     }
   });

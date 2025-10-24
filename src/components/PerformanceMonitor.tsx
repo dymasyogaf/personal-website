@@ -9,7 +9,7 @@ interface PerformanceMetrics {
   cls?: number;
   fcp?: number;
   ttfb?: number;
-  resources?: any[];
+  resources?: { name: string; duration: number; size: number; type: string }[];
 }
 
 export default function PerformanceMonitor() {

@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import NavbarPerformanceTester from '@/utils/navbar-performance-test';
+import { useState } from 'react';
+import NavbarPerformanceTester, { PerformanceMetrics } from '@/utils/navbar-performance-test';
 
 export default function NavbarPerformanceTest() {
   const [isRunning, setIsRunning] = useState(false);
-  const [results, setResults] = useState<any>(null);
+  const [results, setResults] = useState<PerformanceMetrics | null>(null);
   const [showResults, setShowResults] = useState(false);
 
   const runTest = async () => {

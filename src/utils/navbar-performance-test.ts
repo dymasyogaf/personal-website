@@ -93,8 +93,8 @@ class NavbarPerformanceTester {
 
             const observer = new PerformanceObserver((list) => {
                 for (const entry of list.getEntries()) {
-                    if (entry.entryType === 'layout-shift' && !(entry as any).hadRecentInput) {
-                        layoutShifts += (entry as any).value;
+                    if (entry.entryType === 'layout-shift' && !(entry as PerformanceEntry & { hadRecentInput?: boolean }).hadRecentInput) {
+                        layoutShifts += (entry as PerformanceEntry & { value?: number }).value || 0;
                     }
                 }
             });
@@ -114,7 +114,8 @@ class NavbarPerformanceTester {
      */
     getMemoryUsage(): number {
         if ('memory' in performance) {
-            return (performance as any).memory.usedJSHeapSize / 1048576; // MB
+            const perfMemory = (performance as { memory?: { usedJSHeapSize: number } }).memory;
+            return perfMemory ? perfMemory.usedJSHeapSize / 1048576 : 0; // MB
         }
         return 0;
     }
@@ -172,12 +173,12 @@ class NavbarPerformanceTester {
      */
     compareWithBaseline(baseline: PerformanceMetrics): PerformanceComparison {
         return {
-            menuOpenImprovement: ((baseline.menuOpenTime - this.metrics.menuOpenTime) / baseline.menuOpenTime) * 100,
-            menuCloseImprovement: ((baseline.menuCloseTime - this.metrics.menuCloseTime) / baseline.menuCloseTime) * 100,
-            themeChangeImprovement: ((baseline.themeChangeTime - this.metrics.themeChangeTime) / baseline.themeChangeTime) * 100,
-            scrollFPSImprovement: ((this.metrics.scrollFPS - baseline.scrollFPS) / baseline.scrollFPS) * 100,
-            layoutShiftReduction: ((baseline.layoutShifts - this.metrics.layoutShifts) / baseline.layoutShifts) * 100,
-            memoryImprovement: ((baseline.memoryUsage - this.metrics.memoryUsage) / baseline.memoryUsage) * 100
+            menuOpenImprovement: baseline.menuOpenTime > 0 ? ((baseline.menuOpenTime - this.metrics.menuOpenTime) / baseline.menuOpenTime) * 100 : 0,
+            menuCloseImprovement: baseline.menuCloseTime > 0 ? ((baseline.menuCloseTime - this.metrics.menuCloseTime) / baseline.menuCloseTime) * 100 : 0,
+            themeChangeImprovement: baseline.themeChangeTime > 0 ? ((baseline.themeChangeTime - this.metrics.themeChangeTime) / baseline.themeChangeTime) * 100 : 0,
+            scrollFPSImprovement: baseline.scrollFPS > 0 ? ((this.metrics.scrollFPS - baseline.scrollFPS) / baseline.scrollFPS) * 100 : 0,
+            layoutShiftReduction: baseline.layoutShifts > 0 ? ((baseline.layoutShifts - this.metrics.layoutShifts) / baseline.layoutShifts) * 100 : 0,
+            memoryImprovement: baseline.memoryUsage > 0 ? ((baseline.memoryUsage - this.metrics.memoryUsage) / baseline.memoryUsage) * 100 : 0
         };
     }
 
