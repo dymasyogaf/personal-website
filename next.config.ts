@@ -61,7 +61,7 @@ const nextConfig: NextConfig = {
           },
           shared: {
             name: 'shared',
-            async: 'all',
+            chunks: 'all',
             minChunks: 2,
             enforce: true,
           },
