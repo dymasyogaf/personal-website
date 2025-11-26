@@ -78,7 +78,6 @@ export default function OptimizedImage({
                 quality={quality}
                 priority={priority}
                 sizes={sizes}
-                loading={priority ? 'eager' : 'lazy'}
                 placeholder={placeholder}
                 blurDataURL={blurDataURL}
                 onLoad={handleLoad}

@@ -2,7 +2,7 @@
 
 import { ArrowRight, Play, Sparkles, Globe2, Compass, Lightbulb } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import "../../styles/homepage.css";
 
 // ✨ Efek Typewriter
@@ -54,11 +54,23 @@ function DynamicFocus() {
 }
 
 export default function Hero() {
-  // 🌌 Efek glow interaktif (cursor)
+  // 🌌 Efek glow interaktif (cursor) - throttled with requestAnimationFrame
+  const rafId = useRef<number | null>(null);
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-    e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    const target = e.currentTarget;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    if (!rafId.current) {
+      rafId.current = requestAnimationFrame(() => {
+        if (target) {
+          const rect = target.getBoundingClientRect();
+          target.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
+          target.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
+        }
+        rafId.current = null;
+      });
+    }
   }, []);
 
   const cardData = useMemo(() => [
@@ -134,7 +146,7 @@ export default function Hero() {
           {/* 🎯 CTA */}
           <div className="pt-6 flex flex-wrap gap-4">
             <Link
-              href="/projects"
+              href="/order"
               onMouseMove={handleMouseMove}
               className="button-reactive px-6 py-3 rounded-full font-semibold text-base"
               style={{
@@ -142,11 +154,11 @@ export default function Hero() {
                 color: 'white'
               }}
             >
-              Jelajahi Karya Kami <ArrowRight className="w-5 h-5 ml-2" />
+              Pesan Sekarang <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
 
             <Link
-              href="/about"
+              href="/projects"
               onMouseMove={handleMouseMove}
               className="button-reactive px-6 py-3 rounded-full text-base"
               data-color="secondary"
@@ -156,7 +168,7 @@ export default function Hero() {
                 backgroundColor: 'var(--card-bg)'
               }}
             >
-              <Play className="w-5 h-5 mr-2" /> Tentang Dyogaf
+              Lihat Portfolio
             </Link>
           </div>
         </div>

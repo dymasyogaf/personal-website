@@ -3,15 +3,27 @@
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import Image from 'next/image';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import "../../styles/homepage.css";
 
 export default function Testimoni() {
-    // ✨ Efek kursor reaktif seperti section lain
+    // ✨ Efek kursor reaktif - throttled with requestAnimationFrame
+    const rafId = useRef<number | null>(null);
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        const target = e.currentTarget;
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+
+        if (!rafId.current) {
+            rafId.current = requestAnimationFrame(() => {
+                if (target) {
+                    const rect = target.getBoundingClientRect();
+                    target.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
+                    target.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
+                }
+                rafId.current = null;
+            });
+        }
     }, []);
 
     const testimonials = [

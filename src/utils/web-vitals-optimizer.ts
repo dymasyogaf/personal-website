@@ -322,33 +322,5 @@ export function initializeWebVitalsOptimization() {
   });
 }
 
-// Performance monitoring for development
-export function enablePerformanceMonitoring() {
-  if (typeof window === 'undefined' || process.env.NODE_ENV !== 'development') return;
-
-  // Monitor long tasks
-  if ('PerformanceObserver' in window) {
-    new PerformanceObserver((list) => {
-      const entries = list.getEntries();
-      entries.forEach((entry) => {
-        if (entry.duration > 50) {
-          console.warn(`Long task detected: ${entry.duration.toFixed(2)}ms`, entry);
-        }
-      });
-    }).observe({ entryTypes: ['longtask'] });
-  }
-
-  // Monitor memory usage
-  if ('memory' in performance) {
-    setInterval(() => {
-      const memory = (performance as unknown as { memory?: { usedJSHeapSize: number; totalJSHeapSize: number; jsHeapSizeLimit: number } }).memory;
-      if (memory) {
-        console.log('Memory usage:', {
-          used: `${(memory.usedJSHeapSize / 1048576).toFixed(2)} MB`,
-          total: `${(memory.totalJSHeapSize / 1048576).toFixed(2)} MB`,
-          limit: `${(memory.jsHeapSizeLimit / 1048576).toFixed(2)} MB`
-        });
-      }
-    }, 30000); // Every 30 seconds
-  }
-}
+// Performance monitoring removed - was causing build to hang due to persistent setInterval
+// Use browser DevTools or Lighthouse for performance monitoring instead

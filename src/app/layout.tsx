@@ -1,8 +1,6 @@
 import "./globals.css";
 import OptimizedNavbar from "../components/OptimizedNavbar";
 import Footer from "../components/Footer";
-import PerformanceMonitor from "../components/PerformanceMonitor";
-import NavbarPerformanceTest from "../components/NavbarPerformanceTest";
 import { GeistSans, GeistMono } from "geist/font";
 // import { preloadCriticalResources } from "@/utils/performance-optimizer";
 // import { initializeWebVitalsOptimization } from "@/utils/web-vitals-optimizer";
@@ -42,7 +40,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="id" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <head>
         {/* Preconnect untuk sumber daya eksternal */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -144,15 +142,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   });
                 }
                 
-                // Performance optimization: reduce layout shifts
+                // Performance optimization: Preload non-critical resources during idle time
                 if ('requestIdleCallback' in window) {
                   requestIdleCallback(() => {
-                    // Preload non-critical resources during idle time
                     const preloadResources = [
                       '/image/homepage/website-fundrising.png',
                       '/image/homepage/landing-page-produk.png'
                     ];
-                    
+
                     preloadResources.forEach(src => {
                       const link = document.createElement('link');
                       link.rel = 'prefetch';
@@ -160,20 +157,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       link.href = src;
                       document.head.appendChild(link);
                     });
-                    
-                    // Initialize Web Vitals optimization
-                    initializeWebVitalsOptimization();
                   });
-                } else {
-                  // Fallback for browsers without requestIdleCallback
-                  setTimeout(() => {
-                    initializeWebVitalsOptimization();
-                  }, 100);
-                }
-                
-                // Enable performance testing in development
-                if (process.env.NODE_ENV === 'development') {
-                  enablePerformanceTesting();
                 }
               })();
               
@@ -245,12 +229,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* 🔗 footer Global */}
         <Footer />
-        
-        {/* 📊 Performance Monitor - Only in development */}
-        {process.env.NODE_ENV === 'development' && <PerformanceMonitor />}
-        
-        {/* 🧪 Navbar Performance Test - Only in development */}
-        {process.env.NODE_ENV === 'development' && <NavbarPerformanceTest />}
       </body>
     </html>
   );

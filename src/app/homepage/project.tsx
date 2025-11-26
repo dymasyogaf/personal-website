@@ -3,17 +3,29 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useRef } from 'react';
 import "../../styles/homepage.css";
 
 export default function Project() {
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
-    
-    // ✨ Efek kursor reaktif
+
+    // ✨ Efek kursor reaktif - throttled with requestAnimationFrame
+    const rafId = useRef<number | null>(null);
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        const target = e.currentTarget;
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+
+        if (!rafId.current) {
+            rafId.current = requestAnimationFrame(() => {
+                if (target) {
+                    const rect = target.getBoundingClientRect();
+                    target.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
+                    target.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
+                }
+                rafId.current = null;
+            });
+        }
     }, []);
 
     const projects = useMemo(() => [

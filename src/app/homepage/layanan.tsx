@@ -2,17 +2,29 @@
 
 import { motion } from 'framer-motion';
 import "../../styles/homepage.css";
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { Globe } from 'lucide-react';
 import { SiWordpress } from 'react-icons/si'; // ✅ Logo WordPress & Berdu
 import Image from 'next/image';
 
 export default function Layanan() {
-    // ✨ Efek reaktif mengikuti kursor
+    // ✨ Efek reaktif mengikuti kursor - throttled with requestAnimationFrame
+    const rafId = useRef<number | null>(null);
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        const target = e.currentTarget;
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+
+        if (!rafId.current) {
+            rafId.current = requestAnimationFrame(() => {
+                if (target) {
+                    const rect = target.getBoundingClientRect();
+                    target.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
+                    target.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
+                }
+                rafId.current = null;
+            });
+        }
     }, []);
 
     const services = [
