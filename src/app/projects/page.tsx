@@ -22,7 +22,7 @@ export default function ProjectPage() {
             desc: "Website elegan dengan konsep glassmorphism dan animasi halus. Dibangun dengan Next.js & Tailwind.",
             image: "/image/homepage/website-portfolio-personal.png",
             tag: "Creative Portfolio",
-            link: "/projects/portfolio",
+            link: "https://dymasyogaf.is-a.dev/",
             color: "cyan",
         },
         {
@@ -30,7 +30,7 @@ export default function ProjectPage() {
             desc: "Platform donasi & manajemen data wakaf berbasis WordPress, integrasi API dan dashboard custom.",
             image: "/image/homepage/website-fundrising.png",
             tag: "Nonprofit Tech",
-            link: "/projects/wakaf",
+            link: "https://alquransantri.com",
             color: "indigo",
         },
         {
@@ -38,7 +38,7 @@ export default function ProjectPage() {
             desc: "Desain futuristik dengan CTA yang kuat, performa tinggi, dan SEO optimization maksimal.",
             image: "/image/homepage/landing-page-produk.png",
             tag: "Marketing Design",
-            link: "/projects/landing",
+            link: "https://alquransantri.org/",
             color: "teal",
         },
     ], []);
@@ -52,7 +52,7 @@ export default function ProjectPage() {
             icon: <PenTool className="w-7 h-7 text-cyan-400" />,
             title: "Artikel SEO",
             desc: "Meningkatkan visibilitas website melalui artikel SEO-friendly. Mulai dari topik keislaman, rental kendaraan, hingga layanan hukum. Semua dengan strategi kata kunci yang terukur.",
-            clients: "al-fatihah.com, rentalmotor99.com, birohukumindonesia.com",
+            clients: "alfatihah.com, rentalmotor99.com, birohukumindonesia.com",
             color: "cyan",
         },
         {

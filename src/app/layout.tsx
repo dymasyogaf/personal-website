@@ -2,9 +2,6 @@ import "./globals.css";
 import OptimizedNavbar from "../components/OptimizedNavbar";
 import Footer from "../components/Footer";
 import { GeistSans, GeistMono } from "geist/font";
-// import { preloadCriticalResources } from "@/utils/performance-optimizer";
-// import { initializeWebVitalsOptimization } from "@/utils/web-vitals-optimizer";
-// import { enablePerformanceTesting } from "@/utils/performance-test";
 
 export const metadata = {
   title: "Dyogaf Studio",
@@ -43,8 +40,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="id" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <head>
         {/* Preconnect untuk sumber daya eksternal */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://api.github.com" />
         <link rel="preconnect" href="https://www.linkedin.com" />
@@ -80,68 +75,47 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `
               // Performance optimization and theme detection
               (function() {
-                // Preload critical resources immediately
-                if (typeof window !== 'undefined') {
-                  // Preload critical images
-                  const criticalImages = [
-                    '/image/logo/berdu.jpeg',
-                    '/image/homepage/website-portfolio-personal.png'
-                  ];
-                  
-                  criticalImages.forEach(src => {
-                    const link = document.createElement('link');
-                    link.rel = 'preload';
-                    link.as = 'image';
-                    link.href = src;
-                    link.setAttribute('fetchpriority', 'high');
-                    document.head.appendChild(link);
-                  });
-                  
-                  // Optimize font loading
-                  const fontLink = document.createElement('link');
-                  fontLink.rel = 'preload';
-                  fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
-                  fontLink.as = 'style';
-                  document.head.appendChild(fontLink);
-                }
-                
+                const criticalImages = [
+                  '/image/logo/berdu.jpeg',
+                  '/image/homepage/website-portfolio-personal.png'
+                ];
+
+                const preloadImage = (rel, src, highPriority) => {
+                  const link = document.createElement('link');
+                  link.rel = rel;
+                  link.as = 'image';
+                  link.href = src;
+                  if (highPriority) link.setAttribute('fetchpriority', 'high');
+                  document.head.appendChild(link);
+                };
+
+                criticalImages.forEach(src => preloadImage('preload', src, true));
+
                 // Theme detection and persistence
                 const storedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                
-                // Determine initial theme
-                let theme = 'light';
-                if (storedTheme) {
-                  theme = storedTheme;
-                } else if (systemPrefersDark) {
-                  theme = 'dark';
-                }
-                
-                // Apply theme to document
-                document.documentElement.setAttribute('data-theme', theme);
-                document.documentElement.classList.toggle('dark', theme === 'dark');
-                
-                // Update meta theme-color
                 const metaThemeColor = document.querySelector('meta[name="theme-color"]');
                 const metaTileColor = document.querySelector('meta[name="msapplication-TileColor"]');
-                const themeColor = theme === 'dark' ? '#060b18' : '#ffffff';
-                
-                if (metaThemeColor) metaThemeColor.content = themeColor;
-                if (metaTileColor) metaTileColor.content = themeColor;
-                
+
+                const applyTheme = (nextTheme) => {
+                  document.documentElement.setAttribute('data-theme', nextTheme);
+                  document.documentElement.classList.toggle('dark', nextTheme === 'dark');
+
+                  const themeColor = nextTheme === 'dark' ? '#060b18' : '#ffffff';
+                  if (metaThemeColor) metaThemeColor.content = themeColor;
+                  if (metaTileColor) metaTileColor.content = themeColor;
+                };
+
+                const initialTheme = storedTheme || (systemPrefersDark ? 'dark' : 'light');
+                applyTheme(initialTheme);
+
                 // Listen for system theme changes (only if no stored preference)
                 if (!storedTheme) {
                   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                    const newTheme = e.matches ? 'dark' : 'light';
-                    document.documentElement.setAttribute('data-theme', newTheme);
-                    document.documentElement.classList.toggle('dark', newTheme === 'dark');
-                    
-                    const newThemeColor = newTheme === 'dark' ? '#060b18' : '#ffffff';
-                    if (metaThemeColor) metaThemeColor.content = newThemeColor;
-                    if (metaTileColor) metaTileColor.content = newThemeColor;
+                    applyTheme(e.matches ? 'dark' : 'light');
                   });
                 }
-                
+
                 // Performance optimization: Preload non-critical resources during idle time
                 if ('requestIdleCallback' in window) {
                   requestIdleCallback(() => {
@@ -150,13 +124,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       '/image/homepage/landing-page-produk.png'
                     ];
 
-                    preloadResources.forEach(src => {
-                      const link = document.createElement('link');
-                      link.rel = 'prefetch';
-                      link.as = 'image';
-                      link.href = src;
-                      document.head.appendChild(link);
-                    });
+                    preloadResources.forEach(src => preloadImage('prefetch', src, false));
                   });
                 }
               })();
@@ -174,28 +142,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 });
               }
               
-              // Preload critical resources
-              const preloadResources = () => {
-                const criticalImages = [
-                  '/image/logo/berdu.jpeg',
-                  '/image/homepage/website-portfolio-personal.png'
-                ];
-                
-                criticalImages.forEach(src => {
-                  const link = document.createElement('link');
-                  link.rel = 'preload';
-                  link.as = 'image';
-                  link.href = src;
-                  document.head.appendChild(link);
-                });
-              };
-              
-              // Run after DOM is loaded
-              if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', preloadResources);
-              } else {
-                preloadResources();
-              }
             `,
           }}
         />

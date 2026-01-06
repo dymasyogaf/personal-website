@@ -2,7 +2,6 @@
 const CACHE_VERSION = '2.0';
 const STATIC_CACHE = `dyogaf-static-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `dyogaf-images-v${CACHE_VERSION}`;
-const FONT_CACHE = `dyogaf-fonts-v${CACHE_VERSION}`;
 const RUNTIME_CACHE = 'dyogaf-runtime-v1';
 
 // Critical assets yang akan di-cache saat install
@@ -33,12 +32,6 @@ const SECONDARY_IMAGES = [
   '/image/testimoni/patrick.jpeg'
 ];
 
-// External fonts untuk caching
-const FONT_ASSETS = [
-  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
-  'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2'
-];
-
 // Install event - cache static assets dengan priority
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -54,13 +47,6 @@ self.addEventListener('install', (event) => {
       caches.open(IMAGE_CACHE).then((cache) => {
         return cache.addAll(CRITICAL_IMAGES).catch(error => {
           console.error('Failed to cache critical images:', error);
-          return Promise.resolve();
-        });
-      }),
-      // Cache fonts
-      caches.open(FONT_CACHE).then((cache) => {
-        return cache.addAll(FONT_ASSETS).catch(error => {
-          console.error('Failed to cache fonts:', error);
           return Promise.resolve();
         });
       })
@@ -81,7 +67,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
-      const currentCaches = [STATIC_CACHE, IMAGE_CACHE, FONT_CACHE, RUNTIME_CACHE];
+      const currentCaches = [STATIC_CACHE, IMAGE_CACHE, RUNTIME_CACHE];
       return Promise.all(
         cacheNames
           .filter((cacheName) => !currentCaches.includes(cacheName))
@@ -121,17 +107,12 @@ async function handleRequest(request) {
     return staleWhileRevalidate(IMAGE_CACHE, request);
   }
   
-  // Strategy 3: Cache First for fonts
-  if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
-    return cacheFirst(FONT_CACHE, request);
-  }
-  
-  // Strategy 4: Network First for HTML pages
+  // Strategy 3: Network First for HTML pages
   if (request.headers.get('accept').includes('text/html')) {
     return networkFirst(STATIC_CACHE, request);
   }
   
-  // Strategy 5: Stale While Revalidate for API calls
+  // Strategy 4: Stale While Revalidate for API calls
   if (url.pathname.includes('/api/')) {
     return staleWhileRevalidate(RUNTIME_CACHE, request);
   }
@@ -299,44 +280,3 @@ self.addEventListener('message', (event) => {
   }
 });
 
-// Background sync untuk offline support
-self.addEventListener('sync', (event) => {
-  if (event.tag === 'background-sync') {
-    event.waitUntil(doBackgroundSync());
-  }
-});
-
-async function doBackgroundSync() {
-  // Implementasi background sync jika dibutuhkan
-  console.log('Background sync completed');
-}
-
-// Push notifications (jika dibutuhkan)
-self.addEventListener('push', (event) => {
-  const options = {
-    body: event.data ? event.data.text() : 'Ada update dari Dyogaf Studio!',
-    icon: '/favicon-192x192.png',
-    badge: '/favicon-96x96.png',
-    vibrate: [100, 50, 100],
-    data: {
-      dateOfArrival: Date.now(),
-      primaryKey: '1'
-    },
-    actions: [
-      {
-        action: 'explore',
-        title: 'Lihat',
-        icon: '/favicon-96x96.png'
-      },
-      {
-        action: 'close',
-        title: 'Tutup',
-        icon: '/favicon-96x96.png'
-      }
-    ]
-  };
-
-  event.waitUntil(
-    self.registration.showNotification('Dyogaf Studio', options)
-  );
-});

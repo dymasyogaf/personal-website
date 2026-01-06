@@ -158,7 +158,7 @@ export default function Hero() {
             </Link>
 
             <Link
-              href="/projects"
+              href="https://dymasyogaf.is-a.dev/"
               onMouseMove={handleMouseMove}
               className="button-reactive px-6 py-3 rounded-full text-base"
               data-color="secondary"

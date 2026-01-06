@@ -34,7 +34,7 @@ export default function Project() {
             desc: "Website elegan dengan konsep glassmorphism dan animasi halus. Dibangun dengan Next.js & Tailwind.",
             image: "/image/homepage/website-portfolio-personal.png",
             tag: "Creative Portfolio",
-            link: "/projects/portfolio",
+            link: "https://dymasyogaf.is-a.dev/",
             color: "cyan",
         },
         {
@@ -42,7 +42,7 @@ export default function Project() {
             desc: "Platform donasi & manajemen data wakaf berbasis WordPress, integrasi API dan dashboard custom.",
             image: "/image/homepage/website-fundrising.png",
             tag: "Nonprofit Tech",
-            link: "/projects/wakaf",
+            link: "https://alquransantri.com",
             color: "indigo",
         },
         {
@@ -50,7 +50,7 @@ export default function Project() {
             desc: "Desain futuristik dengan CTA yang kuat, performa tinggi, dan SEO optimization maksimal.",
             image: "/image/homepage/landing-page-produk.png",
             tag: "Marketing Design",
-            link: "/projects/landing",
+            link: "https://alquransantri.org/",
             color: "teal",
         },
     ], []);
