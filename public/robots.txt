@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dyogaf.web.id/sitemap.xml
