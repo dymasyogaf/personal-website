@@ -4,20 +4,32 @@ import Footer from "../components/Footer";
 import { GeistSans, GeistMono } from "geist/font";
 
 export const metadata = {
-  title: "Dyogaf Studio",
-  description: "Digital Marketer • Web Developer • Adventurer",
-  metadataBase: new URL('https://dyogaf.my.id'),
+  title: "Dyogaf Studio | Web Developer Palembang",
+  description:
+    "Dyogaf Studio - Dymas Yoga Febratama, web developer Palembang dan digital marketing. Jasa web modern, cepat, dan SEO-friendly.",
+  metadataBase: new URL("https://dyogaf.web.id"),
+  keywords: [
+    "Dyogaf",
+    "Dymas Yoga",
+    "Dymas Yoga Febratama",
+    "Web Developer Palembang",
+    "Digital Marketing",
+    "Jasa Web",
+  ],
   openGraph: {
-    title: "Dyogaf Studio",
-    description: "Digital Marketer • Web Developer • Adventurer",
+    title: "Dyogaf Studio | Web Developer Palembang",
+    description:
+      "Dyogaf Studio - Dymas Yoga Febratama, web developer Palembang dan digital marketing. Jasa web modern, cepat, dan SEO-friendly.",
     type: "website",
     locale: "id_ID",
     siteName: "Dyogaf Studio",
+    url: "https://dyogaf.web.id",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dyogaf Studio",
-    description: "Digital Marketer • Web Developer • Adventurer",
+    title: "Dyogaf Studio | Web Developer Palembang",
+    description:
+      "Dyogaf Studio - Dymas Yoga Febratama, web developer Palembang dan digital marketing. Jasa web modern, cepat, dan SEO-friendly.",
   },
   robots: {
     index: true,
@@ -25,14 +37,38 @@ export const metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: "v76LIQ3-E2hg4BD4MZAMvF8I1cSIB6VD1Okgpz4kiXI",
   },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Dymas Yoga Febratama",
+      "alternateName": ["Dyogaf", "Dymas Yoga"],
+      "url": "https://dyogaf.web.id",
+      "jobTitle": ["Web Developer", "Digital Marketer"],
+      "knowsAbout": [
+        "Web Developer Palembang",
+        "Digital Marketing",
+        "Jasa Web",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "name": "Dyogaf Studio",
+      "url": "https://dyogaf.web.id",
+      "inLanguage": "id-ID",
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -68,6 +104,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         {/* Manifest untuk PWA */}
         <link rel="manifest" href="/site.webmanifest" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body className="relative min-h-screen overflow-x-hidden font-sans antialiased theme-transition" style={{ color: 'var(--foreground)' }}>
         <script
