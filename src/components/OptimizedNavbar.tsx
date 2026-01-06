@@ -38,7 +38,7 @@ export default function OptimizedNavbar() {
         { name: 'Tentang', href: '/about' },
         { name: 'Layanan', href: '/services' },
         { name: 'Proyek', href: '/projects' },
-        { name: 'Blog', href: 'https://baca.dymasyogaf.my.id/' },
+        { name: 'Blog', href: '/blog' },
         { name: 'Kontak', href: '/contact' },
     ], []);
 

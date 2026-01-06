@@ -82,7 +82,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://www.instagram.com" />
         
         {/* DNS prefetch untuk domain yang mungkin dibutuhkan */}
-        <link rel="dns-prefetch" href="https://baca.dymasyogaf.my.id" />
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://www.linkedin.com" />
