@@ -11,10 +11,12 @@ export default function OptimizedNavbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isReducedMotion, setIsReducedMotion] = useState(false);
+    const [hasMounted, setHasMounted] = useState(false);
     const pathname = usePathname();
     const tickingRef = useRef(false);
 
     useEffect(() => {
+        setHasMounted(true);
         // Check for reduced motion preference
         const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
         setIsReducedMotion(mediaQuery.matches);
@@ -98,9 +100,10 @@ export default function OptimizedNavbar() {
                 {/* 🧭 Menu Desktop / Tablet */}
                 <ul className="hidden md:flex flex-wrap items-center justify-center gap-6 lg:gap-8 xl:gap-10 text-sm font-medium text-secondary">
                     {menuItems.map((item) => {
+                        const currentPath = hasMounted ? pathname : '';
                         const isActive =
-                            pathname === item.href ||
-                            (item.href !== '/' && pathname.startsWith(item.href));
+                            currentPath === item.href ||
+                            (item.href !== '/' && currentPath.startsWith(item.href));
 
                         return (
                             <li key={item.name} className="relative">
