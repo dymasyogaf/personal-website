@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useMemo, useState } from 'react';
@@ -72,14 +72,15 @@ export default function ProjectPage() {
     ], []);
 
     return (
-        <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 overflow-visible"
-                 style={{ color: 'var(--foreground)' }}>
+        <LazyMotion features={domAnimation}>
+            <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 overflow-visible"
+                     style={{ color: 'var(--foreground)' }}>
             <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
 
                 {/* 🔹 Header */}
                 <div className="text-center space-y-6">
                     {/* 🌟 Badge kecil */}
-                    <motion.span
+                    <m.span
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -95,7 +96,7 @@ export default function ProjectPage() {
                         }}
                     >
                         Proyek yang Telah Dikerjakan
-                    </motion.span>
+                    </m.span>
 
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                         Siap Berkarya Bersamamu
@@ -136,7 +137,7 @@ export default function ProjectPage() {
                 {/* 💼 Grid Project Cards */}
                 <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
                     {projects.map((project, i) => (
-                        <motion.div
+                        <m.div
                             key={i}
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -186,7 +187,7 @@ export default function ProjectPage() {
                                      background: 'linear-gradient(to bottom, transparent, var(--card-bg))',
                                      opacity: 0.9
                                  }} />
-                        </motion.div>
+                        </m.div>
                     ))}
                 </div>
 
@@ -216,5 +217,6 @@ export default function ProjectPage() {
                 </div>
             </div>
         </section>
+        </LazyMotion>
     );
 }

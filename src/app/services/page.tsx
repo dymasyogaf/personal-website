@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { LazyMotion, domAnimation, m, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import "../../styles/services.css";
@@ -111,19 +111,20 @@ export default function ServicesPage() {
         },
     ] as const, []);
 
-    const MotionLink = motion(Link);
+    const MotionLink = motion.create(Link);
 
     return (
-        <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 py-28 bg-transparent overflow-visible" style={{ color: 'var(--foreground)' }}>
-            <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
-                {/* Hero */}
-                <motion.div
+        <LazyMotion features={domAnimation}>
+            <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 py-28 bg-transparent overflow-visible" style={{ color: 'var(--foreground)' }}>
+                <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
+                    {/* Hero */}
+                    <m.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     className="text-center space-y-6"
                 >
-                    <motion.span
+                    <m.span
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -138,21 +139,21 @@ export default function ServicesPage() {
                         }}
                     >
                         Layanan Kami
-                    </motion.span>
+                    </m.span>
 
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                        Siap Melayani Anda
+                        Jasa Web Developer Dyogaf Studio
                     </h1>
                     <p className="max-w-3xl mx-auto text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                         Di Dyogaf Digital Studio, kami tak sekadar membuat website. Kami
                         menciptakan <em>pengalaman digital</em> — interaktif, berkarakter, dan bermakna.
                     </p>
-                </motion.div>
+                </m.div>
 
                 {/* Services cards */}
                 <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
                     {services.map((service, i) => (
-                        <motion.div
+                        <m.div
                             key={service.title}
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -185,7 +186,7 @@ export default function ServicesPage() {
                                     </li>
                                 ))}
                             </ul>
-                        </motion.div>
+                        </m.div>
                     ))}
                 </div>
 
@@ -197,7 +198,7 @@ export default function ServicesPage() {
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {workflow.map((step, i) => (
-                            <motion.div
+                            <m.div
                                 key={step.title}
                                 initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -213,7 +214,7 @@ export default function ServicesPage() {
                                 <p className="text-sm leading-relaxed mt-2 max-w-[240px]" style={{ color: 'var(--text-secondary)' }}>
                                     {step.text}
                                 </p>
-                            </motion.div>
+                            </m.div>
                         ))}
                     </div>
                 </div>
@@ -226,7 +227,7 @@ export default function ServicesPage() {
 
                     <div className="flex flex-wrap justify-center gap-6">
                         {tools.map((tool, i) => (
-                            <motion.div
+                            <m.div
                                 key={tool.name}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -253,13 +254,13 @@ export default function ServicesPage() {
                             >
                                 {tool.icon}
                                 <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>{tool.name}</span>
-                            </motion.div>
+                            </m.div>
                         ))}
                     </div>
                 </div>
 
                 {/* CTA */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.7 }}
@@ -272,7 +273,7 @@ export default function ServicesPage() {
                     </p>
 
                     <MotionLink
-                        href="/contact"
+                        href="/order"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="relative inline-flex items-center gap-3 px-8 py-4 mt-8 rounded-full font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 shadow-[0_0_25px_rgba(56,189,248,0.25)] transition-all duration-500 ease-out hover:shadow-[0_0_35px_rgba(56,189,248,0.35)] overflow-hidden"
@@ -281,8 +282,9 @@ export default function ServicesPage() {
                             Isi Form Order <ArrowRight className="w-5 h-5" />
                         </span>
                     </MotionLink>
-                </motion.div>
+                </m.div>
             </div>
         </section>
+        </LazyMotion>
     );
 }

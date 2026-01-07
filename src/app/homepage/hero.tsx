@@ -121,20 +121,20 @@ export default function Hero() {
 
           <h1 className="text-[2rem] sm:text-[2.8rem] md:text-[3.5rem] lg:text-[4rem] font-extrabold leading-tight">
             <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              Dyogaf
+              Dyogaf Studio
             </span>
             <br className="hidden sm:block" />
             <span className="block mt-1 text-[1.3rem] sm:text-[1.6rem] md:text-[1.9rem] font-light"
                   style={{ color: 'var(--foreground)' }}>
-              Digital Studio for the Future
+              Web Developer untuk Brand Modern
             </span>
           </h1>
 
           <p className="text-[0.9rem] sm:text-base md:text-lg leading-relaxed max-w-md sm:max-w-lg"
              style={{ color: 'var(--text-secondary)' }}>
             Kami membangun <span className="font-semibold" style={{ color: 'var(--accent)' }}>website</span> dan{' '}
-            <span className="font-semibold" style={{ color: 'var(--accent)' }}>identitas digital</span> dengan sentuhan futuristik
-            dan nilai humanis. Setiap proyek adalah ekspedisi kreatif — menggabungkan teknologi, desain, dan makna.
+            <span className="font-semibold" style={{ color: 'var(--accent)' }}>identitas digital</span> untuk brand modern.
+            Dyogaf Studio fokus sebagai Web Developer dengan sentuhan futuristik dan nilai humanis. Setiap proyek adalah ekspedisi kreatif yang menggabungkan teknologi, desain, dan makna.
           </p>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm tracking-widest"
@@ -169,6 +169,19 @@ export default function Hero() {
               }}
             >
               Lihat Portfolio
+            </Link>
+            <Link
+              href="/blog"
+              onMouseMove={handleMouseMove}
+              className="button-reactive px-6 py-3 rounded-full text-base"
+              data-color="secondary"
+              style={{
+                border: '1px solid var(--card-border)',
+                color: 'var(--foreground)',
+                backgroundColor: 'var(--card-bg)'
+              }}
+            >
+              Baca Blog
             </Link>
           </div>
         </div>

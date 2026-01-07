@@ -68,14 +68,13 @@ export default function BlogPage() {
           </motion.span>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            Blog Artikel
+            Blog Web Developer Dyogaf
           </h1>
           <p
             className="max-w-3xl mx-auto text-base sm:text-lg leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
-            Topik ringan seputar web developer, jasa web, dan digital marketing
-            yang mudah dipahami.
+            Topik ringan seputar web developer, jasa web, dan strategi digital yang mudah dipahami.
           </p>
         </div>
 

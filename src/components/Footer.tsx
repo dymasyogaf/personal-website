@@ -28,7 +28,7 @@ export default function Footer() {
                         Dyogaf Studio
                     </h3>
                     <p className="text-sm leading-relaxed text-shadow-theme" style={{ color: 'var(--text-secondary)' }}>
-                        Dyogaf studio adalah ruang kolaboratif yang lahir dari semangat eksplorasi, teknologi, dan kemanusiaan. Kami percaya bahwa desain dan kode bukan hanya tampilan — tapi perjalanan yang penuh makna dan nilai.
+                        Dyogaf Studio adalah ruang kolaboratif yang lahir dari semangat eksplorasi, teknologi, dan kemanusiaan. Kami percaya bahwa desain dan kode bukan hanya tampilan, tapi perjalanan yang penuh makna dan nilai.
                     </p>
                 </div>
 
@@ -39,6 +39,7 @@ export default function Footer() {
                         {[
                             { href: '/', label: 'Beranda' },
                             { href: '/projects', label: 'Proyek' },
+                            { href: '/blog', label: 'Blog' },
                             { href: '/about', label: 'Tentang Saya' },
                             { href: '/contact', label: 'Kontak' },
                         ].map((item, i) => (
@@ -124,7 +125,7 @@ export default function Footer() {
                     color: 'var(--text-muted)'
                 }}
             >
-                © {new Date().getFullYear()} Dymas Yoga Febratama — All rights reserved.
+                (c) {new Date().getFullYear()} Dyogaf Studio. All rights reserved.
             </motion.div>
         </footer>
     );

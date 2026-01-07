@@ -2,6 +2,7 @@ import "./globals.css";
 import OptimizedNavbar from "../components/OptimizedNavbar";
 import Footer from "../components/Footer";
 import { GeistSans, GeistMono } from "geist/font";
+import Script from "next/script";
 
 export const metadata = {
   title: "Dyogaf Studio | Web Developer Palembang",
@@ -98,8 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         {/* Apple touch icon */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/svg+xml" href="/file.svg" />
         
         {/* Manifest untuk PWA */}
         <link rel="manifest" href="/site.webmanifest" />
@@ -114,22 +114,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `
               // Performance optimization and theme detection
               (function() {
-                const criticalImages = [
-                  '/image/logo/berdu.jpeg',
-                  '/image/homepage/website-portfolio-personal.png'
-                ];
-
-                const preloadImage = (rel, src, highPriority) => {
-                  const link = document.createElement('link');
-                  link.rel = rel;
-                  link.as = 'image';
-                  link.href = src;
-                  if (highPriority) link.setAttribute('fetchpriority', 'high');
-                  document.head.appendChild(link);
-                };
-
-                criticalImages.forEach(src => preloadImage('preload', src, true));
-
                 // Theme detection and persistence
                 const storedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -154,8 +138,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     applyTheme(e.matches ? 'dark' : 'light');
                   });
                 }
+              })();
+            `,
+          }}
+        />
+        <Script
+          id="preload-assets"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const preloadImage = (rel, src, highPriority) => {
+                  const link = document.createElement('link');
+                  link.rel = rel;
+                  link.as = 'image';
+                  link.href = src;
+                  if (highPriority) link.setAttribute('fetchpriority', 'high');
+                  document.head.appendChild(link);
+                };
 
-                // Performance optimization: Preload non-critical resources during idle time
                 if ('requestIdleCallback' in window) {
                   requestIdleCallback(() => {
                     const preloadResources = [
@@ -167,8 +168,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   });
                 }
               })();
-              
-              // Service Worker Registration
+            `,
+          }}
+        />
+        <Script
+          id="service-worker"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
                   navigator.serviceWorker.register('/sw.js')
@@ -180,7 +187,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     });
                 });
               }
-              
             `,
           }}
         />
