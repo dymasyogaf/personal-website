@@ -1,29 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import Image from 'next/image';
-import { useCallback, useRef } from 'react';
 
 export default function Testimoni() {
     // ✨ Efek kursor reaktif - throttled with requestAnimationFrame
-    const rafId = useRef<number | null>(null);
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-        const target = e.currentTarget;
-        const clientX = e.clientX;
-        const clientY = e.clientY;
-
-        if (!rafId.current) {
-            rafId.current = requestAnimationFrame(() => {
-                if (target) {
-                    const rect = target.getBoundingClientRect();
-                    target.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
-                    target.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
-                }
-                rafId.current = null;
-            });
-        }
-    }, []);
 
     const testimonials = [
         {
@@ -77,13 +58,8 @@ export default function Testimoni() {
             {/* 💬 Grid Testimoni */}
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {testimonials.map((t, i) => (
-                    <motion.div
+                    <div
                         key={i}
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.2, duration: 0.6 }}
-                        viewport={{ once: true }}
-                        onMouseMove={handleMouseMove}
                         data-color={t.color}
                         className="service-reactive relative group rounded-3xl p-8 text-center transition-all duration-500"
                         style={{
@@ -120,7 +96,7 @@ export default function Testimoni() {
                             <h3 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>{t.name}</h3>
                             <p className="text-xs uppercase tracking-wider mt-1" style={{ color: 'var(--text-muted)' }}>{t.role}</p>
                         </div>
-                    </motion.div>
+                    </div>
                 ))}
             </div>
         </section>

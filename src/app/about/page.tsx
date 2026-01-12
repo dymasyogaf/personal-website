@@ -11,18 +11,9 @@ import {
     Sparkles,
     Globe2,
 } from 'lucide-react';
-import { useCallback } from 'react';
-import { motion } from "framer-motion";
 
 export default function AboutPage() {
     // 🌀 Efek mouse reactive border
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
-    }, []);
 
     return (
         <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 bg-transparent overflow-visible"
@@ -32,11 +23,7 @@ export default function AboutPage() {
                 {/* 🔹 1. Header (mirip bagian Hubungi Saya) */}
                 <div className="text-center space-y-6">
                     {/* ✨ Label kecil */}
-                    <motion.span
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+                    <span
                         className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect"
                         style={{
                             backgroundColor: 'var(--card-bg)',
@@ -48,7 +35,7 @@ export default function AboutPage() {
                         }}
                     >
                         Tentang Kami
-                    </motion.span>
+                    </span>
 
                     {/* 🌈 Judul besar */}
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold">
@@ -88,7 +75,6 @@ export default function AboutPage() {
                     </div>
 
                     <div
-                        onMouseMove={handleMouseMove}
                         data-color="cyan"
                         className="card-reactive border-reactive backdrop-blur-xl rounded-2xl p-8 shadow-lg transition-all"
                         style={{
@@ -115,7 +101,6 @@ export default function AboutPage() {
                     <div className="grid md:grid-cols-2 gap-10">
                         {/* Visi */}
                         <div
-                            onMouseMove={handleMouseMove}
                             data-color="indigo"
                             className="card-reactive border-reactive backdrop-blur-xl rounded-2xl p-8"
                             style={{
@@ -143,7 +128,6 @@ export default function AboutPage() {
                             ].map((stat, i) => (
                                 <div
                                     key={i}
-                                    onMouseMove={handleMouseMove}
                                     data-color={stat.color}
                                     className="card-reactive border-reactive flex flex-col justify-center items-center gap-3 backdrop-blur-xl rounded-2xl p-8 text-center"
                                     style={{
@@ -153,7 +137,7 @@ export default function AboutPage() {
                                 >
                                     <div className="gloss-top"></div>
                                     <div className="inner-shadow"></div>
-                                    <div className="p-3 rounded-xl" style={{ background: 'linear-gradient(to bottom right, var(--card-bg), var(--card-border))' }}>{stat.icon}</div>
+                                    <div className="p-3 rounded-xl icon-swatch">{stat.icon}</div>
                                     <h3 className="text-3xl font-bold" style={{ color: 'var(--accent)' }}>{stat.value}</h3>
                                     <p className="text-xs tracking-wider uppercase" style={{ color: 'var(--text-muted)' }}>{stat.label}</p>
                                 </div>
@@ -191,7 +175,6 @@ export default function AboutPage() {
                         ].map((item, i) => (
                             <div
                                 key={i}
-                                onMouseMove={handleMouseMove}
                                 data-color={item.color}
                                 className="card-reactive border-reactive backdrop-blur-xl rounded-2xl p-6 text-center"
                                 style={{
@@ -202,7 +185,7 @@ export default function AboutPage() {
                                 <div className="gloss-top"></div>
                                 <div className="inner-shadow"></div>
                                 <div className="flex flex-col items-center gap-3">
-                                    <div className="p-3 rounded-xl" style={{ background: 'linear-gradient(to bottom right, var(--card-bg), var(--card-border))' }}>
+                                    <div className="p-3 rounded-xl icon-swatch">
                                         {item.icon}
                                     </div>
                                     <h3 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>{item.title}</h3>
@@ -228,7 +211,6 @@ export default function AboutPage() {
 
                 {/* 🔹 5. Penutup */}
                 <div
-                    onMouseMove={handleMouseMove}
                     className="footer-reactive relative mt-20 text-center max-w-3xl mx-auto p-6"
                 >
                     <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>

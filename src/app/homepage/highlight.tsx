@@ -1,8 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Globe2, Award, Users, Rocket } from 'lucide-react';
-import { useCallback } from 'react';
 
 export default function Highlight() {
     const items = [
@@ -37,32 +35,14 @@ export default function Highlight() {
     ];
 
     // ✨ Mouse reactive border
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
-    }, []);
 
     return (
         <section className="relative z-10 py-20 px-6 sm:px-12 overflow-hidden" style={{ color: 'var(--foreground)' }}>
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6"
-            >
+            <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 {items.map((item, i) => (
-                    <motion.div
+                    <div
                         key={i}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.1, duration: 0.6 }}
-                        viewport={{ once: true }}
                         data-color={item.color}
-                        onMouseMove={handleMouseMove}
                         className="card-reactive border-reactive bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center transition-all duration-500 hover:-translate-y-2"
                     >
                         <div className="content relative z-10 flex flex-col items-center text-center">
@@ -73,9 +53,9 @@ export default function Highlight() {
                             <p className="text-sm font-semibold mt-1" style={{ color: 'var(--text-secondary)' }}>{item.title}</p>
                             <p className="text-xs mt-2 leading-relaxed" style={{ color: 'var(--text-muted)' }}>{item.desc}</p>
                         </div>
-                    </motion.div>
+                    </div>
                 ))}
-            </motion.div>
+            </div>
         </section>
     );
 }

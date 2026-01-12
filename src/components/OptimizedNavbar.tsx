@@ -4,22 +4,17 @@ import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 
 export default function OptimizedNavbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isReducedMotion, setIsReducedMotion] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
     const pathname = usePathname();
     const tickingRef = useRef(false);
 
     useEffect(() => {
         setHasMounted(true);
-        // Check for reduced motion preference
-        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-        setIsReducedMotion(mediaQuery.matches);
         
         const handleScroll = () => {
             if (!tickingRef.current) {
@@ -52,17 +47,6 @@ export default function OptimizedNavbar() {
         setIsMenuOpen(false);
     }, []);
 
-    // Optimized animation config based on user preferences
-    const animationConfig = useMemo(() => ({
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        transition: {
-            duration: isReducedMotion ? 0.01 : 0.2,
-            ease: [0.25, 0.46, 0.45, 0.94] as const
-        }
-    }), [isReducedMotion]);
-
     return (
         <header className="fixed top-0 left-0 z-50 w-full flex justify-center">
             <nav
@@ -83,7 +67,7 @@ export default function OptimizedNavbar() {
                     href="/"
                     className="font-extrabold text-lg md:text-xl tracking-widest select-none whitespace-nowrap text-primary"
                 >
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
+                    <span className="navbar-logo text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
                         Dyogaf
                     </span>
                 </Link>
@@ -138,7 +122,7 @@ export default function OptimizedNavbar() {
                             px-4 md:px-5 py-2 rounded-full
                             font-semibold
                             hover:scale-[1.03] active:scale-95 transition
-                            text-sm md:text-base hover-theme
+                            text-sm md:text-base hover-theme cta-solid
                         "
                         style={{
                             background: 'linear-gradient(to right, var(--gradient-from), var(--gradient-to))',
@@ -152,12 +136,8 @@ export default function OptimizedNavbar() {
             </nav>
 
             {/* 📱 Overlay Menu (Mobile & Tablet) - Optimized */}
-            <AnimatePresence>
-                {isMenuOpen && (
-                    <motion.div
-                        {...animationConfig}
-                        className="md:hidden fixed inset-0 z-40 backdrop-blur-md flex flex-col justify-start items-center pt-28 px-6 bg-overlay menu-overlay-optimized"
-                    >
+            {isMenuOpen && (
+                <div className="md:hidden fixed inset-0 z-40 backdrop-blur-md flex flex-col justify-start items-center pt-28 px-6 bg-overlay menu-overlay-optimized">
                         <button
                             onClick={closeMenu}
                             className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 theme-transition focus:outline-none focus:ring-2 focus:ring-cyan-400/50 text-primary"
@@ -200,7 +180,7 @@ export default function OptimizedNavbar() {
                             <Link
                                 href="/contact"
                                 onClick={closeMenu}
-                                className="mt-6 w-full inline-flex justify-center items-center gap-2 py-3 rounded-xl text-white font-semibold hover:scale-[1.02] theme-transition text-sm hover-theme card-optimized"
+                                className="mt-6 w-full inline-flex justify-center items-center gap-2 py-3 rounded-xl text-white font-semibold hover:scale-[1.02] theme-transition text-sm hover-theme card-optimized cta-solid"
                                 style={{
                                     background: 'linear-gradient(to right, var(--gradient-from), var(--gradient-to))'
                                 }}
@@ -215,9 +195,8 @@ export default function OptimizedNavbar() {
                                 </span>
                             </div>
                         </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                </div>
+            )}
         </header>
     );
 }

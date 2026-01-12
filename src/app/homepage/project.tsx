@@ -1,31 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useMemo, useState, useRef } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function Project() {
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
     // ✨ Efek kursor reaktif - throttled with requestAnimationFrame
-    const rafId = useRef<number | null>(null);
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-        const target = e.currentTarget;
-        const clientX = e.clientX;
-        const clientY = e.clientY;
-
-        if (!rafId.current) {
-            rafId.current = requestAnimationFrame(() => {
-                if (target) {
-                    const rect = target.getBoundingClientRect();
-                    target.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
-                    target.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
-                }
-                rafId.current = null;
-            });
-        }
-    }, []);
 
     const projects = useMemo(() => [
         {
@@ -54,9 +36,9 @@ export default function Project() {
         },
     ], []);
 
-    const handleImageLoad = useCallback((index: number) => {
+    const handleImageLoad = (index: number) => {
         setLoadedImages(prev => new Set(prev).add(index));
-    }, []);
+    };
 
 
     return (
@@ -84,13 +66,8 @@ export default function Project() {
             {/* 💼 Grid Projects */}
             <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
                 {projects.map((project, i) => (
-                    <motion.div
+                    <div
                         key={i}
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.2, duration: 0.8 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        onMouseMove={handleMouseMove}
                         data-color={project.color}
                         className="card-reactive relative rounded-3xl overflow-hidden transition-all duration-500 group"
                         style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
@@ -132,7 +109,7 @@ export default function Project() {
                                  background: 'linear-gradient(to bottom, transparent, var(--card-bg))',
                                  opacity: 0.9
                              }} />
-                    </motion.div>
+                    </div>
                 ))}
             </div>
 
@@ -140,7 +117,6 @@ export default function Project() {
             <div className="text-center mt-16">
                 <Link
                     href="/projects"
-                    onMouseMove={handleMouseMove}
                     className="button-reactive from-cyan-500 to-indigo-500 text-white px-6 py-3 rounded-full font-semibold text-sm sm:text-base"
                 >
                     Lihat Semua Proyek →

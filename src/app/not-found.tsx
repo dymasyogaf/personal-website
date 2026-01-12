@@ -13,7 +13,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 hover:shadow-lg transition-all duration-300"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 hover:shadow-lg transition-all duration-300 cta-solid"
         >
           Kembali ke Beranda
         </Link>

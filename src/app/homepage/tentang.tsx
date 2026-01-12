@@ -1,16 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useCallback } from 'react';
 import { Rocket, Lightbulb, Compass, HeartHandshake } from 'lucide-react';
 
 export default function Tentang() {
     // 🧠 Efek reaktif seperti hero & highlight
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-    }, []);
 
     return (
         <section className="relative z-10 py-24 px-6 sm:px-12 overflow-hidden" style={{ color: 'var(--foreground)' }}>
@@ -43,21 +36,13 @@ export default function Tentang() {
             {/* 🌌 Bingkai Utama */}
             <div
                 className="relative z-10 max-w-6xl mx-auto rounded-[2rem] border border-white/[0.08] bg-white/[0.02] backdrop-blur-2xl p-10 transition-all duration-500"
-                onMouseMove={handleMouseMove}
             >
                 <div className="grid lg:grid-cols-2 gap-12 items-start">
                     {/* ✨ KIRI - VISI DAN NILAI */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1 }}
-                        viewport={{ once: false, amount: 0.3 }}
-                        className="space-y-8"
-                    >
+                    <div className="space-y-8">
                         {/* 🎯 Visi */}
                         <div
                             className="card-reactive bg-white/[0.03] backdrop-blur-xl p-8 rounded-3xl border border-white/[0.05] hover:bg-white/[0.05] hover:border-white/[0.1] transition-all"
-                            onMouseMove={handleMouseMove}
                             data-color="indigo"
                         >
                             <h3 className="text-2xl font-semibold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">
@@ -92,18 +77,15 @@ export default function Tentang() {
                                     color: 'teal',
                                 },
                                 {
-                                    icon: <HeartHandshake className="w-6 h-6 text-cyan-300" />,
+                                    icon: <HeartHandshake className="w-6 h-6 text-cyan-400" />,
                                     title: 'Humanis',
                                     text: 'Membangun hubungan yang tulus, kolaboratif, dan penuh makna.',
                                     color: 'cyan',
                                 },
                             ].map((item, i) => (
-                                <motion.div
+                                <div
                                     key={i}
-                                    whileHover={{ scale: 1.03 }}
-                                    transition={{ type: "spring", stiffness: 200 }}
                                     className="card-reactive bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-xl p-5 rounded-2xl border border-white/[0.06] hover:border-white/[0.1] transition-all"
-                                    onMouseMove={handleMouseMove}
                                     data-color={item.color}
                                 >
                                     <div className="relative p-2 rounded-lg bg-gradient-to-br from-cyan-500/10 to-indigo-500/10 flex items-center justify-center">
@@ -112,30 +94,22 @@ export default function Tentang() {
                                     </div>
                                     <h4 className="text-lg font-semibold mt-3" style={{ color: 'var(--foreground)' }}>{item.title}</h4>
                                     <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{item.text}</p>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* ✨ KANAN - STATISTIK */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 1 }}
-                        viewport={{ once: false, amount: 0.3 }}
-                        className="flex flex-col justify-center gap-6"
-                    >
+                    <div className="flex flex-col justify-center gap-6">
                         {[
                             { number: '3+', label: 'Tahun Pengalaman', color: 'indigo' },
                             { number: '50+', label: 'Proyek & Klien Puas', color: 'cyan' },
                             { number: '24/7', label: 'Dukungan & Komunikasi', color: 'teal' },
                             { number: '∞', label: 'Karya Bermakna', color: 'indigo' },
                         ].map((stat, i) => (
-                            <motion.div
+                            <div
                                 key={i}
-                                whileHover={{ scale: 1.03 }}
                                 className="card-reactive bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-xl py-8 px-6 text-center rounded-2xl border border-white/[0.06] hover:border-white/[0.1] transition-all"
-                                onMouseMove={handleMouseMove}
                                 data-color={stat.color}
                             >
                                 <div className="relative z-10">
@@ -146,9 +120,9 @@ export default function Tentang() {
                                         {stat.label}
                                     </p>
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </section>

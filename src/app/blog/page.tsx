@@ -1,8 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { useCallback } from "react";
+import {  } from "react";
 
 const posts = [
   {
@@ -35,11 +34,6 @@ const posts = [
 ];
 
 export default function BlogPage() {
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-    e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-  }, []);
 
   return (
     <section
@@ -48,11 +42,7 @@ export default function BlogPage() {
     >
       <div className="relative max-w-6xl mx-auto flex flex-col gap-16">
         <div className="text-center space-y-6">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <span
             className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect"
             style={{
               backgroundColor: "var(--card-bg)",
@@ -64,7 +54,7 @@ export default function BlogPage() {
             }}
           >
             Blog Dyogaf Studio
-          </motion.span>
+          </span>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
             Blog Web Developer Dyogaf
@@ -79,13 +69,8 @@ export default function BlogPage() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {posts.map((post, i) => (
-            <motion.article
+            <article
               key={post.slug}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
-              viewport={{ once: true }}
-              onMouseMove={handleMouseMove}
               data-color={post.color}
               className="card-reactive relative rounded-3xl p-6 transition-all duration-500"
             >
@@ -125,7 +110,7 @@ export default function BlogPage() {
                   ))}
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

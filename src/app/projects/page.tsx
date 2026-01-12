@@ -1,19 +1,13 @@
 'use client';
 
-import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Sparkles, Globe2, PenTool, MonitorSmartphone, Megaphone } from 'lucide-react';
 
 export default function ProjectPage() {
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
     
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-    }, []);
 
     const projects = useMemo(() => [
         {
@@ -42,9 +36,9 @@ export default function ProjectPage() {
         },
     ], []);
 
-    const handleImageLoad = useCallback((index: number) => {
+    const handleImageLoad = (index: number) => {
         setLoadedImages(prev => new Set(prev).add(index));
-    }, []);
+    };
 
     const narrativeData = useMemo(() => [
         {
@@ -71,19 +65,14 @@ export default function ProjectPage() {
     ], []);
 
     return (
-        <LazyMotion features={domAnimation}>
-            <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 overflow-visible"
-                     style={{ color: 'var(--foreground)' }}>
+        <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 pt-28 pb-28 overflow-visible"
+                 style={{ color: 'var(--foreground)' }}>
             <div className="relative max-w-7xl mx-auto flex flex-col gap-24">
 
                 {/* 🔹 Header */}
                 <div className="text-center space-y-6">
                     {/* 🌟 Badge kecil */}
-                    <m.span
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+                    <span
                         className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect"
                         style={{
                             backgroundColor: 'var(--card-bg)',
@@ -95,7 +84,7 @@ export default function ProjectPage() {
                         }}
                     >
                         Proyek yang Telah Dikerjakan
-                    </m.span>
+                    </span>
 
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                         Siap Berkarya Bersamamu
@@ -111,7 +100,6 @@ export default function ProjectPage() {
                     {narrativeData.map((item, i) => (
                         <div
                             key={i}
-                            onMouseMove={handleMouseMove}
                             data-color={item.color}
                             className="card-reactive border-reactive backdrop-blur-xl rounded-2xl p-8 text-center"
                             style={{
@@ -122,7 +110,7 @@ export default function ProjectPage() {
                             <div className="gloss-top"></div>
                             <div className="inner-shadow"></div>
                             <div className="flex flex-col items-center gap-3">
-                                <div className="p-3 rounded-xl" style={{ background: 'linear-gradient(to bottom right, var(--card-bg), var(--card-border))' }}>
+                                <div className="p-3 rounded-xl icon-swatch">
                                     {item.icon}
                                 </div>
                                 <h3 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>{item.title}</h3>
@@ -136,13 +124,8 @@ export default function ProjectPage() {
                 {/* 💼 Grid Project Cards */}
                 <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
                     {projects.map((project, i) => (
-                        <m.div
+                        <div
                             key={i}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.2, duration: 0.8 }}
-                            viewport={{ once: true, amount: 0.3 }}
-                            onMouseMove={handleMouseMove}
                             data-color={project.color}
                             className="card-reactive border-reactive relative rounded-3xl overflow-hidden transition-all duration-500 group"
                             style={{
@@ -186,7 +169,7 @@ export default function ProjectPage() {
                                      background: 'linear-gradient(to bottom, transparent, var(--card-bg))',
                                      opacity: 0.9
                                  }} />
-                        </m.div>
+                        </div>
                     ))}
                 </div>
 
@@ -203,7 +186,6 @@ export default function ProjectPage() {
 
                 {/* ✨ CTA */}
                 <div
-                    onMouseMove={handleMouseMove}
                     data-color="cyan"
                     className="footer-reactive relative mt-20 text-center max-w-3xl mx-auto p-6"
                 >
@@ -216,6 +198,5 @@ export default function ProjectPage() {
                 </div>
             </div>
         </section>
-        </LazyMotion>
     );
 }

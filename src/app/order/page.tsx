@@ -1,7 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -46,11 +45,6 @@ export default function OrderPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-    }, []);
 
     const services = useMemo(() => [
         {
@@ -143,19 +137,10 @@ ${formData.description}
     if (isSubmitted) {
         return (
             <section className="relative z-10 min-h-screen flex items-center justify-center px-6 py-28">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center space-y-6"
-                >
-                    <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.2, type: 'spring' }}
-                        className="w-24 h-24 mx-auto rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 flex items-center justify-center"
-                    >
+                <div className="text-center space-y-6">
+                    <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 flex items-center justify-center">
                         <CheckCircle className="w-12 h-12 text-white" />
-                    </motion.div>
+                    </div>
                     <h2 className="text-3xl font-bold" style={{ color: 'var(--foreground)' }}>
                         Order Terkirim! 🎉
                     </h2>
@@ -169,7 +154,7 @@ ${formData.description}
                         <ArrowRight className="w-4 h-4 rotate-180" />
                         Kembali ke Beranda
                     </Link>
-                </motion.div>
+                </div>
             </section>
         );
     }
@@ -179,17 +164,8 @@ ${formData.description}
         <section className="relative z-10 min-h-screen px-6 sm:px-12 md:px-20 py-28" style={{ color: 'var(--foreground)' }}>
             <div className="max-w-5xl mx-auto space-y-16">
                 {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center space-y-6"
-                >
-                    <motion.span
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+                <div className="text-center space-y-6">
+                    <span
                         className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border"
                         style={{
                             backgroundColor: 'var(--card-bg)',
@@ -201,7 +177,7 @@ ${formData.description}
                     >
                         <ShoppingCart className="w-4 h-4 inline-block mr-2" />
                         Form Order
-                    </motion.span>
+                    </span>
 
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                         Pesan Layanan
@@ -209,27 +185,18 @@ ${formData.description}
                     <p className="max-w-2xl mx-auto text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                         Isi form di bawah untuk memulai proyek digitalmu. Kami akan menghubungi kamu melalui WhatsApp untuk diskusi lebih lanjut.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Service Selection */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="space-y-6"
-                >
+                <div className="space-y-6">
                     <h2 className="text-xl font-semibold flex items-center gap-2">
                         <Package className="w-5 h-5 text-cyan-400" />
                         Pilih Layanan
                     </h2>
                     <div className="grid sm:grid-cols-3 gap-4">
                         {services.map((service, i) => (
-                            <motion.div
+                            <div
                                 key={service.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                onMouseMove={handleMouseMove}
                                 data-color={service.color}
                                 onClick={() => handleServiceSelect(service.id)}
                                 className={`service-card cursor-pointer p-6 rounded-2xl transition-all duration-300 ${
@@ -258,32 +225,24 @@ ${formData.description}
                                         {service.price}
                                     </span>
                                     {formData.service === service.id && (
-                                        <motion.div
-                                            initial={{ scale: 0 }}
-                                            animate={{ scale: 1 }}
-                                            className="absolute top-3 right-3"
-                                        >
+                                        <div className="absolute top-3 right-3">
                                             <CheckCircle className="w-5 h-5 text-cyan-400" />
-                                        </motion.div>
+                                        </div>
                                     )}
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
-                </motion.div>
+                </div>
 
 
                 {/* Order Form */}
-                <motion.form
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                <form
                     onSubmit={handleSubmit}
                     className="space-y-8"
                 >
                     {/* Personal Info */}
                     <div
-                        onMouseMove={handleMouseMove}
                         data-color="cyan"
                         className="form-card p-8 rounded-2xl space-y-6"
                         style={{
@@ -355,7 +314,6 @@ ${formData.description}
 
                     {/* Project Details */}
                     <div
-                        onMouseMove={handleMouseMove}
                         data-color="indigo"
                         className="form-card p-8 rounded-2xl space-y-6"
                         style={{
@@ -431,22 +389,15 @@ ${formData.description}
 
 
                     {/* Submit Button */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="flex flex-col items-center gap-4"
-                    >
-                        <motion.button
+                    <div className="flex flex-col items-center gap-4">
+                        <button
                             type="submit"
                             disabled={isSubmitting || !formData.service}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="relative inline-flex items-center gap-3 px-10 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 shadow-[0_0_25px_rgba(56,189,248,0.25)] transition-all duration-500 ease-out hover:shadow-[0_0_35px_rgba(56,189,248,0.35)] disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
+                            className="relative inline-flex items-center gap-3 px-10 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 shadow-[0_0_25px_rgba(56,189,248,0.25)] transition-all duration-500 ease-out hover:shadow-[0_0_35px_rgba(56,189,248,0.35)] disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden cta-solid"
                         >
                             {isSubmitting ? (
                                 <>
-                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
                                     Mengirim...
                                 </>
                             ) : (
@@ -455,22 +406,18 @@ ${formData.description}
                                     Kirim Order via WhatsApp
                                 </>
                             )}
-                        </motion.button>
+                        </button>
 
                         {!formData.service && (
                             <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
                                 * Pilih layanan terlebih dahulu
                             </p>
                         )}
-                    </motion.div>
-                </motion.form>
+                    </div>
+                </form>
 
                 {/* CTA Footer */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.7 }}
-                    onMouseMove={handleMouseMove}
+                <div
                     className="footer-reactive relative text-center max-w-3xl mx-auto p-8 rounded-2xl"
                     style={{
                         backgroundColor: 'var(--card-bg)',
@@ -488,7 +435,7 @@ ${formData.description}
                     >
                         Lihat Kontak Kami <ArrowRight className="w-4 h-4" />
                     </Link>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

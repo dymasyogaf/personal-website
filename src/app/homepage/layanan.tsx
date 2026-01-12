@@ -1,30 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useCallback, useRef } from 'react';
 import { Globe } from 'lucide-react';
 import { SiWordpress } from 'react-icons/si'; // ✅ Logo WordPress & Berdu
 import Image from 'next/image';
 
 export default function Layanan() {
     // ✨ Efek reaktif mengikuti kursor - throttled with requestAnimationFrame
-    const rafId = useRef<number | null>(null);
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-        const target = e.currentTarget;
-        const clientX = e.clientX;
-        const clientY = e.clientY;
-
-        if (!rafId.current) {
-            rafId.current = requestAnimationFrame(() => {
-                if (target) {
-                    const rect = target.getBoundingClientRect();
-                    target.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
-                    target.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
-                }
-                rafId.current = null;
-            });
-        }
-    }, []);
 
     const services = [
         {
@@ -75,13 +56,8 @@ export default function Layanan() {
             {/* 💼 Grid Layanan */}
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {services.map((service, i) => (
-                    <motion.div
+                    <div
                         key={i}
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.2, duration: 0.6 }}
-                        viewport={{ once: false, amount: 0.3 }}
-                        onMouseMove={handleMouseMove}
                         data-color={service.color}
                         className="service-reactive p-8 rounded-3xl text-center transition-all duration-500"
                     >
@@ -111,7 +87,7 @@ export default function Layanan() {
                                 ))}
                             </ul>
                         </div>
-                    </motion.div>
+                    </div>
                 ))}
             </div>
         </section>

@@ -2,24 +2,20 @@
 
 import { Mail, MapPin, Phone, Github, Linkedin, Instagram } from 'lucide-react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 export default function Footer() {
     return (
-        <footer className="relative z-10 py-20 px-6 sm:px-12 backdrop-blur-xl glow-effect"
-                style={{
-                    color: 'var(--foreground)',
-                    borderTop: '1px solid var(--border)',
-                    backgroundColor: 'var(--card-bg)',
-                    boxShadow: '0 -4px 20px var(--shadow-light)'
-                }}>
+        <footer
+            className="footer-light relative z-10 py-20 px-6 sm:px-12 backdrop-blur-xl glow-effect"
+            style={{
+                color: 'var(--foreground)',
+                borderTop: '1px solid var(--border)',
+                backgroundColor: 'var(--card-bg)',
+                boxShadow: '0 -4px 20px var(--shadow-light)'
+            }}
+        >
             {/* ✨ Garis cahaya lembut di atas footer */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 0.6 }}
-                transition={{ duration: 1 }}
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"
-            />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
 
             <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
                 {/* 🧭 Profil */}
@@ -34,7 +30,7 @@ export default function Footer() {
 
                 {/* 🔗 Navigasi */}
                 <div>
-                    <h4 className="text-lg font-semibold mb-4" style={{ color: 'var(--accent)' }}>Navigasi</h4>
+                    <h4 className="footer-accent text-lg font-semibold mb-4">Navigasi</h4>
                     <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         {[
                             { href: '/', label: 'Beranda' },
@@ -43,25 +39,23 @@ export default function Footer() {
                             { href: '/about', label: 'Tentang Saya' },
                             { href: '/contact', label: 'Kontak' },
                         ].map((item, i) => (
-                            <motion.li
+                            <li
                                 key={i}
-                                whileHover={{ x: 6 }}
-                                transition={{ type: 'spring', stiffness: 300 }}
                             >
                                 <Link href={item.href} className="hover:text-cyan-400 transition hover-theme" style={{ color: 'var(--text-secondary)' }}>
                                     {item.label}
                                 </Link>
-                            </motion.li>
+                            </li>
                         ))}
                     </ul>
                 </div>
 
                 {/* 📞 Kontak & Sosial Media */}
                 <div>
-                    <h4 className="text-lg font-semibold mb-4" style={{ color: 'var(--accent)' }}>Hubungi Saya</h4>
+                    <h4 className="footer-accent text-lg font-semibold mb-4">Hubungi Saya</h4>
                     <ul className="space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         <li className="flex items-center gap-3">
-                            <Mail className="w-4 h-4" style={{ color: 'var(--accent)' }} />
+                            <Mail className="footer-accent w-4 h-4" />
                             <Link
                                 href="mailto:dymasyoga11@gmail.com"
                                 className="hover:text-cyan-400 transition hover-theme"
@@ -71,11 +65,11 @@ export default function Footer() {
                             </Link>
                         </li>
                         <li className="flex items-center gap-3">
-                            <MapPin className="w-4 h-4" style={{ color: 'var(--accent)' }} />
+                            <MapPin className="footer-accent w-4 h-4" />
                             <span style={{ color: 'var(--text-secondary)' }}>Palembang, Indonesia</span>
                         </li>
                         <li className="flex items-center gap-3">
-                            <Phone className="w-4 h-4" style={{ color: 'var(--accent)' }} />
+                            <Phone className="footer-accent w-4 h-4" />
                             <Link
                                 href="https://wa.me/6283178772170"
                                 target="_blank"
@@ -115,10 +109,7 @@ export default function Footer() {
             </div>
 
             {/* 🧡 Garis bawah footer */}
-            <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
+            <div
                 className="mt-12 pt-6 text-center text-xs tracking-wider text-shadow-theme"
                 style={{
                     borderTop: '1px solid var(--border)',
@@ -126,7 +117,7 @@ export default function Footer() {
                 }}
             >
                 (c) {new Date().getFullYear()} Dyogaf Studio. All rights reserved.
-            </motion.div>
+            </div>
         </footer>
     );
 }

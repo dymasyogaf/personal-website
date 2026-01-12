@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Sun, Moon } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
@@ -53,7 +52,7 @@ export default function ThemeToggle() {
   // Prevent hydration mismatch
   if (!isMounted) {
     return (
-      <div className="w-10 h-10 rounded-full bg-white/10 animate-pulse" />
+      <div className="w-10 h-10 rounded-full bg-white/10" />
     );
   }
 
@@ -63,33 +62,12 @@ export default function ThemeToggle() {
       className="relative w-10 h-10 rounded-full theme-transition focus:outline-none focus:ring-2 focus:ring-cyan-400/50 overflow-hidden group hover-theme glow-effect theme-toggle-optimized button-bg button-border button-shadow border"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      {/* Icon container with simplified animation */}
       <div className="relative w-full h-full flex items-center justify-center">
-        <AnimatePresence mode="wait">
-          {isDark ? (
-            <motion.div
-              key="moon"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute"
-            >
-              <Moon className="w-5 h-5" style={{ color: 'var(--accent)' }} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="sun"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute"
-            >
-              <Sun className="w-5 h-5" style={{ color: 'var(--accent)' }} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {isDark ? (
+          <Moon className="w-5 h-5" style={{ color: 'var(--accent)' }} />
+        ) : (
+          <Sun className="w-5 h-5" style={{ color: 'var(--accent)' }} />
+        )}
       </div>
     </button>
   );

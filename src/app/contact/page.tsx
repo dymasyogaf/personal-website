@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import {
     Mail,
     MapPin,
@@ -12,28 +11,16 @@ import {
     Github,
 } from 'lucide-react';
 import Link from 'next/link';
-import { useCallback } from 'react';
 
 export default function Kontak() {
     // 🌀 Efek mouse reactive border
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
-    }, []);
 
     return (
         <section className="relative z-10 pt-32 pb-24 px-6 sm:px-12 overflow-hidden"
                  style={{ color: 'var(--foreground)' }}>
             {/* 🌟 Heading */}
             <div className="text-center mb-16">
-                <motion.span
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                <span
                     className="inline-block px-5 py-1 text-xs uppercase tracking-[0.25em] backdrop-blur-md rounded-full border glow-effect"
                     style={{
                         backgroundColor: 'var(--card-bg)',
@@ -45,29 +32,18 @@ export default function Kontak() {
                     }}
                 >
                     Hubungi Saya
-                </motion.span>
+                </span>
 
-                <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="mt-5 text-3xl sm:text-5xl font-extrabold"
-                >
+                <h2 className="mt-5 text-3xl sm:text-5xl font-extrabold">
                     Siap Bekerja Sama{' '}
                     <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                         Denganmu
                     </span>
-                </motion.h2>
+                </h2>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
-                    className="mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
-                    style={{ color: 'var(--text-muted)' }}
-                >
+                <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                     Jangan ragu untuk menghubungi saya melalui media sosial atau WhatsApp untuk proyek, kolaborasi, atau sekadar diskusi seputar ide digital.
-                </motion.p>
+                </p>
             </div>
 
             {/* 📞 Info Kontak */}
@@ -94,13 +70,9 @@ export default function Kontak() {
                         color: 'purple',
                     },
                 ].map((item, i) => (
-                    <motion.div
+                    <div
                         key={i}
-                        onMouseMove={handleMouseMove}
                         data-color={item.color}
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: i * 0.2 }}
                         className="card-reactive border-reactive flex items-center gap-5 backdrop-blur-xl p-5 rounded-2xl transition-all duration-500"
                         style={{
                             backgroundColor: 'var(--card-bg)',
@@ -110,7 +82,7 @@ export default function Kontak() {
                         <div className="gloss-top"></div>
                         <div className="inner-shadow"></div>
 
-                        <div className="p-3 rounded-xl" style={{ background: 'linear-gradient(to bottom right, var(--card-bg), var(--card-border))' }}>
+                        <div className="p-3 rounded-xl icon-swatch">
                             {item.icon}
                         </div>
 
@@ -131,16 +103,11 @@ export default function Kontak() {
                                 </p>
                             )}
                         </div>
-                    </motion.div>
+                    </div>
                 ))}
 
                 {/* 🌐 Sosial Media */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
-                    className="flex justify-center flex-wrap gap-6 mt-10"
-                >
+                <div className="flex justify-center flex-wrap gap-6 mt-10">
                     {[
                         {
                             icon: <Instagram className="w-6 h-6 text-pink-400" />,
@@ -175,7 +142,6 @@ export default function Kontak() {
                     ].map((social, i) => (
                         <div
                             key={i}
-                            onMouseMove={handleMouseMove}
                             data-color={social.color}
                             className="card-reactive border-reactive p-4 rounded-xl backdrop-blur-md transition-all duration-500 cursor-pointer"
                             style={{
@@ -188,7 +154,7 @@ export default function Kontak() {
                             </Link>
                         </div>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     );

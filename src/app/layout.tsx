@@ -5,22 +5,22 @@ import { GeistSans, GeistMono } from "geist/font";
 import Script from "next/script";
 
 export const metadata = {
-  title: "Dyogaf Studio | Web Developer Palembang",
+  title: "Dyogaf Studio | Web Developer",
   description:
-    "Dyogaf Studio - Dymas Yoga Febratama, web developer Palembang dan digital marketing. Jasa web modern, cepat, dan SEO-friendly.",
+    "Dyogaf Studio - Dymas Yoga Febratama, web developer dan digital marketing. Jasa web modern, cepat, dan SEO-friendly.",
   metadataBase: new URL("https://dyogaf.web.id"),
   keywords: [
     "Dyogaf",
     "Dymas Yoga",
     "Dymas Yoga Febratama",
-    "Web Developer Palembang",
+    "Web Developer",
     "Digital Marketing",
     "Jasa Web",
   ],
   openGraph: {
-    title: "Dyogaf Studio | Web Developer Palembang",
+    title: "Dyogaf Studio | Web Developer",
     description:
-      "Dyogaf Studio - Dymas Yoga Febratama, web developer Palembang dan digital marketing. Jasa web modern, cepat, dan SEO-friendly.",
+      "Dyogaf Studio - Dymas Yoga Febratama, web developer dan digital marketing. Jasa web modern, cepat, dan SEO-friendly.",
     type: "website",
     locale: "id_ID",
     siteName: "Dyogaf Studio",
@@ -28,9 +28,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dyogaf Studio | Web Developer Palembang",
+    title: "Dyogaf Studio | Web Developer",
     description:
-      "Dyogaf Studio - Dymas Yoga Febratama, web developer Palembang dan digital marketing. Jasa web modern, cepat, dan SEO-friendly.",
+      "Dyogaf Studio - Dymas Yoga Febratama, web developer dan digital marketing. Jasa web modern, cepat, dan SEO-friendly.",
   },
   robots: {
     index: true,
@@ -58,7 +58,7 @@ const structuredData = {
       "url": "https://dyogaf.web.id",
       "jobTitle": ["Web Developer", "Digital Marketer"],
       "knowsAbout": [
-        "Web Developer Palembang",
+        "Web Developer",
         "Digital Marketing",
         "Jasa Web",
       ],
@@ -191,36 +191,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         {/* 🌌 Animated Global Gradient Background */}
-        <div className="absolute inset-0 -z-20 animate-[gradient_20s_ease_infinite]" style={{
+        <div className="absolute inset-0 -z-20" style={{
           background: 'radial-gradient(circle at 20% 30%, var(--orb-1), transparent 50%), radial-gradient(circle at 80% 70%, var(--orb-2), transparent 50%), linear-gradient(to bottom, var(--background), var(--card), var(--background))',
           backgroundSize: '200% 200%'
         }} />
 
-        {/* 🌫️ Subtle Overlay Layer for smooth blending */}
-        <div className="absolute inset-0 -z-10" style={{
-          background: 'var(--background)',
-          opacity: 0.1,
-          filter: 'blur(2px)'
-        }} />
-
-        {/* ✨ Floating Light Orbs (global aesthetic glow) */}
-        <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-[15%] left-[10%] w-[400px] h-[400px] blur-[160px] animate-pulse" style={{ background: 'var(--orb-1)' }} />
-          <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] blur-[180px] animate-pulse" style={{ background: 'var(--orb-2)' }} />
-          <div className="absolute top-[50%] left-[60%] w-[300px] h-[300px] blur-[120px] animate-pulse" style={{ background: 'var(--orb-3)' }} />
-        </div>
-
-        {/* 🧭 Navbar Global */}
+        {/* dY- Navbar Global */}
         <OptimizedNavbar />
 
-        {/* 🪄 Main Page Content */}
+        {/* dY¦, Main Page Content */}
         <main className="relative z-0">
           {children}
         </main>
 
-        {/* 🔗 footer Global */}
+        {/* dY"- footer Global */}
         <Footer />
       </body>
     </html>
   );
 }
+

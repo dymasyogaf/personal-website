@@ -1,10 +1,9 @@
 'use client';
 
-import { ArrowRight, Play, Sparkles, Globe2, Compass, Lightbulb } from 'lucide-react';
+import { ArrowRight, Sparkles, Globe2, Compass, Lightbulb } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-// ✨ Efek Typewriter
 function DynamicFocus() {
   const texts = useMemo(() => [
     'Website Futuristik',
@@ -12,7 +11,7 @@ function DynamicFocus() {
     'Web Development Modern',
     'Strategi Kreatif & SEO',
   ], []);
-  
+
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -38,39 +37,23 @@ function DynamicFocus() {
 
   return (
     <div className="relative h-8 overflow-hidden w-max">
-      <span className="font-semibold px-3 py-1 rounded-full backdrop-blur-sm text-sm sm:text-base"
-            style={{
-              color: 'var(--accent)',
-              backgroundColor: 'var(--card-bg)',
-              border: '1px solid var(--card-border)',
-              boxShadow: '0 2px 8px var(--shadow-light)'
-            }}>
+      <span
+        className="font-semibold px-3 py-1 rounded-full backdrop-blur-sm text-sm sm:text-base"
+        style={{
+          color: 'var(--accent)',
+          backgroundColor: 'var(--card-bg)',
+          border: '1px solid var(--card-border)',
+          boxShadow: '0 2px 8px var(--shadow-light)',
+        }}
+      >
         {texts[index].substring(0, subIndex)}
-        <span className="animate-pulse" style={{ color: 'var(--accent)' }}>|</span>
+        <span style={{ color: 'var(--accent)' }}>|</span>
       </span>
     </div>
   );
 }
 
 export default function Hero() {
-  // 🌌 Efek glow interaktif (cursor) - throttled with requestAnimationFrame
-  const rafId = useRef<number | null>(null);
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const target = e.currentTarget;
-    const clientX = e.clientX;
-    const clientY = e.clientY;
-
-    if (!rafId.current) {
-      rafId.current = requestAnimationFrame(() => {
-        if (target) {
-          const rect = target.getBoundingClientRect();
-          target.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
-          target.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
-        }
-        rafId.current = null;
-      });
-    }
-  }, []);
 
   const cardData = useMemo(() => [
     {
@@ -146,19 +129,13 @@ export default function Hero() {
           <div className="pt-6 flex flex-wrap gap-4">
             <Link
               href="/order"
-              onMouseMove={handleMouseMove}
-              className="button-reactive px-6 py-3 rounded-full font-semibold text-base"
-              style={{
-                background: 'linear-gradient(to right, var(--gradient-from), var(--gradient-to))',
-                color: 'white'
-              }}
+              className="button-reactive glass-button px-6 py-3 rounded-full font-semibold text-base"
             >
               Pesan Sekarang <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
 
             <Link
               href="https://dymasyogaf.is-a.dev/"
-              onMouseMove={handleMouseMove}
               className="button-reactive px-6 py-3 rounded-full text-base"
               data-color="secondary"
               style={{
@@ -171,7 +148,6 @@ export default function Hero() {
             </Link>
             <Link
               href="/blog"
-              onMouseMove={handleMouseMove}
               className="button-reactive px-6 py-3 rounded-full text-base"
               data-color="secondary"
               style={{
@@ -192,7 +168,6 @@ export default function Hero() {
               key={index}
               data-color={card.color}
               className="card-reactive p-5 sm:p-6 text-center transition-all w-full"
-              onMouseMove={handleMouseMove}
             >
               <div className="content flex flex-col items-center gap-2">
                 <div className="p-3 rounded-xl"

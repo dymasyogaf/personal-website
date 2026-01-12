@@ -240,7 +240,7 @@ img {
   border-radius: inherit;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  backdrop-filter: blur(20px);
+  backdrop-filter: none;
   padding: 2.8rem;
   box-shadow: inset 0 0 25px var(--glow-light),
     inset 0 0 8px rgba(255, 255, 255, 0.02);
@@ -382,16 +382,16 @@ img {
 
 /* 🌓 Theme-aware backdrop filters - optimized for mobile */
 .backdrop-blur-theme {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   transition: background-color 0.2s ease;
 }
 
 /* 🌓 Reduced backdrop blur for mobile performance */
 @media (max-width: 768px) {
   .backdrop-blur-theme {
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -406,6 +406,195 @@ img {
 
 [data-theme="dark"] .text-shadow-theme {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Light mode typography: force gradients to solid black shades */
+[data-theme="light"] h1 {
+  color: #0b0b0b;
+}
+
+[data-theme="light"] h2 {
+  color: #111111;
+}
+
+[data-theme="light"] h3 {
+  color: #171717;
+}
+
+[data-theme="light"] p {
+  color: #333333;
+}
+
+[data-theme="light"] h1 .bg-clip-text,
+[data-theme="light"] h2 .bg-clip-text,
+[data-theme="light"] h3 .bg-clip-text {
+  background-image: none;
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+}
+
+[data-theme="light"] .navbar-logo {
+  background-image: none !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+}
+
+[data-theme="light"] .button-reactive,
+[data-theme="light"] .cta-solid {
+  background: rgba(12, 16, 24, 0.6) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+[data-theme="light"] .button-reactive:hover,
+[data-theme="light"] .cta-solid:hover {
+  background: rgba(12, 16, 24, 0.68) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="light"] .button-reactive[data-color="secondary"] {
+  background: rgba(255, 255, 255, 0.6) !important;
+  color: #111111 !important;
+  border: 1px solid rgba(17, 17, 17, 0.22) !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Footer light mode color tuning */
+[data-theme="light"] .footer-light {
+  background-color: #ffffff;
+  border-top-color: #d1d5db;
+  box-shadow: none;
+}
+
+[data-theme="light"] .footer-light .footer-accent {
+  color: #111111;
+}
+
+[data-theme="light"] .footer-light a {
+  color: #333333;
+}
+
+[data-theme="light"] .footer-light a:hover {
+  color: #111111;
+}
+
+[data-theme="light"] .footer-light .text-shadow-theme {
+  text-shadow: none;
+}
+
+/* Icon swatches in cards */
+.icon-swatch {
+  background: linear-gradient(to bottom right, var(--card-bg), var(--card-border));
+}
+
+[data-theme="light"] .icon-swatch {
+  background: #f3f4f6;
+}
+
+/* Light mode: remove futuristic gradients from framed content */
+[data-theme="light"] .bg-gradient-to-r {
+  background-image: none;
+}
+
+[data-theme="light"] .bg-gradient-to-br {
+  background-image: none !important;
+  background-color: #f3f4f6 !important;
+}
+
+[data-theme="light"] .bg-clip-text.text-transparent {
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+}
+
+[data-theme="light"] .blur-md {
+  filter: none;
+}
+
+[data-theme="light"] .section-glow {
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transform: none;
+}
+
+[data-theme="light"] .section-glow:hover {
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: none;
+}
+
+[data-theme="light"] .section-content {
+  background: #ffffff;
+  border-color: #d1d5db;
+  box-shadow: none;
+}
+
+[data-theme="light"] .card-reactive,
+[data-theme="light"] .service-reactive,
+[data-theme="light"] .service-card,
+[data-theme="light"] .workflow-card,
+[data-theme="light"] .tech-reactive,
+[data-theme="light"] .footer-reactive {
+  background: #ffffff;
+  border-color: #d1d5db;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .card-reactive:hover,
+[data-theme="light"] .service-reactive:hover,
+[data-theme="light"] .service-card:hover,
+[data-theme="light"] .workflow-card:hover,
+[data-theme="light"] .tech-reactive:hover,
+[data-theme="light"] .footer-reactive:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: none;
+}
+
+[data-theme="light"] .card-reactive::before,
+[data-theme="light"] .card-reactive::after,
+[data-theme="light"] .service-reactive::before,
+[data-theme="light"] .service-reactive::after,
+[data-theme="light"] .section-glow::before {
+  background: none;
+  opacity: 0;
+}
+
+[data-theme="light"] .glow-effect,
+[data-theme="light"] .glow-hover {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .hover-theme:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .card-reactive .bg-cyan-400,
+[data-theme="light"] .card-reactive .bg-indigo-400,
+[data-theme="light"] .card-reactive .bg-teal-400,
+[data-theme="light"] .card-reactive .bg-purple-400,
+[data-theme="light"] .service-reactive .bg-cyan-400,
+[data-theme="light"] .service-reactive .bg-indigo-400,
+[data-theme="light"] .service-reactive .bg-teal-400,
+[data-theme="light"] .service-reactive .bg-purple-400,
+[data-theme="light"] .service-card .bg-cyan-400,
+[data-theme="light"] .service-card .bg-indigo-400,
+[data-theme="light"] .service-card .bg-teal-400,
+[data-theme="light"] .service-card .bg-purple-400 {
+  background-color: #111111;
+}
+
+[data-theme="light"] .text-cyan-400,
+[data-theme="light"] .text-cyan-300,
+[data-theme="light"] .text-indigo-400,
+[data-theme="light"] .text-teal-400,
+[data-theme="light"] .text-purple-400,
+[data-theme="light"] .text-blue-400 {
+  color: #111111;
 }
 
 /* 🌓 Theme-aware borders */
@@ -473,6 +662,15 @@ img {
 
 .border-nav {
   border-color: var(--nav-border);
+}
+
+/* Disable heavy backdrop blur utilities for smoother scrolling */
+.backdrop-blur-sm,
+.backdrop-blur-md,
+.backdrop-blur-xl,
+.backdrop-blur-2xl {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* 🚀 Performance optimization classes */
