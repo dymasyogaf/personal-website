@@ -13,7 +13,6 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useCallback } from 'react';
-import "../../styles/about.css"; // efek card-reactive tetap konsisten
 
 export default function Kontak() {
     // 🌀 Efek mouse reactive border

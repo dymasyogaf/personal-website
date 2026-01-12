@@ -1,3 +1,5 @@
+import "../../styles/order.css";
+
 export const metadata = {
   title: "Order | Dyogaf Studio",
   description: "Form order jasa web, WordPress, dan platform Dyogaf Studio.",

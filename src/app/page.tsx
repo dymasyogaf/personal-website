@@ -1,3 +1,4 @@
+import "../styles/homepage.css";
 import Hero from './homepage/hero';
 import Highlight from './homepage/highlight';
 import Layanan from './homepage/layanan';
@@ -57,7 +58,7 @@ export default function HomePage() {
         <Tentang />
       </LazySection>
       
-      <LazySection rootMargin="50px">
+      <LazySection rootMargin="500px 0px" minHeight="70vh">
         <Kontak />
       </LazySection>
     </>

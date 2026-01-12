@@ -11,7 +11,6 @@ import {
     Sparkles,
     Globe2,
 } from 'lucide-react';
-import "../../styles/about.css";
 import { useCallback } from 'react';
 import { motion } from "framer-motion";
 

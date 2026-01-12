@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { Globe2, Award, Users, Rocket } from 'lucide-react';
 import { useCallback } from 'react';
-import "../../styles/homepage.css";
 
 export default function Highlight() {
     const items = [

@@ -3,7 +3,6 @@
 import { ArrowRight, Play, Sparkles, Globe2, Compass, Lightbulb } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
-import "../../styles/homepage.css";
 
 // ✨ Efek Typewriter
 function DynamicFocus() {

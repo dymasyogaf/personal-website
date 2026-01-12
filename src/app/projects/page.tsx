@@ -4,7 +4,6 @@ import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useMemo, useState } from 'react';
-import "../../styles/project.css";
 import { Sparkles, Globe2, PenTool, MonitorSmartphone, Megaphone } from 'lucide-react';
 
 export default function ProjectPage() {

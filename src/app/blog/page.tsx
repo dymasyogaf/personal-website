@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useCallback } from "react";
-import "../../styles/project.css";
 
 const posts = [
   {

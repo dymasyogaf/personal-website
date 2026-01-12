@@ -8,14 +8,16 @@ interface LazySectionProps {
     rootMargin?: string;
     threshold?: number;
     fallback?: ReactNode;
+    minHeight?: string;
 }
 
 export default function LazySection({
     children,
     className = '',
-    rootMargin = '50px',
-    threshold = 0.1,
+    rootMargin = '300px 0px',
+    threshold = 0,
     fallback = null,
+    minHeight = '40vh',
 }: LazySectionProps) {
     const [isVisible, setIsVisible] = useState(false);
     const hasIntersectedRef = useRef(false);
@@ -48,7 +50,11 @@ export default function LazySection({
 
     return (
         <div ref={ref} className={className}>
-            {isVisible ? children : fallback}
+            {isVisible
+                ? children
+                : (fallback ?? (
+                    <div className="lazy-section-placeholder" style={{ minHeight }} aria-hidden="true" />
+                ))}
         </div>
     );
 }

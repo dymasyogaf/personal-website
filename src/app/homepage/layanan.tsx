@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import "../../styles/homepage.css";
 import { useCallback, useRef } from 'react';
 import { Globe } from 'lucide-react';
 import { SiWordpress } from 'react-icons/si'; // ✅ Logo WordPress & Berdu

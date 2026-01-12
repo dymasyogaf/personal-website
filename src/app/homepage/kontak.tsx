@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { useCallback } from 'react';
-import "../../styles/homepage.css";
 
 export default function CTA() {
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {

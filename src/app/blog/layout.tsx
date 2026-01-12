@@ -1,3 +1,5 @@
+import "../../styles/project.css";
+
 export const metadata = {
   title: "Blog | Dyogaf Studio",
   description:

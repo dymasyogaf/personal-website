@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { useCallback } from 'react';
 import { Rocket, Lightbulb, Compass, HeartHandshake } from 'lucide-react';
-import "../../styles/homepage.css";
 
 export default function Tentang() {
     // 🧠 Efek reaktif seperti hero & highlight

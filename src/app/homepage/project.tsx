@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useMemo, useState, useRef } from 'react';
-import "../../styles/homepage.css";
 
 export default function Project() {
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());

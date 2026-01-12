@@ -1,3 +1,5 @@
+import "../../styles/about.css";
+
 export const metadata = {
   title: "Contact | Dyogaf Studio",
   description: "Hubungi Dyogaf Studio untuk jasa web, konsultasi project, dan digital marketing.",

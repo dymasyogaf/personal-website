@@ -3,7 +3,6 @@
 import { LazyMotion, domAnimation, m, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import "../../styles/services.css";
 import { useCallback, useMemo } from "react";
 import {
     Globe,

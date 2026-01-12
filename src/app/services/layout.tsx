@@ -1,3 +1,5 @@
+import "../../styles/services.css";
+
 export const metadata = {
   title: "Services | Dyogaf Studio",
   description: "Layanan jasa web, WordPress, dan pengembangan platform modern untuk bisnis dan personal.",

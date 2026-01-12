@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useRef } from 'react';
-import "../../styles/homepage.css";
 
 export default function Testimoni() {
     // ✨ Efek kursor reaktif - throttled with requestAnimationFrame

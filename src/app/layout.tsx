@@ -99,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         {/* Apple touch icon */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/svg+xml" href="/file.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
         
         {/* Manifest untuk PWA */}
         <link rel="manifest" href="/site.webmanifest" />

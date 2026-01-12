@@ -1,3 +1,5 @@
+import "../../styles/about.css";
+
 export const metadata = {
   title: "About | Dyogaf Studio",
   description: "Tentang Dyogaf Studio dan Dymas Yoga Febratama, web developer Palembang dan digital marketing.",

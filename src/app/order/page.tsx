@@ -19,7 +19,6 @@ import {
     Package,
 } from 'lucide-react';
 import { SiWordpress } from 'react-icons/si';
-import '../../styles/order.css';
 
 type ServiceType = 'website' | 'wordpress' | 'berdu' | '';
 
